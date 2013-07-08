@@ -4,7 +4,7 @@
   <title><![CDATA[Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-08T07:04:29-07:00</updated>
+  <updated>2013-07-08T09:41:45-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,5 +12,125 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging with Octopress: Quick Installation]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-quick-installation/"/>
+    <updated>2013-07-08T09:10:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-quick-installation</id>
+    <content type="html"><![CDATA[<p>I really wanted to revive my blog (which was hosted in Blogger), but I wanted to have more control over it,
+It just feels very natural for guys like me who uses vi more than GUI =)</p>
+
+<p>Since Octopress docs are too long and frustrating (oh common, i just wanted a blog), I decided to dedicate few posts for it,
+I hope I&rsquo;ll have the time to record (blog, post, whatever) all the cool things i&rsquo;m gonna add to my blog in the future.</p>
+
+<p>15 minutes and you have a pro blog, so there we go:</p>
+
+<h3>Installing Ruby</h3>
+
+<h4>Ubuntu</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install ruby 1.9.3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>MacOS</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew update
+</span><span class='line'>brew install rbenv
+</span><span class='line'>brew install ruby-build
+</span><span class='line'>rbenv install 1.9.3-p0
+</span><span class='line'>rbenv rehash
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(If you don&rsquo;t have brew, visit: <a href="http://mxcl.github.io/homebrew">http://mxcl.github.io/homebrew</a>)</p>
+
+<h3>Installing Octopress</h3>
+
+<p>Now Ocotopress !</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ~ <span class="c">#or wherever u want the octopress folder to be located</span>
+</span><span class='line'>git clone git://github.com/imathis/octopress.git octopress
+</span><span class='line'><span class="nb">cd </span>octipress
+</span><span class='line'>gem install bundler
+</span><span class='line'>rbenv rehash <span class="c">#only if using rbenv</span>
+</span><span class='line'>bundle install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thats it!</p>
+
+<h3>Deploying your blog in GitHub pages.</h3>
+
+<p>There are other alternatives, but I personally love GitHub, to deploy your blog in GitHub pages:</p>
+
+<ul>
+<li><p><a href="https://github.com/new">Create a GitHub repo</a> and name it <em>your_user.github.io</em>, where <em>your_user</em> is your github username, mine is <em>asaf</em>,
+so it&rsquo;ll be: <em>asaf.github.io</em></p></li>
+<li><p>Lets tell Octopress about your github created repo (that&rsquo;ll hold your blog):</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake setup_github_pages
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When it asks for your git repo, paste: <em>git@github.com:your_user/your_user.github.io</em>, for example mine is: <em>git@github.com:asaf/asaf.github.io</em></p>
+
+<ul>
+<li>Now lets deploy and see our new shiny blog!</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
+</span><span class='line'>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This generates the blog site from the (default) sources, commit it via <em>git</em> and deploy it in the created github repo.</p>
+
+<p>Thats all!</p>
+
+<p>now visit: <a href="http://your_user.github.io">http://your_user.github.io</a> to see your blog!</p>
+
+<h3>Minimal Configuration</h3>
+
+<p>And if we&#8217;r already here, lets quickly configure the minimal details:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vi _config.yml
+</span><span class='line'>title: Blog title, I put my full name.
+</span><span class='line'>subtitle: What are you going to blog about?
+</span><span class='line'>author: Your full name
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rake generate
+rake deploy</p>
+
+<p>But it looks gray and dark and missing some cool stuff, isn&rsquo;t it? follow the next blog about how to customize OctoPress =)</p>
+]]></content>
+  </entry>
   
 </feed>
