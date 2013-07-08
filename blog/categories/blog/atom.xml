@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blog | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/blog/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-08T09:41:45-07:00</updated>
+  <updated>2013-07-08T10:24:08-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,112 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging with Octopress: Add Comments]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-comments/"/>
+    <updated>2013-07-08T10:13:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-comments</id>
+    <content type="html"><![CDATA[<p>If you want your blog to support comments, follow this:</p>
+
+<p>Octopress has a native 3rd party plugin for Disqus that will host all your blog&rsquo;s comments.</p>
+
+<p>Visit <a href="Disqus">http://www.disqus.com</a> web site and sign in,
+Then <a href="Signup%20for%20a%20new%20application">https://disqus.com/admin/signup/</a>.</p>
+
+<p>Here&rsquo;s example how I file the signup form my blog which is hosted in GitHub pages.</p>
+
+<p><code>
+Site Url: asaf.github.io
+Site Name: Asaf Shakarchi's Blog
+Site Shortname: asafshakarchisblog
+</code></p>
+
+<p><em>Remember the site short name, you need it soon!</em></p>
+
+<p>Then configure <em>Octopress</em> to be aware of your new <em>Disqus</em> application:</p>
+
+<p>``` bash
+cd octopress #or wherever your octopress folder is located
+vi _config.yml</p>
+
+<h1>then change discqus_short_name line:</h1>
+
+<p>disqus_short_name: asafshakarchisblog #replace with the short name you&rsquo;ve put in the app signup form
+```</p>
+
+<p>Done!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging with Octopress: Add About Page]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-about-page/"/>
+    <updated>2013-07-08T09:58:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-about-page</id>
+    <content type="html"><![CDATA[<p>Adding About Me page, probably one of the first thing to do, right?</p>
+
+<p><em>Note: If you just want to say few words about yourself on the aside panel, skip to <em>About Me on the aside panel</em></em></p>
+
+<h3>Adding About Page</h3>
+
+<p>Create the page:</p>
+
+<p><code>bash
+rake new_page["about"]
+</code></p>
+
+<p>rake creates a new page located in <em>source/about/index.markdown</em></p>
+
+<p>I edited mine to look like:</p>
+
+<h2>``` yaml</h2>
+
+<p>layout: page
+title: &ldquo;About Me&rdquo;
+comments: true
+sharing: true</p>
+
+<h2>footer: true</h2>
+
+<p>```</p>
+
+<p>Note that I removed the <em>date</em> line because it doesn&rsquo;t make sense in this page.</p>
+
+<h4>Add About page in the top menu</h4>
+
+<p>You probably want to add the <em>About</em> page in the top menu, right?</p>
+
+<p>``` bash
+vi source/_includes/custom/navigation.html</p>
+
+<h1>add the line to the bottom of the page:</h1>
+
+<p><li><a href="/about">About</a></li>
+```</p>
+
+<h3>About on the aside panel</h3>
+
+<p>If u want to put some words about yourself on the side panel panel, do this:</p>
+
+<p>``` bash
+vi source/_includes/custom/asides/about.html</p>
+
+<p><h1>your name<h1/>
+<p>some words about you, not longer than a line.</p>
+```</p>
+
+<p>Then enable the about html in the aside bar by:</p>
+
+<p>``` bash
+vi _config.yml</p>
+
+<p>default_asides: [custom/asides/about.html, OTHER STUFF] # leave all other pages as is
+```</p>
+
+<p>Now the world knows about who you are :&ndash;)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blogging with Octopress: Quick Installation]]></title>

@@ -4,7 +4,7 @@
   <title><![CDATA[Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-08T09:41:45-07:00</updated>
+  <updated>2013-07-08T10:24:08-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,135 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging with Octopress: Add Comments]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-comments/"/>
+    <updated>2013-07-08T10:13:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-comments</id>
+    <content type="html"><![CDATA[<p>If you want your blog to support comments, follow this:</p>
+
+<p>Octopress has a native 3rd party plugin for Disqus that will host all your blog&rsquo;s comments.</p>
+
+<p>Visit <a href="Disqus">http://www.disqus.com</a> web site and sign in,
+Then <a href="Signup%20for%20a%20new%20application">https://disqus.com/admin/signup/</a>.</p>
+
+<p>Here&rsquo;s example how I file the signup form my blog which is hosted in GitHub pages.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Site Url: asaf.github.io
+</span><span class='line'>Site Name: Asaf Shakarchi's Blog
+</span><span class='line'>Site Shortname: asafshakarchisblog</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Remember the site short name, you need it soon!</em></p>
+
+<p>Then configure <em>Octopress</em> to be aware of your new <em>Disqus</em> application:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>octopress <span class="c">#or wherever your octopress folder is located</span>
+</span><span class='line'>vi _config.yml
+</span><span class='line'>
+</span><span class='line'><span class="c">#then change discqus_short_name line:</span>
+</span><span class='line'>disqus_short_name: asafshakarchisblog <span class="c">#replace with the short name you&#39;ve put in the app signup form</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Done!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging with Octopress: Add About Page]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-about-page/"/>
+    <updated>2013-07-08T09:58:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-about-page</id>
+    <content type="html"><![CDATA[<p>Adding About Me page, probably one of the first thing to do, right?</p>
+
+<p><em>Note: If you just want to say few words about yourself on the aside panel, skip to <em>About Me on the aside panel</em></em></p>
+
+<h3>Adding About Page</h3>
+
+<p>Create the page:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_page<span class="o">[</span><span class="s2">&quot;about&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rake creates a new page located in <em>source/about/index.markdown</em></p>
+
+<p>I edited mine to look like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="nn">---</span>
+</span><span class='line'><span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">page</span>
+</span><span class='line'><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;About</span><span class="nv"> </span><span class="s">Me&quot;</span>
+</span><span class='line'><span class="l-Scalar-Plain">comments</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+</span><span class='line'><span class="l-Scalar-Plain">sharing</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+</span><span class='line'><span class="l-Scalar-Plain">footer</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+</span><span class='line'><span class="nn">---</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that I removed the <em>date</em> line because it doesn&rsquo;t make sense in this page.</p>
+
+<h4>Add About page in the top menu</h4>
+
+<p>You probably want to add the <em>About</em> page in the top menu, right?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vi <span class="nb">source</span>/_includes/custom/navigation.html
+</span><span class='line'>
+</span><span class='line'><span class="c">#add the line to the bottom of the page:</span>
+</span><span class='line'>&lt;li&gt;&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;/about&quot;</span>&gt;About&lt;/a&gt;&lt;/li&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>About on the aside panel</h3>
+
+<p>If u want to put some words about yourself on the side panel panel, do this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vi <span class="nb">source</span>/_includes/custom/asides/about.html
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;your name&lt;h1/&gt;
+</span><span class='line'>&lt;p&gt;some words about you, not longer than a line.&lt;/p&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then enable the about html in the aside bar by:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vi _config.yml
+</span><span class='line'>
+</span><span class='line'>default_asides: <span class="o">[</span>custom/asides/about.html, OTHER STUFF<span class="o">]</span> <span class="c"># leave all other pages as is</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now the world knows about who you are :&ndash;)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blogging with Octopress: Quick Installation]]></title>
