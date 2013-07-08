@@ -4,7 +4,7 @@
   <title><![CDATA[Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-08T10:24:08-07:00</updated>
+  <updated>2013-07-08T10:50:37-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Accessing EmberJS Controller from different scopes]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/accessing-emberjs-controller-from-different-scopes/"/>
+    <updated>2013-07-08T10:32:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/accessing-emberjs-controller-from-different-scopes</id>
+    <content type="html"><![CDATA[<p>Sometimes you want to use one <em>ember</em> controller from another,
+This simply can be done by &ldquo;asking&rdquo; ember access to the other controller:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">PostController</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">ArrayController</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">CommentsController</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">ArrayController</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">needs</span><span class="o">:</span> <span class="s2">&quot;post&quot;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you can simply use the <em>Post</em> controller in <em>Comments</em>&rsquo;s template:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c">&lt;!--</span> <span class="nx">within</span> <span class="err">`</span><span class="nx">comments</span><span class="err">`</span> <span class="nx">controller</span><span class="o">--&gt;</span>
+</span><span class='line'><span class="p"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This works pretty nice, especially when you have nested routes (you surely want to display some data of the post when you are in the post&rsquo;s comments context.),</p>
+
+<p>But what if you need to access a controller outside of Ember&rsquo;s scope?</p>
+
+<p>For instance, you may have a websocket listening to a certain top level event and would like to update a certian controller when data is pushed,</p>
+
+<p>You can use the container lookup to retrieve a controller instance:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c">&lt;!--</span> <span class="nx">Somewhere</span> <span class="nx">out</span> <span class="nx">of</span> <span class="nx">Ember</span><span class="err">`</span><span class="nx">s</span> <span class="nx">scope</span> <span class="o">--&gt;</span>
+</span><span class='line'><span class="nx">ss</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;incomingComment&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">comment</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">commentsController</span> <span class="o">=</span> <span class="nx">App</span><span class="p">.</span><span class="nx">__container__</span><span class="p">.</span><span class="nx">lookup</span><span class="p">(</span><span class="s1">&#39;controller:Comments&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="nx">commentsController</span><span class="p">.</span><span class="nx">pushObject</span><span class="p">(</span><span class="nx">comment</span><span class="p">)</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blogging with Octopress: Add Comments]]></title>
@@ -53,6 +110,15 @@ Then <a href="Signup%20for%20a%20new%20application">https://disqus.com/admin/sig
 
 
 <p>Done!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web in Realtime: using nodejs socketstream emberjs and more]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/"/>
+    <updated>2013-07-08T10:08:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more</id>
+    <content type="html"><![CDATA[<p>now here we go with some content :)</p>
 ]]></content>
   </entry>
   
