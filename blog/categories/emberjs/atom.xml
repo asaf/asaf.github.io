@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: emberjs | Asaf Shakarchi]]></title>
+  <link href="http://asaf.github.io/blog/categories/emberjs/atom.xml" rel="self"/>
+  <link href="http://asaf.github.io/"/>
+  <updated>2013-07-08T10:54:14-07:00</updated>
+  <id>http://asaf.github.io/</id>
+  <author>
+    <name><![CDATA[Asaf Shakarchi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Accessing EmberJS Controller from different scopes]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/accessing-emberjs-controller-from-different-scopes/"/>
+    <updated>2013-07-08T10:32:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/accessing-emberjs-controller-from-different-scopes</id>
+    <content type="html"><![CDATA[<p>Sometimes you want to use one <em>ember</em> controller from another,
+This simply can be done by &ldquo;asking&rdquo; ember access to the other controller:</p>
+
+<p>``` javascript
+App.PostController = Ember.ArrayController.extend({</p>
+
+<pre><code>...
+</code></pre>
+
+<p>})</p>
+
+<p>App.CommentsController = Ember.ArrayController.extend({
+  needs: &ldquo;post&rdquo;
+});
+```</p>
+
+<p>Then you can simply use the <em>Post</em> controller in <em>Comments</em>&rsquo;s template:</p>
+
+<p>``` javascript</p>
+
+<!-- within `comments` controller-->
+
+
+<p>
+```</p>
+
+<p>This works pretty nice, especially when you have nested routes (you surely want to display some data of the post when you are in the post&rsquo;s comments context.),</p>
+
+<p>But what if you need to access a controller outside of Ember&rsquo;s scope?</p>
+
+<p>For instance, you may have a websocket listening to a certain top level event and would like to update a certian controller when data is pushed,</p>
+
+<p>You can use the container lookup to retrieve a controller instance:</p>
+
+<p>``` javascript</p>
+
+<!-- Somewhere out of Ember`s scope -->
+
+
+<p>ss.event.on(&lsquo;incomingComment&rsquo;, function(comment) {</p>
+
+<pre><code>commentsController = App.__container__.lookup('controller:Comments')
+commentsController.pushObject(comment)
+</code></pre>
+
+<p>})
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
