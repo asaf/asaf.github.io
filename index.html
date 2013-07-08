@@ -32,18 +32,6 @@ This simply can be done by &ldquo;asking&rdquo; ember access to the other contro
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-42310078-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 
 </head>
 
@@ -132,8 +120,8 @@ This simply can be done by &ldquo;asking&rdquo; ember access to the other contro
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c">&lt;!--</span> <span class="nx">within</span> <span class="err">`</span><span class="nx">comments</span><span class="err">`</span> <span class="nx">controller</span><span class="o">--&gt;</span>
-</span><span class='line'><span class="p"></span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- use comments template --&gt;</span>
+</span><span class='line'>{{ controllers.post }}
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -150,7 +138,7 @@ This simply can be done by &ldquo;asking&rdquo; ember access to the other contro
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c">&lt;!--</span> <span class="nx">Somewhere</span> <span class="nx">out</span> <span class="nx">of</span> <span class="nx">Ember</span><span class="err">`</span><span class="nx">s</span> <span class="nx">scope</span> <span class="o">--&gt;</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// Somewhere out of Ember`s scope</span>
 </span><span class='line'><span class="nx">ss</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;incomingComment&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">comment</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>    <span class="nx">commentsController</span> <span class="o">=</span> <span class="nx">App</span><span class="p">.</span><span class="nx">__container__</span><span class="p">.</span><span class="nx">lookup</span><span class="p">(</span><span class="s1">&#39;controller:Comments&#39;</span><span class="p">)</span>
 </span><span class='line'>    <span class="nx">commentsController</span><span class="p">.</span><span class="nx">pushObject</span><span class="p">(</span><span class="nx">comment</span><span class="p">)</span>
@@ -227,6 +215,42 @@ Then <a href="Signup%20for%20a%20new%20application">https://disqus.com/admin/sig
 
 
 <p>Done!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/">Web in Realtime: Using Nodejs Socketstream Emberjs and More</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-08T10:08:00-07:00" pubdate data-updated="true">Jul 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>now here we go with some content :)</p>
 </div>
   
   
@@ -516,6 +540,10 @@ rake deploy</p>
     
       <li class="post">
         <a href="/blog/2013/07/08/blogging-with-octopress-add-comments/">Blogging With Octopress: Add Comments</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/">Web in Realtime: Using Nodejs Socketstream Emberjs and More</a>
       </li>
     
       <li class="post">

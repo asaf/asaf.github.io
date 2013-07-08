@@ -4,7 +4,7 @@
   <title><![CDATA[Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-08T10:54:14-07:00</updated>
+  <updated>2013-07-08T11:13:45-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -42,8 +42,8 @@ This simply can be done by &ldquo;asking&rdquo; ember access to the other contro
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c">&lt;!--</span> <span class="nx">within</span> <span class="err">`</span><span class="nx">comments</span><span class="err">`</span> <span class="nx">controller</span><span class="o">--&gt;</span>
-</span><span class='line'><span class="p"></span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- use comments template --&gt;</span>
+</span><span class='line'>{{ controllers.post }}
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -60,7 +60,7 @@ This simply can be done by &ldquo;asking&rdquo; ember access to the other contro
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c">&lt;!--</span> <span class="nx">Somewhere</span> <span class="nx">out</span> <span class="nx">of</span> <span class="nx">Ember</span><span class="err">`</span><span class="nx">s</span> <span class="nx">scope</span> <span class="o">--&gt;</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// Somewhere out of Ember`s scope</span>
 </span><span class='line'><span class="nx">ss</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;incomingComment&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">comment</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>    <span class="nx">commentsController</span> <span class="o">=</span> <span class="nx">App</span><span class="p">.</span><span class="nx">__container__</span><span class="p">.</span><span class="nx">lookup</span><span class="p">(</span><span class="s1">&#39;controller:Comments&#39;</span><span class="p">)</span>
 </span><span class='line'>    <span class="nx">commentsController</span><span class="p">.</span><span class="nx">pushObject</span><span class="p">(</span><span class="nx">comment</span><span class="p">)</span>
@@ -110,6 +110,15 @@ Then <a href="Signup%20for%20a%20new%20application">https://disqus.com/admin/sig
 
 
 <p>Done!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web in Realtime: using nodejs socketstream emberjs and more]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/"/>
+    <updated>2013-07-08T10:08:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more</id>
+    <content type="html"><![CDATA[<p>now here we go with some content :)</p>
 ]]></content>
   </entry>
   

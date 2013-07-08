@@ -4,7 +4,7 @@
   <title><![CDATA[Category: emberjs | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/emberjs/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-08T10:54:14-07:00</updated>
+  <updated>2013-07-08T11:13:45-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -36,13 +36,15 @@ App.PostController = Ember.ArrayController.extend({</p>
 
 <p>Then you can simply use the <em>Post</em> controller in <em>Comments</em>&rsquo;s template:</p>
 
-<p>``` javascript</p>
-
-<!-- within `comments` controller-->
-
-
 <p>
-```</p>
+``` html</p>
+
+<!-- use comments template -->
+
+
+<p>{{ controllers.post }}
+```
+</p>
 
 <p>This works pretty nice, especially when you have nested routes (you surely want to display some data of the post when you are in the post&rsquo;s comments context.),</p>
 
@@ -52,12 +54,9 @@ App.PostController = Ember.ArrayController.extend({</p>
 
 <p>You can use the container lookup to retrieve a controller instance:</p>
 
-<p>``` javascript</p>
-
-<!-- Somewhere out of Ember`s scope -->
-
-
-<p>ss.event.on(&lsquo;incomingComment&rsquo;, function(comment) {</p>
+<p><code>`` javascript
+// Somewhere out of Ember</code>s scope
+ss.event.on(&lsquo;incomingComment&rsquo;, function(comment) {</p>
 
 <pre><code>commentsController = App.__container__.lookup('controller:Comments')
 commentsController.pushObject(comment)
@@ -65,6 +64,15 @@ commentsController.pushObject(comment)
 
 <p>})
 ```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web in Realtime: using nodejs socketstream emberjs and more]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/"/>
+    <updated>2013-07-08T10:08:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more</id>
+    <content type="html"><![CDATA[<p>now here we go with some content :)</p>
 ]]></content>
   </entry>
   
