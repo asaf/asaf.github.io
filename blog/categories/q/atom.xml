@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: nodejs | Asaf Shakarchi]]></title>
-  <link href="http://asaf.github.io/blog/categories/nodejs/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Q | Asaf Shakarchi]]></title>
+  <link href="http://asaf.github.io/blog/categories/q/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
   <updated>2013-07-09T06:30:47-07:00</updated>
   <id>http://asaf.github.io/</id>
@@ -97,15 +97,6 @@ promises = require &lsquo;./promises&rsquo;</p>
 
 <p>)
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Web in Realtime: using nodejs socketstream emberjs and more]]></title>
-    <link href="http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/"/>
-    <updated>2013-07-08T10:08:00-07:00</updated>
-    <id>http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more</id>
-    <content type="html"><![CDATA[<p>now here we go with some content :)</p>
 ]]></content>
   </entry>
   
