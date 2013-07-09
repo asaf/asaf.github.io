@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ec2 | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/ec2/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-08T18:58:47-07:00</updated>
+  <updated>2013-07-09T06:15:50-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -18,7 +18,7 @@
     <link href="http://asaf.github.io/blog/2013/07/08/installing-couch-db-on-amazon-ami/"/>
     <updated>2013-07-08T18:53:00-07:00</updated>
     <id>http://asaf.github.io/blog/2013/07/08/installing-couch-db-on-amazon-ami</id>
-    <content type="html"><![CDATA[<p><img class="<a" src="href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a>" width="160" height="180" title="Couch" ></p>
+    <content type="html"><![CDATA[<p>{% img <a href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a> 160 180 Couch %}</p>
 
 <p>One of our platform is based on CouchDB, we host everything on Amazon EC2 and while Amazon lacks with CouchDB support,
 I have decided to build our own CouchDB server.</p>
@@ -40,6 +40,28 @@ RHEL style package management using <em>yum</em>.</p>
 <p><code>bash
 [ec2-user@ip ~]$ sudo yum update
 </code></p>
+
+<h2>UPDATE</h2>
+
+<p>Before proceeding with the flow below, I found this project:</p>
+
+<p><a href="https://github.com/iriscouch/build-couchdb">https://github.com/iriscouch/build-couchdb</a></p>
+
+<p>Which maintain its own CouchDB dependencies and perform the build for you,</p>
+
+<p>You can use this project by this script:
+XXX</p>
+
+<p>This script does the following things:</p>
+
+<ol>
+<li>Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.)</li>
+<li>Clone the &lsquo;build-couchdb&rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc), It is all the dependencies that couchdb needs in order to be compiled.</li>
+<li></li>
+</ol>
+
+
+<p>But if you still want to build from sources (which is more depdendent on Amazon&rsquo;s dependencies) proceed reading.</p>
 
 <h3>Installing CouchDB via EPEL</h3>
 

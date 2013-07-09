@@ -9,8 +9,7 @@
   <meta name="author" content="Asaf Shakarchi">
 
   
-  <meta name="description" content="One of our platform is based on CouchDB, we host everything on Amazon EC2 and while Amazon lacks with CouchDB support,
-I have decided to build our &hellip;">
+  <meta name="description" content="If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came acrross &ldquo;https://github.com/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +84,172 @@ I have decided to build our &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/09/q-promises-with-coffeescript/">Q Promises With CoffeeScript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T06:03:00-07:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came acrross <a href="Q%20Promises">&ldquo;https://github.com/kriskowal/q&rdquo;</a>.</p>
+
+<p>Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner,</p>
+
+<p>Here&rsquo;s an example:</p>
+
+<p>Defining promises with CoffeeScript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">q = </span><span class="nx">require</span> <span class="s">&#39;q&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">exports.hello = </span><span class="p">()</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nv">d = </span><span class="nx">q</span><span class="p">.</span><span class="nx">defer</span><span class="p">()</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">resolve</span> <span class="s">&#39;hello&#39;</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">promise</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">exports.world = </span><span class="p">()</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nv">d = </span><span class="nx">q</span><span class="p">.</span><span class="nx">defer</span><span class="p">()</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">resolve</span> <span class="s">&#39;world&#39;</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">promise</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">exports.die = </span><span class="p">()</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nv">d = </span><span class="nx">q</span><span class="p">.</span><span class="nx">defer</span><span class="p">()</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">reject</span> <span class="s">&#39;bye world&#39;</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">promise</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here are Mocha sample of Q propagations and error handling</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">cradle = </span><span class="nx">require</span> <span class="s">&#39;cradle&#39;</span>
+</span><span class='line'><span class="p">,</span> <span class="nv">assert = </span><span class="nx">require</span> <span class="s">&#39;assert&#39;</span>
+</span><span class='line'><span class="p">,</span> <span class="nv">promises = </span><span class="nx">require</span> <span class="s">&#39;./promises&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s">&#39;Promises&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nx">it</span> <span class="s">&#39;Simple&#39;</span><span class="p">,</span> <span class="nf">(done) -&gt;</span>
+</span><span class='line'>    <span class="nx">promises</span><span class="p">.</span><span class="nx">die</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span>
+</span><span class='line'>      <span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="c1">#handle val</span>
+</span><span class='line'>      <span class="nf">(err) =&gt;</span>
+</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">err</span><span class="p">,</span> <span class="s">&#39;bye world&#39;</span>
+</span><span class='line'>        <span class="nx">done</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">it</span> <span class="s">&#39;Test Promises Propagation&#39;</span><span class="p">,</span> <span class="nf">(done) -&gt;</span>
+</span><span class='line'>    <span class="nx">promises</span><span class="p">.</span><span class="nx">hello</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span>
+</span><span class='line'>      <span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;hello&#39;</span>
+</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">world</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;world&#39;</span>
+</span><span class='line'>        <span class="nx">done</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">it</span> <span class="s">&#39;Test promises propagation with error&#39;</span><span class="p">,</span> <span class="nf">(done) -&gt;</span>
+</span><span class='line'>    <span class="nx">promises</span><span class="p">.</span><span class="nx">hello</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span>
+</span><span class='line'>      <span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;hello&#39;</span>
+</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">die</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">world</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span>
+</span><span class='line'>      <span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="c1">#we wont get here</span>
+</span><span class='line'>      <span class="nf">(err) =&gt;</span>
+</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">err</span><span class="p">,</span> <span class="s">&#39;bye world&#39;</span>
+</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">world</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nf">(val) =&gt;</span>
+</span><span class='line'>      <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;world&#39;</span>
+</span><span class='line'>      <span class="nx">done</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/07/08/installing-couch-db-on-amazon-ami/">Installing CouchDB Instance on Amazon AMI</a></h1>
     
     
@@ -131,6 +296,28 @@ RHEL style package management using <em>yum</em>.</p>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>ec2-user@ip ~<span class="o">]</span><span class="nv">$ </span>sudo yum update
 </span></code></pre></td></tr></table></div></figure>
 
+
+<h2>UPDATE</h2>
+
+<p>Before proceeding with the flow below, I found this project:</p>
+
+<p><a href="https://github.com/iriscouch/build-couchdb">https://github.com/iriscouch/build-couchdb</a></p>
+
+<p>Which maintain its own CouchDB dependencies and perform the build for you,</p>
+
+<p>You can use this project by this script:
+XXX</p>
+
+<p>This script does the following things:</p>
+
+<ol>
+<li>Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.)</li>
+<li>Clone the &lsquo;build-couchdb&rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc), It is all the dependencies that couchdb needs in order to be compiled.</li>
+<li></li>
+</ol>
+
+
+<p>But if you still want to build from sources (which is more depdendent on Amazon&rsquo;s dependencies) proceed reading.</p>
 
 <h3>Installing CouchDB via EPEL</h3>
 
@@ -775,6 +962,10 @@ rake deploy</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/09/q-promises-with-coffeescript/">Q Promises With CoffeeScript</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/08/installing-couch-db-on-amazon-ami/">Installing CouchDB Instance on Amazon AMI</a>
       </li>
     
@@ -788,10 +979,6 @@ rake deploy</p>
     
       <li class="post">
         <a href="/blog/2013/07/08/blogging-with-octopress-add-about-page/">Blogging With Octopress: Add About Page</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/08/blogging-with-octopress-quick-installation/">Blogging With Octopress: Quick Installation</a>
       </li>
     
   </ul>

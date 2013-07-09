@@ -129,6 +129,28 @@ RHEL style package management using <em>yum</em>.</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h2>UPDATE</h2>
+
+<p>Before proceeding with the flow below, I found this project:</p>
+
+<p><a href="https://github.com/iriscouch/build-couchdb">https://github.com/iriscouch/build-couchdb</a></p>
+
+<p>Which maintain its own CouchDB dependencies and perform the build for you,</p>
+
+<p>You can use this project by this script:
+XXX</p>
+
+<p>This script does the following things:</p>
+
+<ol>
+<li>Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.)</li>
+<li>Clone the &lsquo;build-couchdb&rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc), It is all the dependencies that couchdb needs in order to be compiled.</li>
+<li></li>
+</ol>
+
+
+<p>But if you still want to build from sources (which is more depdendent on Amazon&rsquo;s dependencies) proceed reading.</p>
+
 <h3>Installing CouchDB via EPEL</h3>
 
 <p>Enabling EPEL repo, we need some packages missing in standard Amazon repos:</p>
@@ -384,6 +406,8 @@ If you feel comfortable with js-devel 1.7.0, you can just:</p>
         <a class="basic-alignment left" href="/blog/2013/07/08/accessing-emberjs-controller-from-different-scopes/" title="Previous Post: Accessing EmberJS Controller from different scopes">&laquo; Accessing EmberJS Controller from different scopes</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/07/09/q-promises-with-coffeescript/" title="Next Post: Q promises with CoffeeScript">Q promises with CoffeeScript &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -407,6 +431,10 @@ If you feel comfortable with js-devel 1.7.0, you can just:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/09/q-promises-with-coffeescript/">Q Promises With CoffeeScript</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/08/installing-couch-db-on-amazon-ami/">Installing CouchDB Instance on Amazon AMI</a>
       </li>
     
@@ -420,10 +448,6 @@ If you feel comfortable with js-devel 1.7.0, you can just:</p>
     
       <li class="post">
         <a href="/blog/2013/07/08/blogging-with-octopress-add-about-page/">Blogging With Octopress: Add About Page</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/08/blogging-with-octopress-quick-installation/">Blogging With Octopress: Quick Installation</a>
       </li>
     
   </ul>
