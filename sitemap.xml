@@ -28,11 +28,17 @@
     </url>
     <url>
         <loc>http://asaf.github.io/blog/2013/07/08/installing-couch-db-on-amazon-ami/</loc>
-        <lastmod>2013-07-09T04:55:55-07:00</lastmod>
+        <lastmod>2013-07-10T11:09:59-07:00</lastmod>
     </url>
     <url>
         <loc>http://asaf.github.io/blog/2013/07/09/q-promises-with-coffeescript/</loc>
-        <lastmod>2013-07-09T06:29:47-07:00</lastmod>
+        <lastmod>2013-07-09T16:08:18-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/
+        </loc>
+        <lastmod>2013-07-10T11:10:01-07:00</lastmod>
     </url>
     <url>
         <loc>http://asaf.github.io/about-me/</loc>
@@ -40,11 +46,11 @@
     </url>
     <url>
         <loc>http://asaf.github.io/blog/archives/</loc>
-        <lastmod>2013-07-09T06:29:47-07:00</lastmod>
+        <lastmod>2013-07-10T11:10:01-07:00</lastmod>
     </url>
     <url>
         <loc>http://asaf.github.io/</loc>
-        <lastmod>2013-07-09T06:29:47-07:00</lastmod>
+        <lastmod>2013-07-10T11:10:01-07:00</lastmod>
     </url>
     <url>
         <loc>http://asaf.github.io/robots.txt</loc>

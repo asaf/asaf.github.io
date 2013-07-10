@@ -4,7 +4,7 @@
   <title><![CDATA[Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-09T06:30:26-07:00</updated>
+  <updated>2013-07-10T11:28:49-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -14,13 +14,307 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Installing CouchDB instance on Amazon AMI using build-couchdb]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/"/>
+    <updated>2013-07-10T10:54:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb</id>
+    <content type="html"><![CDATA[<p><img src="http://couchdb.apache.org/image/couch.png" width="160" height="180" title="Couch" ></p>
+
+<p>This post explains how to install CouchDB on Amazon AMI using <a href="https://github.com/iriscouch/build-couchdb">build-couchdb</a>/</p>
+
+<p>If you want to install couch from sources without build-couchdb tool, read:
+<a href="http://asaf.github.io/blog/2013/07/08/installing-couch-db-on-amazon-ami/">Installing CouchDB instance on Amazon AMI</a> is a working link</p>
+
+<p>build-couchdb does the following things:</p>
+
+<ol>
+<li>Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.)</li>
+<li>Clone the &lsquo;build-couchdb&rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc),
+These are all the dependencies that CouchDB needs in order to be compiled.</li>
+<li>Compiles all dependencies</li>
+<li>Compiles CouchDB linked with the compiled dependencies.</li>
+</ol>
+
+
+<p>Okay, go grab coffee and lets start!</p>
+
+<h3>Launch Instance</h3>
+
+<p>Login into EC2, and launch a new instanc and choose <em>Amazon Linux AMI</em>,
+You can of course choose other Linux flavours (you are not going to use Windows right?),</p>
+
+<p>But I really suggest going with Amazon AMI, it is EBS backed, ships with AWS tools installed and has a
+RHEL style package management using <em>yum</em>.</p>
+
+<p>Once your instance is launched, SSH it, i&rsquo;m sure you can do.</p>
+
+<p>Now lets updated the system to latest:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo yum update
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Installation</h3>
+
+<h4>Installing OS dependencies</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo yum install gcc gcc-c++ libtool curl-devel python27 help2man texinfo ruby-rdoc zlib-devel openssl-devel make automake rubygems perl git-core
+</span><span class='line'>sudo gem install rake --no-ri --no-rdoc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you don&rsquo;t want to get into troubles where build-couch tries to patch autoconf-2.69 because of old python version (&lt; 2.6) then link to python 2.7,
+at least during the time couch is being built.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo mv /usr/bin/python /usr/bin/python_org
+</span><span class='line'>sudo ln -s /usr/bin/python2.7 /usr/bin/python
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Clone build-couchdb</h4>
+
+<p>git clone git://github.com/iriscouch/build-couchdb
+cd build-couchdb
+git submodule init
+git submodule update</p>
+
+<h4>Optional: Upgrade SpiderMonkey</h4>
+
+<p>build-couch uses not an official Mozilla SpiderMonkey version, but considered to be very stable,
+if you would like to replace it with other versions then do the following,
+<em>You can safely skip this, proceed only if you have a good reason to do so</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo yum install mercurial
+</span><span class='line'><span class="nb">cd</span>
+</span><span class='line'>hg clone --verbose http://hg.mozilla.org/releases/mozilla-release
+</span><span class='line'><span class="nb">cd </span>mozilla-release
+</span><span class='line'>hg checkout FIREFOX_XX_0_RELEASE --clean <span class="c">#replace XX with the tag you wish</span>
+</span><span class='line'>rm -rf ~/build-couchdb/dependencies/spidermonkey/js
+</span><span class='line'>rm -rf ~/build-couchdb/dependencies/spidermonkey/mfbt
+</span><span class='line'>cp -r js mfbt ~/build-couchdb/dependencies/spidermonkey
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Building CouchDB and its dependencies</h4>
+
+<p>Now lets build Couch, you can replace <em>1.3.1</em> with any CouchDB release you wish to build,
+Or change the installation location.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo rake <span class="nv">git</span><span class="o">=</span><span class="s2">&quot;git://git.apache.org/couchdb.git tags/1.3.1&quot;</span> <span class="nv">install</span><span class="o">=</span>/usr/local/couchdb-1.3.1
+</span><span class='line'>sudo ln -s /usr/local/couchdb-1.3.1 /usr/local/couchdb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now go eat something, drink (another?) coffee, take a shower (you will have time for all of them, I promise.)</p>
+
+<p>You should expect the following output:</p>
+
+<blockquote><p>Plugins done</p></blockquote>
+
+<p>Now lets see what we&rsquo;ve built:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ls build/bin
+</span><span class='line'>
+</span><span class='line'>&gt; aclocal       autoheader2.13  autom4te2.69    autoreconf2.69  autoupdate2.59  ct_run       erl       genctd       ifnames2.62  pkgdata
+</span><span class='line'>&gt; aclocal-1.11  autoheader2.59  automake        autoscan2.13    autoupdate2.62  curl         erlc      genrb        ifnames2.69  run_erl
+</span><span class='line'>&gt; autoconf2.13  autoheader2.62  automake-1.11   autoscan2.59    autoupdate2.69  curl-config  escript   icu-config   js-config    run_test
+</span><span class='line'>&gt; autoconf2.59  autoheader2.69  autoreconf2.13  autoscan2.62    couch-config    derb         genbrk    icuinfo      libtool      to_erl
+</span><span class='line'>&gt; autoconf2.62  autom4te2.59    autoreconf2.59  autoscan2.69    couchdb         dialyzer     gencfu    ifnames2.13  libtoolize   typer
+</span><span class='line'>&gt; autoconf2.69  autom4te2.62    autoreconf2.62  autoupdate2.13  couchjs         epmd         gencnval  ifnames2.59  makeconv     uconv
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets execute Couch to ensure it can be executed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./build/bin/couchdb
+</span><span class='line'>
+</span><span class='line'>&gt; Apache CouchDB 1.3.1 <span class="o">(</span><span class="nv">LogLevel</span><span class="o">=</span>info<span class="o">)</span> is starting.
+</span><span class='line'>&gt; Apache CouchDB has started. Time to relax.
+</span><span class='line'>&gt; <span class="o">[</span>info<span class="o">]</span> <span class="o">[</span>&lt;0.32.0&gt;<span class="o">]</span> Apache CouchDB has started on http://127.0.0.1:5984/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can open another terminal to ensure Couch replies properly:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl http://127.0.0.1:5984
+</span><span class='line'>
+</span><span class='line'>&gt; <span class="o">{</span><span class="s2">&quot;couchdb&quot;</span>:<span class="s2">&quot;Welcome&quot;</span>,<span class="s2">&quot;uuid&quot;</span>:<span class="s2">&quot;9db29433ea76ccfaa81726f6ace742f4&quot;</span>,<span class="s2">&quot;version&quot;</span>:<span class="s2">&quot;1.3.1&quot;</span>,<span class="s2">&quot;vendor&quot;</span>:<span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;The Apache Software Foundation&quot;</span>,<span class="s2">&quot;version&quot;</span>:<span class="s2">&quot;1.3.1&quot;</span><span class="o">}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Configuration</h3>
+
+<h4>Replace Python link</h4>
+
+<p>To avoid breaking yum and other things, it is adviced to return the python binary link back to its original version</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo rm /usr/bin/python
+</span><span class='line'>sudo mv /usr/bin/python_org /usr/bin/python
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Run Couch on isolated user and correct files ownership</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># add couchdb user</span>
+</span><span class='line'>sudo adduser --system --home /usr/local/couchdb/var/lib/couchdb -M --shell /bin/bash --comment <span class="s2">&quot;CouchDB&quot;</span> couchdb
+</span><span class='line'>
+</span><span class='line'><span class="c"># change file ownership</span>
+</span><span class='line'>sudo chown -R couchdb:couchdb /usr/local/couchdb/etc/couchdb /usr/local/couchdb/var/lib/couchdb /usr/local/couchdb/var/log/couchdb /usr/local/couchdb/var/run/couchdb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>couch ini file</h4>
+
+<p>Lets create couch ini file</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat <span class="s">&lt;&lt; &#39;EOF&#39; &gt; /usr/local/etc/couchdb/local.ini</span>
+</span><span class='line'><span class="s">[couchdb]</span>
+</span><span class='line'><span class="s">#read more here: http://guide.couchdb.org/draft/performance.html</span>
+</span><span class='line'><span class="s">delayed_commits = false</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">[httpd]</span>
+</span><span class='line'><span class="s">port = 80</span>
+</span><span class='line'><span class="s">bind_address = 0.0.0.0</span>
+</span><span class='line'><span class="s">socket_options = [{recbuf, 262144}, {sndbuf, 262144}, {nodelay, true}]</span>
+</span><span class='line'><span class="s">WWW-Authenticate = Basic realm=&quot;administrator&quot;</span>
+</span><span class='line'><span class="s">;WWW-Authenticate = bummer</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">[couch_httpd_auth]</span>
+</span><span class='line'><span class="s">require_valid_user = true</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">[log]</span>
+</span><span class='line'><span class="s">level = error</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">[admins]</span>
+</span><span class='line'><span class="s">EOF</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Password protection</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span><span class="nv">PASS</span><span class="o">=</span><span class="sb">`</span>&lt;/dev/urandom tr -dc <span class="s1">&#39;12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB&#39;</span> | head -c20; <span class="nb">echo</span> <span class="s2">&quot;&quot;</span><span class="sb">`</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;admin = ${ADMIN_PASSWORD}&quot;</span> &gt;&gt; /usr/local/etc/couchdb/local.ini
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Couch is smart enough to hash the passwords.</p>
+
+<h4>Logs Rotation</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">if</span> <span class="o">[</span> ! -e <span class="s2">&quot;/etc/logrotate.d/couchdb&quot;</span> <span class="o">]</span>
+</span><span class='line'><span class="k">then</span>
+</span><span class='line'>  <span class="c"># add couch.log to logrotate</span>
+</span><span class='line'>  sudo ln -s /usr/local/couchdb/etc/logrotate.d/couchdb /etc/logrotate.d/
+</span><span class='line'>  <span class="c"># change to daily rotation</span>
+</span><span class='line'>  sudo sed -e s/weekly/daily/g -i /usr/local/couchdb/etc/logrotate.d/couchdb
+</span><span class='line'>  <span class="c">#logrotate -v -f /etc/logrotate.d/couchdb </span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Run CouchDB on startup</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># run couchdb on startup</span>
+</span><span class='line'>sudo ln -s /usr/local/couchdb/etc/rc.d/couchdb /etc/init.d/couchdb
+</span><span class='line'>sudo chkconfig --add couchdb
+</span><span class='line'>sudo chkconfig --level 345 couchdb on
+</span><span class='line'>
+</span><span class='line'>sudo service couchdb status
+</span><span class='line'><span class="c">#Apache CouchDB is not running.</span>
+</span><span class='line'>
+</span><span class='line'>sudo service couchdb start
+</span><span class='line'><span class="c">#</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Q promises with CoffeeScript]]></title>
     <link href="http://asaf.github.io/blog/2013/07/09/q-promises-with-coffeescript/"/>
     <updated>2013-07-09T06:03:00-07:00</updated>
     <id>http://asaf.github.io/blog/2013/07/09/q-promises-with-coffeescript</id>
-    <content type="html"><![CDATA[<p>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came acrross <a href="Q%20Promises">&ldquo;https://github.com/kriskowal/q&rdquo;</a>.</p>
+    <content type="html"><![CDATA[<p>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across <a href="Q%20Promises">&ldquo;https://github.com/kriskowal/q&rdquo;</a>.</p>
 
-<p>Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner,</p>
+<p>Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner.</p>
 
 <p>Here&rsquo;s an example:</p>
 
@@ -181,23 +475,13 @@ RHEL style package management using <em>yum</em>.</p>
 
 <h2>UPDATE</h2>
 
-<p>Before proceeding with the flow below, I found this project:</p>
+<p><em>Before proceeding with this guide, which compiles CouchDB from sources without any automated tool</em></p>
 
-<p><a href="https://github.com/iriscouch/build-couchdb">https://github.com/iriscouch/build-couchdb</a></p>
+<p>I found this project:
+<a href="https://github.com/iriscouch/build-couchdb">https://github.com/iriscouch/build-couchdb</a></p>
 
-<p>Which maintain its own CouchDB dependencies and perform the build for you,</p>
-
-<p>You can use this project by this script:
-XXX</p>
-
-<p>This script does the following things:</p>
-
-<ol>
-<li>Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.)</li>
-<li>Clone the &lsquo;build-couchdb&rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc), It is all the dependencies that couchdb needs in order to be compiled.</li>
-<li></li>
-</ol>
-
+<p>Which maintains its own CouchDB dependencies and perform the build for you, if you choose this approach, check out this post:
+<a href="http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/">Installing CouchDB instance on Amazon AMI using build-couchdb</a> is a working link</p>
 
 <p>But if you still want to build from sources (which is more depdendent on Amazon&rsquo;s dependencies) proceed reading.</p>
 
@@ -506,6 +790,15 @@ Then <a href="Signup%20for%20a%20new%20application">https://disqus.com/admin/sig
 
 
 <p>Done!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web in Realtime: using nodejs socketstream emberjs and more]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/"/>
+    <updated>2013-07-08T10:08:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more</id>
+    <content type="html"><![CDATA[<p>now here we go with some content :)</p>
 ]]></content>
   </entry>
   

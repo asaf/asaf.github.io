@@ -4,7 +4,7 @@
   <title><![CDATA[Category: promises | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/promises/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-09T06:30:26-07:00</updated>
+  <updated>2013-07-10T11:28:49-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -18,9 +18,9 @@
     <link href="http://asaf.github.io/blog/2013/07/09/q-promises-with-coffeescript/"/>
     <updated>2013-07-09T06:03:00-07:00</updated>
     <id>http://asaf.github.io/blog/2013/07/09/q-promises-with-coffeescript</id>
-    <content type="html"><![CDATA[<p>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came acrross <a href="Q%20Promises">&ldquo;https://github.com/kriskowal/q&rdquo;</a>.</p>
+    <content type="html"><![CDATA[<p>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across <a href="Q%20Promises">&ldquo;https://github.com/kriskowal/q&rdquo;</a>.</p>
 
-<p>Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner,</p>
+<p>Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner.</p>
 
 <p>Here&rsquo;s an example:</p>
 

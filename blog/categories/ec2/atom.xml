@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ec2 | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/ec2/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-09T06:30:47-07:00</updated>
+  <updated>2013-07-10T11:28:49-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -14,11 +14,234 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Installing CouchDB instance on Amazon AMI using build-couchdb]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/"/>
+    <updated>2013-07-10T10:54:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb</id>
+    <content type="html"><![CDATA[<p><img class="<a" src="href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a>" width="160" height="180" title="Couch" ></p>
+
+<p>This post explains how to install CouchDB on Amazon AMI using <a href="https://github.com/iriscouch/build-couchdb">build-couchdb</a>/</p>
+
+<p>If you want to install couch from sources without build-couchdb tool, read:
+<a href="/blog/2013/07/08/installing-couch-db-on-amazon-ami/">Installing CouchDB instance on Amazon AMI</a> is a working link</p>
+
+<p>build-couchdb does the following things:</p>
+
+<ol>
+<li>Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.)</li>
+<li>Clone the &lsquo;build-couchdb&rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc),
+These are all the dependencies that CouchDB needs in order to be compiled.</li>
+<li>Compiles all dependencies</li>
+<li>Compiles CouchDB linked with the compiled dependencies.</li>
+</ol>
+
+
+<p>Okay, go grab coffee and lets start!</p>
+
+<h3>Launch Instance</h3>
+
+<p>Login into EC2, and launch a new instanc and choose <em>Amazon Linux AMI</em>,
+You can of course choose other Linux flavours (you are not going to use Windows right?),</p>
+
+<p>But I really suggest going with Amazon AMI, it is EBS backed, ships with AWS tools installed and has a
+RHEL style package management using <em>yum</em>.</p>
+
+<p>Once your instance is launched, SSH it, i&rsquo;m sure you can do.</p>
+
+<p>Now lets updated the system to latest:</p>
+
+<p><code>bash
+sudo yum update
+</code></p>
+
+<h3>Installation</h3>
+
+<h4>Installing OS dependencies</h4>
+
+<p><code>bash
+sudo yum install gcc gcc-c++ libtool curl-devel python27 help2man texinfo ruby-rdoc zlib-devel openssl-devel make automake rubygems perl git-core
+sudo gem install rake --no-ri --no-rdoc
+</code></p>
+
+<p>If you don&rsquo;t want to get into troubles where build-couch tries to patch autoconf-2.69 because of old python version (&lt; 2.6) then link to python 2.7,
+at least during the time couch is being built.</p>
+
+<p><code>bash
+sudo mv /usr/bin/python /usr/bin/python_org
+sudo ln -s /usr/bin/python2.7 /usr/bin/python
+</code></p>
+
+<h4>Clone build-couchdb</h4>
+
+<p>git clone git://github.com/iriscouch/build-couchdb
+cd build-couchdb
+git submodule init
+git submodule update</p>
+
+<h4>Optional: Upgrade SpiderMonkey</h4>
+
+<p>build-couch uses not an official Mozilla SpiderMonkey version, but considered to be very stable,
+if you would like to replace it with other versions then do the following,
+<em>You can safely skip this, proceed only if you have a good reason to do so</em></p>
+
+<p><code>bash
+sudo yum install mercurial
+cd
+hg clone --verbose http://hg.mozilla.org/releases/mozilla-release  
+cd mozilla-release
+hg checkout FIREFOX_XX_0_RELEASE --clean #replace XX with the tag you wish
+rm -rf ~/build-couchdb/dependencies/spidermonkey/js
+rm -rf ~/build-couchdb/dependencies/spidermonkey/mfbt
+cp -r js mfbt ~/build-couchdb/dependencies/spidermonkey
+</code></p>
+
+<h4>Building CouchDB and its dependencies</h4>
+
+<p>Now lets build Couch, you can replace <em>1.3.1</em> with any CouchDB release you wish to build,
+Or change the installation location.</p>
+
+<p><code>bash
+sudo rake git="git://git.apache.org/couchdb.git tags/1.3.1" install=/usr/local/couchdb-1.3.1
+sudo ln -s /usr/local/couchdb-1.3.1 /usr/local/couchdb
+</code></p>
+
+<p>Now go eat something, drink (another?) coffee, take a shower (you will have time for all of them, I promise.)</p>
+
+<p>You should expect the following output:</p>
+
+<blockquote><p>Plugins done</p></blockquote>
+
+<p>Now lets see what we&rsquo;ve built:</p>
+
+<p>``` bash
+ls build/bin</p>
+
+<blockquote><p>aclocal       autoheader2.13  autom4te2.69    autoreconf2.69  autoupdate2.59  ct_run       erl       genctd       ifnames2.62  pkgdata
+aclocal-1.11  autoheader2.59  automake        autoscan2.13    autoupdate2.62  curl         erlc      genrb        ifnames2.69  run_erl
+autoconf2.13  autoheader2.62  automake-1.11   autoscan2.59    autoupdate2.69  curl-config  escript   icu-config   js-config    run_test
+autoconf2.59  autoheader2.69  autoreconf2.13  autoscan2.62    couch-config    derb         genbrk    icuinfo      libtool      to_erl
+autoconf2.62  autom4te2.59    autoreconf2.59  autoscan2.69    couchdb         dialyzer     gencfu    ifnames2.13  libtoolize   typer
+autoconf2.69  autom4te2.62    autoreconf2.62  autoupdate2.13  couchjs         epmd         gencnval  ifnames2.59  makeconv     uconv
+```</p></blockquote>
+
+<p>Lets execute Couch to ensure it can be executed.</p>
+
+<p>``` bash
+./build/bin/couchdb</p>
+
+<blockquote><p>Apache CouchDB 1.3.1 (LogLevel=info) is starting.
+Apache CouchDB has started. Time to relax.
+[info] [&lt;0.32.0>] Apache CouchDB has started on <a href="http://127.0.0.1:5984/">http://127.0.0.1:5984/</a>
+```</p></blockquote>
+
+<p>You can open another terminal to ensure Couch replies properly:</p>
+
+<p>``` bash
+curl <a href="http://127.0.0.1:5984">http://127.0.0.1:5984</a></p>
+
+<blockquote><p>{&ldquo;couchdb&rdquo;:&ldquo;Welcome&rdquo;,&ldquo;uuid&rdquo;:&ldquo;9db29433ea76ccfaa81726f6ace742f4&rdquo;,&ldquo;version&rdquo;:&ldquo;1.3.1&rdquo;,&ldquo;vendor&rdquo;:{&ldquo;name&rdquo;:&ldquo;The Apache Software Foundation&rdquo;,&ldquo;version&rdquo;:&ldquo;1.3.1&rdquo;}}
+```</p></blockquote>
+
+<h3>Configuration</h3>
+
+<h4>Replace Python link</h4>
+
+<p>To avoid breaking yum and other things, it is adviced to return the python binary link back to its original version</p>
+
+<p><code>bash
+sudo rm /usr/bin/python
+sudo mv /usr/bin/python_org /usr/bin/python
+</code></p>
+
+<h4>Run Couch on isolated user and correct files ownership</h4>
+
+<p>``` bash</p>
+
+<h1>add couchdb user</h1>
+
+<p>sudo adduser &mdash;system &mdash;home /usr/local/couchdb/var/lib/couchdb -M &mdash;shell /bin/bash &mdash;comment &ldquo;CouchDB&rdquo; couchdb</p>
+
+<h1>change file ownership</h1>
+
+<p>sudo chown -R couchdb:couchdb /usr/local/couchdb/etc/couchdb /usr/local/couchdb/var/lib/couchdb /usr/local/couchdb/var/log/couchdb /usr/local/couchdb/var/run/couchdb
+```</p>
+
+<h4>couch ini file</h4>
+
+<p>Lets create couch ini file</p>
+
+<p>``` bash
+cat &lt;&lt; &lsquo;EOF&rsquo; > /usr/local/etc/couchdb/local.ini
+[couchdb]</p>
+
+<h1>read more here: <a href="http://guide.couchdb.org/draft/performance.html">http://guide.couchdb.org/draft/performance.html</a></h1>
+
+<p>delayed_commits = false</p>
+
+<p>[httpd]
+port = 80
+bind_address = 0.0.0.0
+socket_options = [{recbuf, 262144}, {sndbuf, 262144}, {nodelay, true}]
+WWW-Authenticate = Basic realm=&ldquo;administrator&rdquo;
+;WWW-Authenticate = bummer</p>
+
+<p>[couch_httpd_auth]
+require_valid_user = true</p>
+
+<p>[log]
+level = error</p>
+
+<p>[admins]
+EOF
+```</p>
+
+<h4>Password protection</h4>
+
+<p><code>bash
+export PASS=`&lt;/dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c20; echo ""`
+echo "admin = ${ADMIN_PASSWORD}" &gt;&gt; /usr/local/etc/couchdb/local.ini
+</code>
+Couch is smart enough to hash the passwords.</p>
+
+<h4>Logs Rotation</h4>
+
+<p><code>bash
+if [ ! -e "/etc/logrotate.d/couchdb" ]
+then
+  # add couch.log to logrotate
+  sudo ln -s /usr/local/couchdb/etc/logrotate.d/couchdb /etc/logrotate.d/
+  # change to daily rotation
+  sudo sed -e s/weekly/daily/g -i /usr/local/couchdb/etc/logrotate.d/couchdb
+  #logrotate -v -f /etc/logrotate.d/couchdb
+fi
+</code></p>
+
+<h4>Run CouchDB on startup</h4>
+
+<p>``` bash</p>
+
+<h1>run couchdb on startup</h1>
+
+<p>sudo ln -s /usr/local/couchdb/etc/rc.d/couchdb /etc/init.d/couchdb
+sudo chkconfig &mdash;add couchdb
+sudo chkconfig &mdash;level 345 couchdb on</p>
+
+<p>sudo service couchdb status</p>
+
+<h1>Apache CouchDB is not running.</h1>
+
+<p>sudo service couchdb start
+#
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Installing CouchDB instance on Amazon AMI]]></title>
     <link href="http://asaf.github.io/blog/2013/07/08/installing-couch-db-on-amazon-ami/"/>
     <updated>2013-07-08T18:53:00-07:00</updated>
     <id>http://asaf.github.io/blog/2013/07/08/installing-couch-db-on-amazon-ami</id>
-    <content type="html"><![CDATA[<p>{% img <a href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a> 160 180 Couch %}</p>
+    <content type="html"><![CDATA[<p><img class="<a" src="href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a>" width="160" height="180" title="Couch" ></p>
 
 <p>One of our platform is based on CouchDB, we host everything on Amazon EC2 and while Amazon lacks with CouchDB support,
 I have decided to build our own CouchDB server.</p>
@@ -43,23 +266,13 @@ RHEL style package management using <em>yum</em>.</p>
 
 <h2>UPDATE</h2>
 
-<p>Before proceeding with the flow below, I found this project:</p>
+<p><em>Before proceeding with this guide, which compiles CouchDB from sources without any automated tool</em></p>
 
-<p><a href="https://github.com/iriscouch/build-couchdb">https://github.com/iriscouch/build-couchdb</a></p>
+<p>I found this project:
+<a href="https://github.com/iriscouch/build-couchdb">https://github.com/iriscouch/build-couchdb</a></p>
 
-<p>Which maintain its own CouchDB dependencies and perform the build for you,</p>
-
-<p>You can use this project by this script:
-XXX</p>
-
-<p>This script does the following things:</p>
-
-<ol>
-<li>Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.)</li>
-<li>Clone the &lsquo;build-couchdb&rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc), It is all the dependencies that couchdb needs in order to be compiled.</li>
-<li></li>
-</ol>
-
+<p>Which maintains its own CouchDB dependencies and perform the build for you, if you choose this approach, check out this post:
+<a href="/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/">Installing CouchDB instance on Amazon AMI using build-couchdb</a> is a working link</p>
 
 <p>But if you still want to build from sources (which is more depdendent on Amazon&rsquo;s dependencies) proceed reading.</p>
 
