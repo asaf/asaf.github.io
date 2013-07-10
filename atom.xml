@@ -4,7 +4,7 @@
   <title><![CDATA[Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-10T11:28:49-07:00</updated>
+  <updated>2013-07-10T12:45:30-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nodejs Deployment: Building and Configuring on Amazon Linux AMI]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/"/>
+    <updated>2013-07-10T12:17:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Installing CouchDB instance on Amazon AMI using build-couchdb]]></title>
@@ -136,7 +145,9 @@ Or change the installation location.</p>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ls build/bin
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /usr/local/couchdb-1.3.1
+</span><span class='line'>ls bin
 </span><span class='line'>
 </span><span class='line'>&gt; aclocal       autoheader2.13  autom4te2.69    autoreconf2.69  autoupdate2.59  ct_run       erl       genctd       ifnames2.62  pkgdata
 </span><span class='line'>&gt; aclocal-1.11  autoheader2.59  automake        autoscan2.13    autoupdate2.62  curl         erlc      genrb        ifnames2.69  run_erl
@@ -154,7 +165,7 @@ Or change the installation location.</p>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>./build/bin/couchdb
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo ./bin/couchdb
 </span><span class='line'>
 </span><span class='line'>&gt; Apache CouchDB 1.3.1 <span class="o">(</span><span class="nv">LogLevel</span><span class="o">=</span>info<span class="o">)</span> is starting.
 </span><span class='line'>&gt; Apache CouchDB has started. Time to relax.
@@ -225,7 +236,7 @@ Or change the installation location.</p>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat <span class="s">&lt;&lt; &#39;EOF&#39; &gt; /usr/local/etc/couchdb/local.ini</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat <span class="s">&lt;&lt; &#39;EOF&#39; &gt; /usr/local/couchdb/etc/couchdb/local.ini</span>
 </span><span class='line'><span class="s">[couchdb]</span>
 </span><span class='line'><span class="s">#read more here: http://guide.couchdb.org/draft/performance.html</span>
 </span><span class='line'><span class="s">delayed_commits = false</span>
@@ -301,9 +312,11 @@ Or change the installation location.</p>
 </span><span class='line'><span class="c">#Apache CouchDB is not running.</span>
 </span><span class='line'>
 </span><span class='line'>sudo service couchdb start
-</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">#Apache CouchDB is running as process 5047, time to relax.</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>Now it&rsquo;s really time to relax, enjoy :&ndash;)</p>
 ]]></content>
   </entry>
   
@@ -790,15 +803,6 @@ Then <a href="Signup%20for%20a%20new%20application">https://disqus.com/admin/sig
 
 
 <p>Done!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Web in Realtime: using nodejs socketstream emberjs and more]]></title>
-    <link href="http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/"/>
-    <updated>2013-07-08T10:08:00-07:00</updated>
-    <id>http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more</id>
-    <content type="html"><![CDATA[<p>now here we go with some content :)</p>
 ]]></content>
   </entry>
   
