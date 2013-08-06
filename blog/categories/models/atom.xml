@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: models | Asaf Shakarchi]]></title>
+  <link href="http://asaf.github.io/blog/categories/models/atom.xml" rel="self"/>
+  <link href="http://asaf.github.io/"/>
+  <updated>2013-08-06T03:58:04-07:00</updated>
+  <id>http://asaf.github.io/</id>
+  <author>
+    <name><![CDATA[Asaf Shakarchi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[nodejs-model is born]]></title>
+    <link href="http://asaf.github.io/blog/2013/08/06/nodejs-model-is-born/"/>
+    <updated>2013-08-06T03:22:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/08/06/nodejs-model-is-born</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been struggling lately to find an appropriate way to handle models correctly,
+In one hand, these noSQL DBs such <em>CouchDB</em> have great flexibility and I didn&rsquo;t want to ruin that with a blowing up ORM framework,
+in the other hand once the application grows a little bit more than a contact list app, then things become messy.</p>
+
+<p>While writing a larger app with Node, I find myself struggling with finding solutions to problems such:
+(there are few more but these are the main)</p>
+
+<ul>
+<li><strong>Validating a document (model) properties (application level) before storing it in the DB.</strong></li>
+<li><strong>A minimal schema where each attribute is defined per model to ensure no allowed attributes leaks into the model.</strong></li>
+<li><strong>Automatically convert a property value when a value is set.</strong></li>
+<li><strong>Filter critical, sensitive attributes when transfering the model on the wire to external clients.</strong></li>
+<li><strong>Updating an existing domain via an accessibility-aware method (you may want users to update their profile but not letting them directly change their password attribute)</strong></li>
+</ul>
+
+
+<p>So I couldn&rsquo;t really find a good module to achieve all of that without sticking a giant into my lightweight app, so I built one, it&rsquo;s named
+<a href="https://github.com/asaf/nodejs-model">nodejs-model</a>, available here: <a href="https://github.com/asaf/nodejs-model">https://github.com/asaf/nodejs-model</a></p>
+
+<p>For now, read the docs on the github repo for more info, i will post series of posts about <em>nodejs-model</em> in the near future.</p>
+]]></content>
+  </entry>
+  
+</feed>

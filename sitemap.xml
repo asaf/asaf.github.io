@@ -38,13 +38,17 @@
         <loc>
             http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/
         </loc>
-        <lastmod>2013-07-10T12:44:33-07:00</lastmod>
+        <lastmod>2013-07-10T13:35:51-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://asaf.github.io/blog/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/
         </loc>
-        <lastmod>2013-07-10T12:17:44-07:00</lastmod>
+        <lastmod>2013-07-10T15:08:24-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://asaf.github.io/blog/2013/08/06/nodejs-model-is-born/</loc>
+        <lastmod>2013-08-06T03:57:25-07:00</lastmod>
     </url>
     <url>
         <loc>http://asaf.github.io/about-me/</loc>
@@ -52,11 +56,11 @@
     </url>
     <url>
         <loc>http://asaf.github.io/blog/archives/</loc>
-        <lastmod>2013-07-10T12:44:33-07:00</lastmod>
+        <lastmod>2013-08-06T03:57:25-07:00</lastmod>
     </url>
     <url>
         <loc>http://asaf.github.io/</loc>
-        <lastmod>2013-07-10T12:44:33-07:00</lastmod>
+        <lastmod>2013-08-06T03:57:25-07:00</lastmod>
     </url>
     <url>
         <loc>http://asaf.github.io/robots.txt</loc>

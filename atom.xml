@@ -4,7 +4,7 @@
   <title><![CDATA[Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-07-10T12:45:30-07:00</updated>
+  <updated>2013-08-06T03:58:04-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -14,11 +14,290 @@
 
   
   <entry>
+    <title type="html"><![CDATA[nodejs-model is born]]></title>
+    <link href="http://asaf.github.io/blog/2013/08/06/nodejs-model-is-born/"/>
+    <updated>2013-08-06T03:22:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/08/06/nodejs-model-is-born</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been struggling lately to find an appropriate way to handle models correctly,
+In one hand, these noSQL DBs such <em>CouchDB</em> have great flexibility and I didn&rsquo;t want to ruin that with a blowing up ORM framework,
+in the other hand once the application grows a little bit more than a contact list app, then things become messy.</p>
+
+<p>While writing a larger app with Node, I find myself struggling with finding solutions to problems such:
+(there are few more but these are the main)</p>
+
+<ul>
+<li><strong>Validating a document (model) properties (application level) before storing it in the DB.</strong></li>
+<li><strong>A minimal schema where each attribute is defined per model to ensure no allowed attributes leaks into the model.</strong></li>
+<li><strong>Automatically convert a property value when a value is set.</strong></li>
+<li><strong>Filter critical, sensitive attributes when transfering the model on the wire to external clients.</strong></li>
+<li><strong>Updating an existing domain via an accessibility-aware method (you may want users to update their profile but not letting them directly change their password attribute)</strong></li>
+</ul>
+
+
+<p>So I couldn&rsquo;t really find a good module to achieve all of that without sticking a giant into my lightweight app, so I built one, it&rsquo;s named
+<a href="https://github.com/asaf/nodejs-model">nodejs-model</a>, available here: <a href="https://github.com/asaf/nodejs-model">https://github.com/asaf/nodejs-model</a></p>
+
+<p>For now, read the docs on the github repo for more info, i will post series of posts about <em>nodejs-model</em> in the near future.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Nodejs Deployment: Building and Configuring on Amazon Linux AMI]]></title>
     <link href="http://asaf.github.io/blog/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/"/>
     <updated>2013-07-10T12:17:00-07:00</updated>
     <id>http://asaf.github.io/blog/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<h3>Logging in and updating system to latest</h3>
+
+<p>SSH your shiny new VM,</p>
+
+<p>Now lets update the system to the latest:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo yum update
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Install OS dependencies</h3>
+
+<p>We&#8217;r going to build Node.js from sources, some dependencies (such as gcc) are required:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo yum install gcc-c++ make openssl-devel git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Cloning n Building Node.js</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span>
+</span><span class='line'>git clone git://github.com/joyent/node.git
+</span><span class='line'><span class="nb">cd </span>node
+</span><span class='line'>git checkout v0.10.13 <span class="c">#check for other stable tags by executing &#39;git tag&#39;</span>
+</span><span class='line'>./configure --prefix<span class="o">=</span>/usr/local/node
+</span><span class='line'>make
+</span><span class='line'>sudo make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Go grab a cup of coffee&hellip; :&ndash;)
+&hellip;</p>
+
+<h3>Configuration</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo useradd _yourappuser_
+</span><span class='line'>passwd _yourappuser_
+</span><span class='line'>sudo su - _yourappuser_
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Put your app</h3>
+
+<p>Now put your app in ~, for instance:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span>
+</span><span class='line'><span class="nb">pwd</span>
+</span><span class='line'><span class="c">#/home/_yourappuser_</span>
+</span><span class='line'>git clone _https://myhost.com/myapp myapp_
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Init.d</h3>
+
+<p>We would like to have nodejs to start automatically as a service, to do so, lets create an init.d file
+<em>Note: you have to change the properties in the file such as yourappuser, myapp to your app folder and server.js to your node app file.</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat <span class="s">&lt;&lt; &#39;EOF&#39; &gt; /etc/init.d/nodejs</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">#</span>
+</span><span class='line'><span class="s"># chkconfig: 35 99 99</span>
+</span><span class='line'><span class="s"># description: Node.js /home/yourappuser/myapp/app.js</span>
+</span><span class='line'><span class="s">#</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">. /etc/rc.d/init.d/functions</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">USER=&quot;_yourappuser_&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">NODE_ENV=&quot;production&quot;</span>
+</span><span class='line'><span class="s">DAEMON=&quot;/usr/local/node/bin/node&quot;</span>
+</span><span class='line'><span class="s">ROOT_DIR=&quot;/home/yourappuser/myapp&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">SERVER=&quot;$ROOT_DIR/server.js&quot;</span>
+</span><span class='line'><span class="s">LOG_FILE=&quot;$ROOT_DIR/app.js.log&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">LOCK_FILE=&quot;/var/lock/subsys/node-server&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">do_start()</span>
+</span><span class='line'><span class="s">{</span>
+</span><span class='line'><span class="s">        if [ ! -f &quot;$LOCK_FILE&quot; ] ; then</span>
+</span><span class='line'><span class="s">                echo -n $&quot;Starting $SERVER: &quot;</span>
+</span><span class='line'><span class="s">                runuser -l &quot;$USER&quot; -c &quot;NODE_ENV=$NODE_ENV $DAEMON $SERVER &gt;&gt; $LOG_FILE &amp;&quot; &amp;&amp; echo_success || echo_failure</span>
+</span><span class='line'><span class="s">                RETVAL=$?</span>
+</span><span class='line'><span class="s">                echo</span>
+</span><span class='line'><span class="s">                [ $RETVAL -eq 0 ] &amp;&amp; touch $LOCK_FILE</span>
+</span><span class='line'><span class="s">        else</span>
+</span><span class='line'><span class="s">                echo &quot;$SERVER is locked.&quot;</span>
+</span><span class='line'><span class="s">                RETVAL=1</span>
+</span><span class='line'><span class="s">        fi</span>
+</span><span class='line'><span class="s">}</span>
+</span><span class='line'><span class="s">do_stop()</span>
+</span><span class='line'><span class="s">{</span>
+</span><span class='line'><span class="s">        echo -n $&quot;Stopping $SERVER: &quot;</span>
+</span><span class='line'><span class="s">        pid=`ps -aefw | grep &quot;$DAEMON $SERVER&quot; | grep -v &quot; grep &quot; | awk &#39;{print $2}&#39;`</span>
+</span><span class='line'><span class="s">        kill -9 $pid &gt; /dev/null 2&gt;&amp;1 &amp;&amp; echo_success || echo_failure</span>
+</span><span class='line'><span class="s">        RETVAL=$?</span>
+</span><span class='line'><span class="s">        echo</span>
+</span><span class='line'><span class="s">        [ $RETVAL -eq 0 ] &amp;&amp; rm -f $LOCK_FILE</span>
+</span><span class='line'><span class="s">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">case &quot;$1&quot; in</span>
+</span><span class='line'><span class="s">        start)</span>
+</span><span class='line'><span class="s">                do_start</span>
+</span><span class='line'><span class="s">                ;;</span>
+</span><span class='line'><span class="s">        stop)</span>
+</span><span class='line'><span class="s">                do_stop</span>
+</span><span class='line'><span class="s">                ;;</span>
+</span><span class='line'><span class="s">        restart)</span>
+</span><span class='line'><span class="s">                do_stop</span>
+</span><span class='line'><span class="s">                do_start</span>
+</span><span class='line'><span class="s">                ;;</span>
+</span><span class='line'><span class="s">        *)</span>
+</span><span class='line'><span class="s">                echo &quot;Usage: $0 {start|stop|restart}&quot;</span>
+</span><span class='line'><span class="s">                RETVAL=1</span>
+</span><span class='line'><span class="s">esac</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">exit $RETVAL</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">EOF</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add execution permission to the nodejs init script</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo chmod +x /etc/init.d/nodejs
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Pre Routing to port 80</h3>
+
+<p>Linux does not allow non super users to listen to ports &lt; 1024, assuming your application listen to port <em>8080</em>,
+You would probably like to pre route any traffic arriving from port <em>80</em> to your node app that listens to port <em>8080</em></p>
+
+<p>You can do this by the pre routing nat capability of <em>Iptables</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>chkconfig iptables on
+</span><span class='line'>service iptables start
+</span><span class='line'>iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+</span><span class='line'>iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443 <span class="c">#if you want SSL too</span>
+</span><span class='line'>service iptables save
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Configuring node-http-proxy</h3>
+
+<p>It is common to install http proxies such as <em>nginx</em> on front of nodejs,
+This architecture has many advantages such as raising security level, listening natively to port 80, load balancing, multiple node apps support
+via url rewrite, etc&hellip;</p>
+
+<p>I personally think that the best approach, which is very native to node apps is to use <a href="https://github.com/nodejitsu/node-http-proxy,">https://github.com/nodejitsu/node-http-proxy,</a></p>
+
+<p>Which have several advantages:</p>
+
+<ol>
+<li>Reverse proxies incoming http.ServerRequest streams, WebSockets, HTTPS</li>
+<li>Minimal request overhead and latency</li>
+<li>Battled-hardened through production usage</li>
+<li>Very native for nodejs apps</li>
+</ol>
+
+
+<p>TODO: Will post more details in the future but you can simply visit <a href="node-http-proxy">&ldquo;https://github.com/nodejitsu/node-http-proxy&rdquo;</a> site.</p>
+
+<p><a href="https://github.com/pkrumins/nodejs-proxy">https://github.com/pkrumins/nodejs-proxy</a></p>
 ]]></content>
   </entry>
   
@@ -803,6 +1082,15 @@ Then <a href="Signup%20for%20a%20new%20application">https://disqus.com/admin/sig
 
 
 <p>Done!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web in Realtime: using nodejs socketstream emberjs and more]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/"/>
+    <updated>2013-07-08T10:08:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more</id>
+    <content type="html"><![CDATA[<p>now here we go with some content :)</p>
 ]]></content>
   </entry>
   
