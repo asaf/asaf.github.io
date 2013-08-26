@@ -4,7 +4,7 @@
   <title><![CDATA[Category: emberjs | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/emberjs/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-08-06T03:58:04-07:00</updated>
+  <updated>2013-08-26T07:52:59-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bootstrap for Ember is born]]></title>
+    <link href="http://asaf.github.io/blog/2013/08/26/bootstrap-for-ember-is-born/"/>
+    <updated>2013-08-26T07:29:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/08/26/bootstrap-for-ember-is-born</id>
+    <content type="html"><![CDATA[<p>Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of
+making web applications right.</p>
+
+<p>You can just hook both projects together by using Bootstrap as is in Handlebars templates,
+But soon enough, you will find yourself asking questions sucha s:</p>
+
+<ul>
+<li>How do I interact between Bootstrap events and Ember (such as Controllers)?</li>
+<li>How to pass Bootstrap components data from Ember (such as Controllers)</li>
+</ul>
+
+
+<p>I&rsquo;ve seen few options about the integration between both, but:</p>
+
+<ul>
+<li>They are not easy and fun to use, they make the ease of Bootstrap too complex.</li>
+<li>They are not well documented.</li>
+<li>Development is too slow, I haven&rsquo;t seen anything new lately.</li>
+</ul>
+
+
+<p>So! I&rsquo;m excited about a project I&rsquo;ve been working lately with some guys to integrate Bootstrap &amp; EmberJs together in a way that
+doesnt make Bootstrap usage more complex than using it as-is but providing great integration with EmberJs components.</p>
+
+<h1>Links!</h1>
+
+<ul>
+<li>Github Page: <a href="https://github.com/ember-addons/bootstrap-for-ember">https://github.com/ember-addons/bootstrap-for-ember</a></li>
+<li>Showcase: <a href="http://ember-addons.github.io/bootstrap-for-ember/dist/">http://ember-addons.github.io/bootstrap-for-ember/dist/</a></li>
+<li>Twitter: <a href="https://twitter.com/bs_for_ember">https://twitter.com/bs_for_ember</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Accessing EmberJS Controller from different scopes]]></title>
