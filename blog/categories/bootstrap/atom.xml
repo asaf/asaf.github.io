@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bootstrap | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/bootstrap/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-08-26T07:52:59-07:00</updated>
+  <updated>2013-08-29T09:39:01-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bootstrap for Ember v0.2.0 released]]></title>
+    <link href="http://asaf.github.io/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/"/>
+    <updated>2013-08-29T09:27:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released</id>
+    <content type="html"><![CDATA[<p>Few days ago I submitted a post about <a href="blog/2013/08/26/bootstrap-for-ember-is-born/">Bootstrap for Ember</a>,
+We released today the 2nd minor version 0.2.0,</p>
+
+<p>So far, version 0.2.0 contains the following components:</p>
+
+<ul>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/alert">Alert</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/label">Label</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/badge">Badge</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/well">Well</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/page-header">Page Header</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/button">Button</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/progressbar">ProgressBar</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/pills">Pills Navigation</a></li>
+<li><p><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/tabs">Tabs Navigation</a></p></li>
+<li><p><a href="https://github.com/ember-addons/bootstrap-for-ember">Github</a></p></li>
+<li><a href="https://github.com/ember-addons/bootstrap-for-ember/releases/tag/0.2.0">Release</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember">Showcase</a></li>
+</ul>
+
+
+<p>Have fun!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bootstrap for Ember is born]]></title>
@@ -50,15 +80,6 @@ doesnt make Bootstrap usage more complex than using it as-is but providing great
 <li>Twitter: <a href="https://twitter.com/bs_for_ember">https://twitter.com/bs_for_ember</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Web in Realtime: using nodejs socketstream emberjs and more]]></title>
-    <link href="http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/"/>
-    <updated>2013-07-08T10:08:00-07:00</updated>
-    <id>http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more</id>
-    <content type="html"><![CDATA[<p>now here we go with some content :)</p>
 ]]></content>
   </entry>
   

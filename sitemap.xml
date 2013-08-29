@@ -11,6 +11,12 @@
         <lastmod>2013-07-08T10:07:49-07:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/
+        </loc>
+        <lastmod>2013-07-08T09:10:25-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-comments/</loc>
         <lastmod>2013-07-08T10:21:22-07:00</lastmod>
     </url>
@@ -49,16 +55,20 @@
         <lastmod>2013-08-26T07:41:44-07:00</lastmod>
     </url>
     <url>
+        <loc>http://asaf.github.io/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</loc>
+        <lastmod>2013-08-29T09:38:33-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://asaf.github.io/about-me/</loc>
         <lastmod>2013-07-08T08:29:29-07:00</lastmod>
     </url>
     <url>
         <loc>http://asaf.github.io/blog/archives/</loc>
-        <lastmod>2013-08-26T07:41:44-07:00</lastmod>
+        <lastmod>2013-08-29T09:38:33-07:00</lastmod>
     </url>
     <url>
         <loc>http://asaf.github.io/</loc>
-        <lastmod>2013-08-26T07:41:44-07:00</lastmod>
+        <lastmod>2013-08-29T09:38:33-07:00</lastmod>
     </url>
     <url>
         <loc>http://asaf.github.io/robots.txt</loc>
