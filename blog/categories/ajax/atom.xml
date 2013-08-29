@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ajax | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/ajax/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-08-29T09:39:01-07:00</updated>
+  <updated>2013-08-29T10:05:21-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -32,8 +32,14 @@ We released today the 2nd minor version 0.2.0,</p>
 <li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/button">Button</a></li>
 <li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/progressbar">ProgressBar</a></li>
 <li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/pills">Pills Navigation</a></li>
-<li><p><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/tabs">Tabs Navigation</a></p></li>
-<li><p><a href="https://github.com/ember-addons/bootstrap-for-ember">Github</a></p></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/tabs">Tabs Navigation</a></li>
+</ul>
+
+
+<p>Project details:</p>
+
+<ul>
+<li><a href="https://github.com/ember-addons/bootstrap-for-ember">Github</a></li>
 <li><a href="https://github.com/ember-addons/bootstrap-for-ember/releases/tag/0.2.0">Release</a></li>
 <li><a href="http://ember-addons.github.io/bootstrap-for-ember">Showcase</a></li>
 </ul>
