@@ -4,7 +4,7 @@
   <title><![CDATA[Category: emberjs | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/emberjs/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2013-08-29T10:05:21-07:00</updated>
+  <updated>2013-09-02T16:38:04-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bootstrap for Ember - more than 100 stars in 1 week]]></title>
+    <link href="http://asaf.github.io/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/"/>
+    <updated>2013-09-02T16:31:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week</id>
+    <content type="html"><![CDATA[<p>This is awesome! <em>Bootstrap for Ember</em> got more than 100 github <strong>stars</strong> in less than a week,</p>
+
+<p>Thanks for the great feedbacks, here&rsquo;s an interesting tweet of the author of Handlebars and Ember.js, <em>Yehuda Katz</em>.</p>
+
+<blockquote class="twitter-tweet"><p>Also, <a href="http://t.co/NtqRMNtsA4">http://t.co/NtqRMNtsA4</a> (Bootstrap for <a href="https://twitter.com/search?q=%23emberjs&amp;src=hash">#emberjs</a> using components) is kind of awesome!</p>&mdash; Yehuda Katz (@wycats) <a href="https://twitter.com/wycats/statuses/373875479096205312">August 31, 2013</a></blockquote>
+
+
+<p>Visit the project: <a href="https://github.com/ember-addons/bootstrap-for-ember">https://github.com/ember-addons/bootstrap-for-ember</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bootstrap for Ember v0.2.0 released]]></title>
@@ -140,6 +156,15 @@ commentsController.pushObject(comment)
 
 <p>})
 ```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web in Realtime: using nodejs socketstream emberjs and more]]></title>
+    <link href="http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/"/>
+    <updated>2013-07-08T10:08:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more</id>
+    <content type="html"><![CDATA[<p>now here we go with some content :)</p>
 ]]></content>
   </entry>
   
