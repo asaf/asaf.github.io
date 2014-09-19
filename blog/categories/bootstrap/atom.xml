@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bootstrap | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/bootstrap/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2014-09-19T07:14:32-07:00</updated>
+  <updated>2014-09-19T07:15:17-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Ember Forms]]></title>
+    <title type="html"><![CDATA[New Ember Components Suite!]]></title>
     <link href="http://asaf.github.io/blog/2014/02/08/ember-forms/"/>
     <updated>2014-02-08T17:57:00-08:00</updated>
     <id>http://asaf.github.io/blog/2014/02/08/ember-forms</id>
@@ -119,15 +119,6 @@ doesnt make Bootstrap usage more complex than using it as-is but providing great
 <li>Twitter: <a href="https://twitter.com/bs_for_ember">https://twitter.com/bs_for_ember</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Web in Realtime: using nodejs socketstream emberjs and more]]></title>
-    <link href="http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/"/>
-    <updated>2013-07-08T10:08:00-07:00</updated>
-    <id>http://asaf.github.io/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more</id>
-    <content type="html"><![CDATA[<p>now here we go with some content :)</p>
 ]]></content>
   </entry>
   

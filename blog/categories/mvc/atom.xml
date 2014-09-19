@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mvc | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/mvc/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2014-09-19T07:14:32-07:00</updated>
+  <updated>2014-09-19T07:15:17-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -36,7 +36,7 @@ App.PostController = Ember.ArrayController.extend({</p>
 
 <p>Then you can simply use the <em>Post</em> controller in <em>Comments</em>&rsquo;s template:</p>
 
-<p>{% raw %}
+<p>
 ``` html</p>
 
 <!-- use comments template -->
@@ -44,7 +44,7 @@ App.PostController = Ember.ArrayController.extend({</p>
 
 <p>{{ controllers.post }}
 ```
-{% endraw %}</p>
+</p>
 
 <p>This works pretty nice, especially when you have nested routes (you surely want to display some data of the post when you are in the post&rsquo;s comments context.),</p>
 
