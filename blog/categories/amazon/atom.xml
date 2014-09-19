@@ -4,7 +4,7 @@
   <title><![CDATA[Category: amazon | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/amazon/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2014-09-19T07:05:54-07:00</updated>
+  <updated>2014-09-19T07:14:32-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -18,7 +18,7 @@
     <link href="http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/"/>
     <updated>2013-07-10T10:54:00-07:00</updated>
     <id>http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb</id>
-    <content type="html"><![CDATA[<p><img class="<a" src="href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a>" width="160" height="180" title="Couch" ></p>
+    <content type="html"><![CDATA[<p>{% img <a href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a> 160 180 Couch %}</p>
 
 <p>This post explains how to install CouchDB on Amazon AMI using <a href="https://github.com/iriscouch/build-couchdb">build-couchdb</a>/</p>
 
@@ -246,7 +246,7 @@ sudo chkconfig &mdash;level 345 couchdb on</p>
     <link href="http://asaf.github.io/blog/2013/07/08/installing-couch-db-on-amazon-ami/"/>
     <updated>2013-07-08T18:53:00-07:00</updated>
     <id>http://asaf.github.io/blog/2013/07/08/installing-couch-db-on-amazon-ami</id>
-    <content type="html"><![CDATA[<p><img class="<a" src="href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a>" width="160" height="180" title="Couch" ></p>
+    <content type="html"><![CDATA[<p>{% img <a href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a> 160 180 Couch %}</p>
 
 <p>One of our platform is based on CouchDB, we host everything on Amazon EC2 and while Amazon lacks with CouchDB support,
 I have decided to build our own CouchDB server.</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blogging | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/blogging/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2014-09-19T07:05:54-07:00</updated>
+  <updated>2014-09-19T07:14:32-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -93,7 +93,7 @@ vi source/_includes/custom/navigation.html</p>
 
 <h1>add the line to the bottom of the page:</h1>
 
-<p><li><a href="/about">About</a></li>
+<p><li><a href="{{ root_url }}/about">About</a></li>
 ```</p>
 
 <h3>About on the aside panel</h3>
