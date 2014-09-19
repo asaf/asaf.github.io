@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ember-forms | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/ember-forms/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2014-09-19T07:15:17-07:00</updated>
+  <updated>2014-09-19T07:20:18-07:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -14,10 +14,39 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Ember Forms]]></title>
+    <link href="http://asaf.github.io/blog/2014/08/02/ember-forms/"/>
+    <updated>2014-08-02T17:57:00-07:00</updated>
+    <id>http://asaf.github.io/blog/2014/08/02/ember-forms</id>
+    <content type="html"><![CDATA[<p><em>Smart, Intuitive forms for Ember.js styled with Bootstrap, Multi layouts and Validation support.</em></p>
+
+<p>As my favorite web framework is <em>emberjs</em>, I lately needed forms support for one of my projects with the following set of features in mind:</p>
+
+<ul>
+<li>Styled for Bootstrap but easy to stil differently.</li>
+<li>Different layouts such <em>inline</em> and <em>horizontal</em></li>
+<li>Validations where validation rules are defined in model/controller and <em>form</em> supports for:
+
+<ul>
+<li>Change color &amp; icons when validation rule fails.</li>
+<li>Show error message per form input.</li>
+<li>Submit button with async support that changes its styles &amp; get disabled during async call.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>So here is the result: <a href="https://github.com/indexiatech/ember-forms">https://github.com/indexiatech/ember-forms</a></p>
+
+<p>Demo &amp; docs: <a href="http://indexiatech.github.io/ember-forms">http://indexiatech.github.io/ember-forms</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[New Ember Components Suite!]]></title>
-    <link href="http://asaf.github.io/blog/2014/02/08/ember-forms/"/>
+    <link href="http://asaf.github.io/blog/2014/02/08/ember-components/"/>
     <updated>2014-02-08T17:57:00-08:00</updated>
-    <id>http://asaf.github.io/blog/2014/02/08/ember-forms</id>
+    <id>http://asaf.github.io/blog/2014/02/08/ember-components</id>
     <content type="html"><![CDATA[<p>Introducing a new Ember Components suite!</p>
 
 <p>Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.</p>
