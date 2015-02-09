@@ -4,7 +4,7 @@
   <title><![CDATA[Category: couchdb | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/couchdb/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2014-09-19T07:21:50-07:00</updated>
+  <updated>2015-02-09T20:18:21+02:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[nodejs-model is born]]></title>
     <link href="http://asaf.github.io/blog/2013/08/06/nodejs-model-is-born/"/>
-    <updated>2013-08-06T03:22:00-07:00</updated>
+    <updated>2013-08-06T03:22:00+03:00</updated>
     <id>http://asaf.github.io/blog/2013/08/06/nodejs-model-is-born</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve been struggling lately to find an appropriate way to handle models correctly,
 In one hand, these noSQL DBs such <em>CouchDB</em> have great flexibility and I didn&rsquo;t want to ruin that with a blowing up ORM framework,
@@ -44,7 +44,7 @@ in the other hand once the application grows a little bit more than a contact li
   <entry>
     <title type="html"><![CDATA[Installing CouchDB instance on Amazon AMI using build-couchdb]]></title>
     <link href="http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/"/>
-    <updated>2013-07-10T10:54:00-07:00</updated>
+    <updated>2013-07-10T10:54:00+03:00</updated>
     <id>http://asaf.github.io/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb</id>
     <content type="html"><![CDATA[<p><img class="<a" src="href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a>" width="160" height="180" title="Couch" ></p>
 
@@ -272,7 +272,7 @@ sudo chkconfig &mdash;level 345 couchdb on</p>
   <entry>
     <title type="html"><![CDATA[Installing CouchDB instance on Amazon AMI]]></title>
     <link href="http://asaf.github.io/blog/2013/07/08/installing-couch-db-on-amazon-ami/"/>
-    <updated>2013-07-08T18:53:00-07:00</updated>
+    <updated>2013-07-08T18:53:00+03:00</updated>
     <id>http://asaf.github.io/blog/2013/07/08/installing-couch-db-on-amazon-ami</id>
     <content type="html"><![CDATA[<p><img class="<a" src="href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a>" width="160" height="180" title="Couch" ></p>
 

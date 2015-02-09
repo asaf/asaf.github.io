@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bootstrap-for-ember | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/bootstrap-for-ember/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2014-09-19T07:21:50-07:00</updated>
+  <updated>2015-02-09T20:18:21+02:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Bootstrap for Ember - more than 100 stars in 1 week]]></title>
     <link href="http://asaf.github.io/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/"/>
-    <updated>2013-09-02T16:31:00-07:00</updated>
+    <updated>2013-09-02T16:31:00+03:00</updated>
     <id>http://asaf.github.io/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week</id>
     <content type="html"><![CDATA[<p>This is awesome! <em>Bootstrap for Ember</em> got more than 100 github <strong>stars</strong> in less than a week,</p>
 
@@ -32,7 +32,7 @@
   <entry>
     <title type="html"><![CDATA[Bootstrap for Ember v0.2.0 released]]></title>
     <link href="http://asaf.github.io/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/"/>
-    <updated>2013-08-29T09:27:00-07:00</updated>
+    <updated>2013-08-29T09:27:00+03:00</updated>
     <id>http://asaf.github.io/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released</id>
     <content type="html"><![CDATA[<p>Few days ago I submitted a post about <a href="blog/2013/08/26/bootstrap-for-ember-is-born/">Bootstrap for Ember</a>,
 We released today the 2nd minor version 0.2.0,</p>
@@ -68,7 +68,7 @@ We released today the 2nd minor version 0.2.0,</p>
   <entry>
     <title type="html"><![CDATA[Bootstrap for Ember is born]]></title>
     <link href="http://asaf.github.io/blog/2013/08/26/bootstrap-for-ember-is-born/"/>
-    <updated>2013-08-26T07:29:00-07:00</updated>
+    <updated>2013-08-26T07:29:00+03:00</updated>
     <id>http://asaf.github.io/blog/2013/08/26/bootstrap-for-ember-is-born</id>
     <content type="html"><![CDATA[<p>Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of
 making web applications right.</p>

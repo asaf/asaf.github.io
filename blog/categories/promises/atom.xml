@@ -4,7 +4,7 @@
   <title><![CDATA[Category: promises | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/promises/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2014-09-19T07:21:50-07:00</updated>
+  <updated>2015-02-09T20:18:21+02:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Q promises with CoffeeScript]]></title>
     <link href="http://asaf.github.io/blog/2013/07/09/q-promises-with-coffeescript/"/>
-    <updated>2013-07-09T06:03:00-07:00</updated>
+    <updated>2013-07-09T06:03:00+03:00</updated>
     <id>http://asaf.github.io/blog/2013/07/09/q-promises-with-coffeescript</id>
     <content type="html"><![CDATA[<p>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across <a href="Q%20Promises">&ldquo;https://github.com/kriskowal/q&rdquo;</a>.</p>
 
