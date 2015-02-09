@@ -9,7 +9,7 @@
   <meta name="author" content="Asaf Shakarchi">
 
   
-  <meta name="description" content="Introducing a new Ember Components suite! Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI &hellip;">
+  <meta name="description" content="About Ratpack Ratpack is a set of Java libraries that facilitate fast, efficient, evolvable and well tested HTTP applications built on Netty event &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +84,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/09/19/ember-data-reload-relationship/">New Ember Components Suite!</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/02/15/ratpack_hello_world/">Hello World Using Ratpack.</a></h1>
     
     
       <p class="meta">
@@ -100,22 +100,149 @@
   
 
 
-<time datetime="2014-09-19T17:20:00+03:00" pubdate data-updated="true">Sep 19<span>th</span>, 2014</time>
+<time datetime="2015-02-15T20:20:00+02:00" pubdate data-updated="true">Feb 15<span>th</span>, 2015</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Introducing a new Ember Components suite!</p>
+  <div class="entry-content"><h2>About Ratpack</h2>
 
-<p>Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.</p>
+<p><a href="http://www.ratpack.io">Ratpack</a> is a set of Java libraries that facilitate fast, efficient, evolvable and well tested HTTP applications built on <em>Netty</em> event driven networking engine,</p>
 
-<p>This project aims to be the successor of our Bootstrap for Ember project as all components on this suite are not bound to any specific CSS framework.</p>
+<p>After crawling into its source code, I find it simple and easy to use and it feels right, why? because:</p>
 
-<p>Github repo: <a href="https://github.com/indexiatech/ember-components">https://github.com/indexiatech/ember-components</a></p>
+<ol>
+<li>It&rsquo;s super simple, its core has very limited number of <a href="https://github.com/ratpack/ratpack/blob/master/ratpack-core/ratpack-core.gradle">dependencies</a></li>
+<li>Has out of the box extensions such as Guice, Jackson, etc, but nothing dictates you using them thanks to Guice modular architecture.</li>
+<li>Compatible with Java8 lambda syntax</li>
+<li>Testing is very easy.</li>
+</ol>
 
-<p>Demo &amp; docs: <a href="http://indexiatech.github.io/ember-components">http://indexiatech.github.io/ember-components</a></p>
+
+<p>Code can be written in <em>Groovy</em> or <em>Java</em>, and since java8 lambda syntax is so pretty, I find it suitable for the Ratpack handlers architecture quit well.</p>
+
+<p>So here&rsquo;s a simple hello world using <em>Ratpack</em> and Java8,</p>
+
+<h2>The build file (Gradle)</h2>
+
+<p>While used to Maven, It feels like Ratpack folks like Gradle, so I said why not use it?</p>
+
+<p>Here&rsquo;s a simple <em>build.gradle</em> file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">buildscript</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">repositories</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">jcenter</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="n">dependencies</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">classpath</span> <span class="s2">&quot;io.ratpack:ratpack-gradle:0.9.13&quot;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;io.ratpack.ratpack-java&quot;</span>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&quot;idea&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">dependencies</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">//Ratpack uses slf4j for logging</span>
+</span><span class='line'>  <span class="n">runtime</span> <span class="s2">&quot;org.slf4j:slf4j-simple:1.7.5&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//we need this since 0.9.13 is based on snapshot version of Netty</span>
+</span><span class='line'><span class="n">repositories</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">jcenter</span><span class="o">()</span>
+</span><span class='line'>    <span class="n">maven</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">url</span> <span class="s2">&quot;http://clinker.netty.io/nexus/content/repositories/snapshots&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create basic directories</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir -p src/main/java
+</span><span class='line'>mkdir -p src/ratpack
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run in the command like <code>gradle idea</code> to create Intellij project:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gradle idea
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One of the things I mostly like about <em>Ratpack</em> is that it has no real notion of a &ldquo;container&rdquo;, you can simply start it a plain <em>main</em> method just like that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">import</span> <span class="nn">ratpack.server.RatpackServer</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ratpack.server.ServerConfig</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Server</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">RatpackServer</span> <span class="n">server</span> <span class="o">=</span> <span class="n">RatpackServer</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="n">b</span>
+</span><span class='line'>                        <span class="o">.</span><span class="na">serverConfig</span><span class="o">(</span><span class="n">ServerConfig</span><span class="o">.</span><span class="na">embedded</span><span class="o">())</span> <span class="c1">//default config</span>
+</span><span class='line'>                        <span class="o">.</span><span class="na">registryOf</span><span class="o">(</span><span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">&quot;world&quot;</span><span class="o">))</span>  <span class="c1">// registry of supporting objects - optional</span>
+</span><span class='line'>                        <span class="o">.</span><span class="na">handlers</span><span class="o">(</span><span class="n">chain</span> <span class="o">-&gt;</span> <span class="n">chain</span>                    <span class="c1">// request handlers - required</span>
+</span><span class='line'>                                        <span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;hello&quot;</span><span class="o">,</span> <span class="n">ctx</span> <span class="o">-&gt;</span> <span class="n">ctx</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">ctx</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot; !&quot;</span><span class="o">))</span>
+</span><span class='line'>                        <span class="o">)</span>
+</span><span class='line'>        <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">server</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Server will start with on some available port and will print:
+<code>Ratpack started for http://localhost:65478</code></p>
+
+<p>now hit in the browser <code>http://localhost:65478/hello</code> ! :)</p>
 </div>
   
   
@@ -128,7 +255,89 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/09/19/ember-components+copy/">New Ember Components Suite!</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/02/01/searching_for_new_java_backend/">Choosing Java Backend Framework in 2015.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-01T20:20:00+02:00" pubdate data-updated="true">Feb 1<span>st</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So it&rsquo;s year 2015 and I&rsquo;m taking a role in a new cloud service, helping to choose the right backend technology,</p>
+
+<p>This is the summary of our requirements:</p>
+
+<ol>
+<li>Can quickly come up with some POC.</li>
+<li>HTTP driven.</li>
+<li>Native support for Async.</li>
+<li>Modular.</li>
+<li>Avoid frameworks that dictates specific code structure.</li>
+</ol>
+
+
+<p>Here are few options we tried but decided to pivot and seek for alternatives,</p>
+
+<h2>Akka</h2>
+
+<p><a href="http://www.akka.io">Akka</a> seems very promising, it feels lightweight, highly concurrent and distributed,
+Akka is based on actors pattern, an old pattern invented by <em>Carl Hewitt</em> and friends, promoted lately by Erlang,</p>
+
+<p>We tried to create a POC with Akka, in conjuction with their new <a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/current">Akka Streams</a> (which seems to replace <a href="http://www.spray.io">Spray</a>), both felt like a complete solution, but we decided to pivot out of it, I think I can summarize it in one sentence.</p>
+
+<p><strong>Although Akka seems to have support for Java, it&rsquo;s just not a java project,
+Akka is written in <em>Scala</em>, and exposes Java APIs via bindings layers, I felt like its community is Scala oriented debugging code of Scala is something tough for people that plans to stick in the Java domain.</strong></p>
+
+<h2>Vert.x</h2>
+
+<p><a href="http://www.vertx.io">Vert.x</a> is similar to NodeJs, written in Java,
+It is Netty based and works in a non blocking mode,</p>
+
+<p>Vertx 3 seems to be very promising we found some advantages of it,</p>
+
+<ol>
+<li>We quickly could create a web app using <a href="https://github.com/vert-x3/vertx-apex">Apex</a>.</li>
+<li>Almost no configuration and deployment code is required to see real results.</li>
+<li>Completely written in Java (which was a big releaf after Akka)</li>
+<li>Scale out by levaraging an internal even bus.</li>
+</ol>
+
+
+<p>But we decided to pivot again, but why?!
+because Vert.x makes certain irreversible decisions about how applications should be written, and working with the event bus was a nightmare, we tried to use <a href="https://github.com/vert-x3/vertx-service-factory">Vertx Service Factory</a> which eliminates most of the boilerplate code required to perform actions over the event bus, <strong>but it restrictions of passing only JsonObject and JsonArray frustrated us</strong>,
+We found ourself spending too much time on convertions between Vertx&rsquo;s JsonObjects and application / core services models.</p>
+
+<h2>What now?</h2>
+
+<p>So what now? we&#8217;r still seeking for a better solution that hopefully will satisfy our needs.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/19/ember-components/">New Ember Components Suite!</a></h1>
     
     
       <p class="meta">
@@ -1063,170 +1272,6 @@ Or change the installation location.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/09/q-promises-with-coffeescript/">Q Promises With CoffeeScript</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-09T06:03:00+03:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across <a href="Q%20Promises">&ldquo;https://github.com/kriskowal/q&rdquo;</a>.</p>
-
-<p>Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner.</p>
-
-<p>Here&rsquo;s an example:</p>
-
-<p>Defining promises with CoffeeScript:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">q = </span><span class="nx">require</span> <span class="s">&#39;q&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">exports.hello = </span><span class="p">()</span> <span class="nf">-&gt;</span>
-</span><span class='line'>  <span class="nv">d = </span><span class="nx">q</span><span class="p">.</span><span class="nx">defer</span><span class="p">()</span>
-</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">resolve</span> <span class="s">&#39;hello&#39;</span>
-</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">promise</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">exports.world = </span><span class="p">()</span> <span class="nf">-&gt;</span>
-</span><span class='line'>  <span class="nv">d = </span><span class="nx">q</span><span class="p">.</span><span class="nx">defer</span><span class="p">()</span>
-</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">resolve</span> <span class="s">&#39;world&#39;</span>
-</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">promise</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">exports.die = </span><span class="p">()</span> <span class="nf">-&gt;</span>
-</span><span class='line'>  <span class="nv">d = </span><span class="nx">q</span><span class="p">.</span><span class="nx">defer</span><span class="p">()</span>
-</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">reject</span> <span class="s">&#39;bye world&#39;</span>
-</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">promise</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And here are Mocha sample of Q propagations and error handling</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">assert = </span><span class="nx">require</span> <span class="s">&#39;assert&#39;</span><span class="p">,</span>
-</span><span class='line'><span class="nv">promises = </span><span class="nx">require</span> <span class="s">&#39;./promises&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s">&#39;Promises&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="nf">-&gt;</span>
-</span><span class='line'>  <span class="nx">it</span> <span class="s">&#39;Simple&#39;</span><span class="p">,</span> <span class="nf">(done) -&gt;</span>
-</span><span class='line'>    <span class="nx">promises</span><span class="p">.</span><span class="nx">die</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span>
-</span><span class='line'>      <span class="nf">(val) =&gt;</span>
-</span><span class='line'>        <span class="c1">#handle val</span>
-</span><span class='line'>      <span class="nf">(err) =&gt;</span>
-</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">err</span><span class="p">,</span> <span class="s">&#39;bye world&#39;</span>
-</span><span class='line'>        <span class="nx">done</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">it</span> <span class="s">&#39;Test Promises Propagation&#39;</span><span class="p">,</span> <span class="nf">(done) -&gt;</span>
-</span><span class='line'>    <span class="nx">promises</span><span class="p">.</span><span class="nx">hello</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span>
-</span><span class='line'>      <span class="nf">(val) =&gt;</span>
-</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;hello&#39;</span>
-</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">world</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nf">(val) =&gt;</span>
-</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;world&#39;</span>
-</span><span class='line'>        <span class="nx">done</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">it</span> <span class="s">&#39;Test promises propagation with error&#39;</span><span class="p">,</span> <span class="nf">(done) -&gt;</span>
-</span><span class='line'>    <span class="nx">promises</span><span class="p">.</span><span class="nx">hello</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span>
-</span><span class='line'>      <span class="nf">(val) =&gt;</span>
-</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;hello&#39;</span>
-</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">die</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nf">(val) =&gt;</span>
-</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">world</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span>
-</span><span class='line'>      <span class="nf">(val) =&gt;</span>
-</span><span class='line'>        <span class="c1">#we wont get here</span>
-</span><span class='line'>      <span class="nf">(err) =&gt;</span>
-</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">err</span><span class="p">,</span> <span class="s">&#39;bye world&#39;</span>
-</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">world</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nf">(val) =&gt;</span>
-</span><span class='line'>      <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;world&#39;</span>
-</span><span class='line'>      <span class="nx">done</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">)</span>
-</span><span class='line'><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1246,11 +1291,15 @@ Or change the installation location.</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/09/19/ember-data-reload-relationship/">New Ember Components Suite!</a>
+        <a href="/blog/2015/02/15/ratpack_hello_world/">Hello World Using Ratpack.</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/19/ember-components+copy/">New Ember Components Suite!</a>
+        <a href="/blog/2015/02/01/searching_for_new_java_backend/">Choosing Java Backend Framework in 2015.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/19/ember-components/">New Ember Components Suite!</a>
       </li>
     
       <li class="post">
@@ -1259,10 +1308,6 @@ Or change the installation location.</p>
     
       <li class="post">
         <a href="/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/">Bootstrap for Ember - More Than 100 Stars in 1 Week</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/">Bootstrap for Ember v0.2.0 Released</a>
       </li>
     
   </ul>

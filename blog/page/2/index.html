@@ -9,8 +9,7 @@
   <meta name="author" content="Asaf Shakarchi">
 
   
-  <meta name="description" content="One of our platform is based on CouchDB, we host everything on Amazon EC2 and while Amazon lacks with CouchDB support,
-I have decided to build our &hellip;">
+  <meta name="description" content="If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across &ldquo;https://github.com/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,170 @@ I have decided to build our &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/09/q-promises-with-coffeescript/">Q Promises With CoffeeScript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T06:03:00+03:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across <a href="Q%20Promises">&ldquo;https://github.com/kriskowal/q&rdquo;</a>.</p>
+
+<p>Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner.</p>
+
+<p>Here&rsquo;s an example:</p>
+
+<p>Defining promises with CoffeeScript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">q = </span><span class="nx">require</span> <span class="s">&#39;q&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">exports.hello = </span><span class="p">()</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nv">d = </span><span class="nx">q</span><span class="p">.</span><span class="nx">defer</span><span class="p">()</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">resolve</span> <span class="s">&#39;hello&#39;</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">promise</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">exports.world = </span><span class="p">()</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nv">d = </span><span class="nx">q</span><span class="p">.</span><span class="nx">defer</span><span class="p">()</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">resolve</span> <span class="s">&#39;world&#39;</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">promise</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">exports.die = </span><span class="p">()</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nv">d = </span><span class="nx">q</span><span class="p">.</span><span class="nx">defer</span><span class="p">()</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">reject</span> <span class="s">&#39;bye world&#39;</span>
+</span><span class='line'>  <span class="nx">d</span><span class="p">.</span><span class="nx">promise</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here are Mocha sample of Q propagations and error handling</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">assert = </span><span class="nx">require</span> <span class="s">&#39;assert&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nv">promises = </span><span class="nx">require</span> <span class="s">&#39;./promises&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s">&#39;Promises&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nx">it</span> <span class="s">&#39;Simple&#39;</span><span class="p">,</span> <span class="nf">(done) -&gt;</span>
+</span><span class='line'>    <span class="nx">promises</span><span class="p">.</span><span class="nx">die</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span>
+</span><span class='line'>      <span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="c1">#handle val</span>
+</span><span class='line'>      <span class="nf">(err) =&gt;</span>
+</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">err</span><span class="p">,</span> <span class="s">&#39;bye world&#39;</span>
+</span><span class='line'>        <span class="nx">done</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">it</span> <span class="s">&#39;Test Promises Propagation&#39;</span><span class="p">,</span> <span class="nf">(done) -&gt;</span>
+</span><span class='line'>    <span class="nx">promises</span><span class="p">.</span><span class="nx">hello</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span>
+</span><span class='line'>      <span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;hello&#39;</span>
+</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">world</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;world&#39;</span>
+</span><span class='line'>        <span class="nx">done</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">it</span> <span class="s">&#39;Test promises propagation with error&#39;</span><span class="p">,</span> <span class="nf">(done) -&gt;</span>
+</span><span class='line'>    <span class="nx">promises</span><span class="p">.</span><span class="nx">hello</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span>
+</span><span class='line'>      <span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;hello&#39;</span>
+</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">die</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">world</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span>
+</span><span class='line'>      <span class="nf">(val) =&gt;</span>
+</span><span class='line'>        <span class="c1">#we wont get here</span>
+</span><span class='line'>      <span class="nf">(err) =&gt;</span>
+</span><span class='line'>        <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">err</span><span class="p">,</span> <span class="s">&#39;bye world&#39;</span>
+</span><span class='line'>        <span class="nx">promises</span><span class="p">.</span><span class="nx">world</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nf">(val) =&gt;</span>
+</span><span class='line'>      <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">val</span><span class="p">,</span> <span class="s">&#39;world&#39;</span>
+</span><span class='line'>      <span class="nx">done</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -789,11 +952,15 @@ rake deploy</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/09/19/ember-data-reload-relationship/">New Ember Components Suite!</a>
+        <a href="/blog/2015/02/15/ratpack_hello_world/">Hello World Using Ratpack.</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/19/ember-components+copy/">New Ember Components Suite!</a>
+        <a href="/blog/2015/02/01/searching_for_new_java_backend/">Choosing Java Backend Framework in 2015.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/19/ember-components/">New Ember Components Suite!</a>
       </li>
     
       <li class="post">
@@ -802,10 +969,6 @@ rake deploy</p>
     
       <li class="post">
         <a href="/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/">Bootstrap for Ember - More Than 100 Stars in 1 Week</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/">Bootstrap for Ember v0.2.0 Released</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: coffeescript | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/coffeescript/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2015-02-09T20:18:21+02:00</updated>
+  <updated>2015-02-09T21:10:39+02:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -15,26 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[New Ember Components Suite!]]></title>
-    <link href="http://asaf.github.io/blog/2014/09/19/ember-data-reload-relationship/"/>
+    <link href="http://asaf.github.io/blog/2014/09/19/ember-components/"/>
     <updated>2014-09-19T17:20:00+03:00</updated>
-    <id>http://asaf.github.io/blog/2014/09/19/ember-data-reload-relationship</id>
-    <content type="html"><![CDATA[<p>Introducing a new Ember Components suite!</p>
-
-<p>Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.</p>
-
-<p>This project aims to be the successor of our Bootstrap for Ember project as all components on this suite are not bound to any specific CSS framework.</p>
-
-<p>Github repo: <a href="https://github.com/indexiatech/ember-components">https://github.com/indexiatech/ember-components</a></p>
-
-<p>Demo &amp; docs: <a href="http://indexiatech.github.io/ember-components">http://indexiatech.github.io/ember-components</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[New Ember Components Suite!]]></title>
-    <link href="http://asaf.github.io/blog/2014/09/19/ember-components+copy/"/>
-    <updated>2014-09-19T17:20:00+03:00</updated>
-    <id>http://asaf.github.io/blog/2014/09/19/ember-components copy</id>
+    <id>http://asaf.github.io/blog/2014/09/19/ember-components</id>
     <content type="html"><![CDATA[<p>Introducing a new Ember Components suite!</p>
 
 <p>Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.</p>

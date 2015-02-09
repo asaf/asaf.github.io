@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: http | Asaf Shakarchi]]></title>
+  <link href="http://asaf.github.io/blog/categories/http/atom.xml" rel="self"/>
+  <link href="http://asaf.github.io/"/>
+  <updated>2015-02-09T21:10:39+02:00</updated>
+  <id>http://asaf.github.io/</id>
+  <author>
+    <name><![CDATA[Asaf Shakarchi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello world using Ratpack.]]></title>
+    <link href="http://asaf.github.io/blog/2015/02/15/ratpack_hello_world/"/>
+    <updated>2015-02-15T20:20:00+02:00</updated>
+    <id>http://asaf.github.io/blog/2015/02/15/ratpack_hello_world</id>
+    <content type="html"><![CDATA[<h2>About Ratpack</h2>
+
+<p><a href="http://www.ratpack.io">Ratpack</a> is a set of Java libraries that facilitate fast, efficient, evolvable and well tested HTTP applications built on <em>Netty</em> event driven networking engine,</p>
+
+<p>After crawling into its source code, I find it simple and easy to use and it feels right, why? because:</p>
+
+<ol>
+<li>It&rsquo;s super simple, its core has very limited number of <a href="https://github.com/ratpack/ratpack/blob/master/ratpack-core/ratpack-core.gradle">dependencies</a></li>
+<li>Has out of the box extensions such as Guice, Jackson, etc, but nothing dictates you using them thanks to Guice modular architecture.</li>
+<li>Compatible with Java8 lambda syntax</li>
+<li>Testing is very easy.</li>
+</ol>
+
+
+<p>Code can be written in <em>Groovy</em> or <em>Java</em>, and since java8 lambda syntax is so pretty, I find it suitable for the Ratpack handlers architecture quit well.</p>
+
+<p>So here&rsquo;s a simple hello world using <em>Ratpack</em> and Java8,</p>
+
+<h2>The build file (Gradle)</h2>
+
+<p>While used to Maven, It feels like Ratpack folks like Gradle, so I said why not use it?</p>
+
+<p>Here&rsquo;s a simple <em>build.gradle</em> file:</p>
+
+<p>``` groovy
+buildscript {
+  repositories {</p>
+
+<pre><code>jcenter()
+</code></pre>
+
+<p>  }
+  dependencies {</p>
+
+<pre><code>classpath "io.ratpack:ratpack-gradle:0.9.13"
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>apply plugin: &ldquo;io.ratpack.ratpack-java&rdquo;
+apply plugin: &ldquo;idea&rdquo;</p>
+
+<p>dependencies {
+  //Ratpack uses slf4j for logging
+  runtime &ldquo;org.slf4j:slf4j-simple:1.7.5&rdquo;
+}</p>
+
+<p>//we need this since 0.9.13 is based on snapshot version of Netty
+repositories {
+  jcenter()</p>
+
+<pre><code>maven {
+  url "http://clinker.netty.io/nexus/content/repositories/snapshots"
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Create basic directories
+<code>bash
+mkdir -p src/main/java
+mkdir -p src/ratpack
+</code></p>
+
+<p>Run in the command like <code>gradle idea</code> to create Intellij project:
+<code>bash
+gradle idea
+</code></p>
+
+<p>One of the things I mostly like about <em>Ratpack</em> is that it has no real notion of a &ldquo;container&rdquo;, you can simply start it a plain <em>main</em> method just like that:</p>
+
+<p>``` java
+import ratpack.server.RatpackServer;
+import ratpack.server.ServerConfig;</p>
+
+<p>/<em>*
+ </em>/
+public class Server {</p>
+
+<pre><code>public static void main(String[] args) throws Exception {
+    RatpackServer server = RatpackServer.of(b -&gt; b
+                    .serverConfig(ServerConfig.embedded()) //default config
+                    .registryOf(r -&gt; r.add(String.class, "world"))  // registry of supporting objects - optional
+                    .handlers(chain -&gt; chain                    // request handlers - required
+                                    .get("hello", ctx -&gt; ctx.render(ctx.get(String.class) + " !"))
+                    )
+    );
+
+    server.start();
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Server will start with on some available port and will print:
+<code>Ratpack started for http://localhost:65478</code></p>
+
+<p>now hit in the browser <code>http://localhost:65478/hello</code> ! :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Choosing Java Backend framework in 2015.]]></title>
+    <link href="http://asaf.github.io/blog/2015/02/01/searching_for_new_java_backend/"/>
+    <updated>2015-02-01T20:20:00+02:00</updated>
+    <id>http://asaf.github.io/blog/2015/02/01/searching_for_new_java_backend</id>
+    <content type="html"><![CDATA[<p>So it&rsquo;s year 2015 and I&rsquo;m taking a role in a new cloud service, helping to choose the right backend technology,</p>
+
+<p>This is the summary of our requirements:</p>
+
+<ol>
+<li>Can quickly come up with some POC.</li>
+<li>HTTP driven.</li>
+<li>Native support for Async.</li>
+<li>Modular.</li>
+<li>Avoid frameworks that dictates specific code structure.</li>
+</ol>
+
+
+<p>Here are few options we tried but decided to pivot and seek for alternatives,</p>
+
+<h2>Akka</h2>
+
+<p><a href="http://www.akka.io">Akka</a> seems very promising, it feels lightweight, highly concurrent and distributed,
+Akka is based on actors pattern, an old pattern invented by <em>Carl Hewitt</em> and friends, promoted lately by Erlang,</p>
+
+<p>We tried to create a POC with Akka, in conjuction with their new <a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/current">Akka Streams</a> (which seems to replace <a href="http://www.spray.io">Spray</a>), both felt like a complete solution, but we decided to pivot out of it, I think I can summarize it in one sentence.</p>
+
+<p><strong>Although Akka seems to have support for Java, it&rsquo;s just not a java project,
+Akka is written in <em>Scala</em>, and exposes Java APIs via bindings layers, I felt like its community is Scala oriented debugging code of Scala is something tough for people that plans to stick in the Java domain.</strong></p>
+
+<h2>Vert.x</h2>
+
+<p><a href="http://www.vertx.io">Vert.x</a> is similar to NodeJs, written in Java,
+It is Netty based and works in a non blocking mode,</p>
+
+<p>Vertx 3 seems to be very promising we found some advantages of it,</p>
+
+<ol>
+<li>We quickly could create a web app using <a href="https://github.com/vert-x3/vertx-apex">Apex</a>.</li>
+<li>Almost no configuration and deployment code is required to see real results.</li>
+<li>Completely written in Java (which was a big releaf after Akka)</li>
+<li>Scale out by levaraging an internal even bus.</li>
+</ol>
+
+
+<p>But we decided to pivot again, but why?!
+because Vert.x makes certain irreversible decisions about how applications should be written, and working with the event bus was a nightmare, we tried to use <a href="https://github.com/vert-x3/vertx-service-factory">Vertx Service Factory</a> which eliminates most of the boilerplate code required to perform actions over the event bus, <strong>but it restrictions of passing only JsonObject and JsonArray frustrated us</strong>,
+We found ourself spending too much time on convertions between Vertx&rsquo;s JsonObjects and application / core services models.</p>
+
+<h2>What now?</h2>
+
+<p>So what now? we'r still seeking for a better solution that hopefully will satisfy our needs.</p>
+]]></content>
+  </entry>
+  
+</feed>
