@@ -4,7 +4,7 @@
   <title><![CDATA[Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2015-02-09T21:10:39+02:00</updated>
+  <updated>2015-06-19T02:19:13+03:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,233 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Elegant way to use React with ES6/ES7 features.]]></title>
+    <link href="http://asaf.github.io/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/"/>
+    <updated>2015-06-19T01:51:00+03:00</updated>
+    <id>http://asaf.github.io/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features</id>
+    <content type="html"><![CDATA[<h2>React, JSX, ES6.</h2>
+
+<p>So you want React, JSX the markup and write ES6/7 code style, but setting a working
+environment may be pain in the ass,</p>
+
+<p>More to say, Facebook announced that its JSTransformer and react-tools going to be <a href="https://facebook.github.io/react/blog/2015/06/12/deprecating-jstransform-and-react-tools.html">deprecated</a>,</p>
+
+<p>It seems like it&rsquo;s starting to get confusing how to set a full working environment
+with JSX transformation and ES6/ES7 support.</p>
+
+<p>While React 0.13.0-beta-1 announced great support for ES6, it still unclear how
+to build a full working environment that supports ES6 either,</p>
+
+<p>You can find multiple boilerplate projects at <a href="http://www.github.com">github</a> using
+WebPack, Browserify and other module loader tools available nowadays but I found all
+of them unclean, full of build scripts and things that just make things more complicated,</p>
+
+<p>After doing some research, I feel like the best approach would be to go with <a href="http://jspm.io/">JSPM</a> repository that is based on <a href="https://github.com/systemjs/systemjs">SystemJs</a> dynamic module loader.</p>
+
+<p>The chosen tools:</p>
+
+<ol>
+<li>SytemJs &ndash; It is a Universal dynamic module loader, it supports AMD, CommonJS
+but the best of it is its native support for ES6 modules, with native support for
+Babel as its transpiler to ES5, it also uses <a href="http://jspm.io">JSPM</a> which supports
+NPM and Github repos such as Bower does, so you can enjoy packages from both worlds.</li>
+<li><a href="https://babeljs.io">Babel</a> as the ES6 transpiler, this transpiler is responsible
+to translate ES6 coding to ES5 as ES6 is not supported yet by most browsers, Babel is
+also supported by Facebook and provides JSX native transformation.</li>
+</ol>
+
+
+<p>Enough said, here&rsquo;s some code, we&rsquo;ll start with empty folder!</p>
+
+<h2>Setting a clean working environment</h2>
+
+<h3>Pre requisites</h3>
+
+<p>Lets install pre requisites:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>npm install -g jspm
+</span><span class='line'>npm install -g http-server
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Initializing Project</h3>
+
+<p>Create an empty folder and run</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>jspm init
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can choose default answers for all questions if not sure,</p>
+
+<p>This will create a <code>package.json</code> and a <code>config.js</code> file required for SystemJs
+to work properly.</p>
+
+<p>Now lets tweak <code>config.js</code> a bit to support ES7 so you can enjoy ES7+ property
+initializers and other ES7 cool features</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="s2">&quot;babelOptions&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">blacklist</span><span class="o">:</span> <span class="p">[],</span>
+</span><span class='line'>  <span class="nx">stage</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;optional&quot;</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="s2">&quot;runtime&quot;</span>
+</span><span class='line'>  <span class="p">]</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>blacklist: []</code> tells Babel not to ignore JSX transformation as by default it&rsquo;s disabled,
+<code>stage: 0</code> tells Babel that we want to use experimental ES7 syntax.</p>
+
+<h3>Creating an index.html file</h3>
+
+<p>Lets create our index file as every web app that respect itself has one!</p>
+
+<p>Simply create <code>index.html</code> in the root folder with your favorite editor</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;viewport&quot;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">Title</span> <span class="nx">Here</span><span class="o">&lt;</span><span class="err">/title&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/head&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="c">&lt;!--</span> <span class="nx">build</span><span class="o">:</span><span class="nx">js</span> <span class="o">--&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;jspm_packages/system.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;config.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span><span class='line'>            <span class="nx">System</span><span class="p">.</span><span class="kr">import</span><span class="p">(</span><span class="s1">&#39;app/main&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>        <span class="c">&lt;!--</span> <span class="nx">endbuild</span> <span class="o">--&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/body&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>See how clean and elegant is it? we just load <code>system.js</code> as our dynamic module loader
+and the generated <code>config.js</code> that holds our <code>SystemJs</code> configuration.</p>
+
+<p>Then we import <code>app/main</code> as our first ES6 module that serves the application.</p>
+
+<h3>Create a simple React based class.</h3>
+
+<p>Thanks to SystemJs, we can now fully write application modules, lets create our
+<code>main</code> application entry point</p>
+
+<p>Create a file <code>app/main.js</code> with the following content:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">&#39;./app&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">React</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span><span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This just import <code>React</code> and renders our <code>App</code> component.</p>
+
+<p>Her eis the <code>app/app.js</code> file content:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="o">=</span> <span class="nx">React</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyApp</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kr">static</span> <span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>       <span class="nx">flux</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">isRequired</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">render</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>        <span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now run <code>http-server</code> in your folder,</p>
+
+<p>hitting <a href="http://localhost:8080">http://localhost:8080</a> should display <em>Hello</em> :)</p>
+
+<h2>Summary</h2>
+
+<p>The combination of React, JSX transformation via Babel, and ES6/7 support via
+SystemJS provides a great clean and elegant way to write React code without the
+overhead of build systems and ugly scripts around.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook React - simplified work flow.]]></title>
+    <link href="http://asaf.github.io/blog/2015/05/01/react/"/>
+    <updated>2015-05-01T01:39:00+03:00</updated>
+    <id>http://asaf.github.io/blog/2015/05/01/react</id>
+    <content type="html"><![CDATA[<p>React is a really game changer in the world of web development,
+As most web frameworks (such Angular, Ember, etc) supports <a href="http://https://docs.angularjs.org/tutorial/step_04">two way bindings</a> that really simplifies
+development life, when applications start to get bigger things start to get clashed
+as multiple views may be bound to multiple models and getting
+unexpected behaviors is not something imaginary,</p>
+
+<p>React solve these problems by exposing a new flow that is based on unidirectional
+binding, combined with the usage of <a href="https://facebook.github.io/react/docs/glossary.html">virtual DOM</a>,
+DOM reconciliation should result a better performance than two way bindings based
+frameworks, Well, if Facebook uses it, then it scales :)</p>
+
+<p>You can read about it in <a href="https://facebook.github.io/react">React&rsquo;s web site</a>,
+especially the <a href="http://facebook.github.io/react/docs/tutorial.html">Tutorial</a> should
+give you a great starting point,</p>
+
+<p>Watch out my next post about how to setup a React environment using great tools
+that will simplify your development lifecycle.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello world using Ratpack.]]></title>

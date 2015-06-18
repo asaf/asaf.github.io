@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: js | Asaf Shakarchi]]></title>
+  <link href="http://asaf.github.io/blog/categories/js/atom.xml" rel="self"/>
+  <link href="http://asaf.github.io/"/>
+  <updated>2015-06-19T02:19:13+03:00</updated>
+  <id>http://asaf.github.io/</id>
+  <author>
+    <name><![CDATA[Asaf Shakarchi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Elegant way to use React with ES6/ES7 features.]]></title>
+    <link href="http://asaf.github.io/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/"/>
+    <updated>2015-06-19T01:51:00+03:00</updated>
+    <id>http://asaf.github.io/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features</id>
+    <content type="html"><![CDATA[<h2>React, JSX, ES6.</h2>
+
+<p>So you want React, JSX the markup and write ES6/7 code style, but setting a working
+environment may be pain in the ass,</p>
+
+<p>More to say, Facebook announced that its JSTransformer and react-tools going to be <a href="https://facebook.github.io/react/blog/2015/06/12/deprecating-jstransform-and-react-tools.html">deprecated</a>,</p>
+
+<p>It seems like it&rsquo;s starting to get confusing how to set a full working environment
+with JSX transformation and ES6/ES7 support.</p>
+
+<p>While React 0.13.0-beta-1 announced great support for ES6, it still unclear how
+to build a full working environment that supports ES6 either,</p>
+
+<p>You can find multiple boilerplate projects at <a href="http://www.github.com">github</a> using
+WebPack, Browserify and other module loader tools available nowadays but I found all
+of them unclean, full of build scripts and things that just make things more complicated,</p>
+
+<p>After doing some research, I feel like the best approach would be to go with <a href="http://jspm.io/">JSPM</a> repository that is based on <a href="https://github.com/systemjs/systemjs">SystemJs</a> dynamic module loader.</p>
+
+<p>The chosen tools:</p>
+
+<ol>
+<li>SytemJs &ndash; It is a Universal dynamic module loader, it supports AMD, CommonJS
+but the best of it is its native support for ES6 modules, with native support for
+Babel as its transpiler to ES5, it also uses <a href="http://jspm.io">JSPM</a> which supports
+NPM and Github repos such as Bower does, so you can enjoy packages from both worlds.</li>
+<li><a href="https://babeljs.io">Babel</a> as the ES6 transpiler, this transpiler is responsible
+to translate ES6 coding to ES5 as ES6 is not supported yet by most browsers, Babel is
+also supported by Facebook and provides JSX native transformation.</li>
+</ol>
+
+
+<p>Enough said, here&rsquo;s some code, we&rsquo;ll start with empty folder!</p>
+
+<h2>Setting a clean working environment</h2>
+
+<h3>Pre requisites</h3>
+
+<p>Lets install pre requisites:</p>
+
+<p><code>bash
+npm install -g jspm
+npm install -g http-server
+</code></p>
+
+<h3>Initializing Project</h3>
+
+<p>Create an empty folder and run</p>
+
+<p><code>bash
+jspm init
+</code></p>
+
+<p>You can choose default answers for all questions if not sure,</p>
+
+<p>This will create a <code>package.json</code> and a <code>config.js</code> file required for SystemJs
+to work properly.</p>
+
+<p>Now lets tweak <code>config.js</code> a bit to support ES7 so you can enjoy ES7+ property
+initializers and other ES7 cool features</p>
+
+<p>``` javascript
+&ldquo;babelOptions&rdquo;: {
+  blacklist: [],
+  stage: 0,
+  &ldquo;optional&rdquo;: [</p>
+
+<pre><code>"runtime"
+</code></pre>
+
+<p>  ]
+},
+```</p>
+
+<p><code>blacklist: []</code> tells Babel not to ignore JSX transformation as by default it&rsquo;s disabled,
+<code>stage: 0</code> tells Babel that we want to use experimental ES7 syntax.</p>
+
+<h3>Creating an index.html file</h3>
+
+<p>Lets create our index file as every web app that respect itself has one!</p>
+
+<p>Simply create <code>index.html</code> in the root folder with your favorite editor</p>
+
+<p>```javascript
+&lt;!DOCTYPE html>
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Title Here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- build:js --&gt;
+    &lt;script src="jspm_packages/system.js"&gt;&lt;/script&gt;
+    &lt;script src="config.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        System.import('app/main');
+    &lt;/script&gt;
+    &lt;!-- endbuild --&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>See how clean and elegant is it? we just load <code>system.js</code> as our dynamic module loader
+and the generated <code>config.js</code> that holds our <code>SystemJs</code> configuration.</p>
+
+<p>Then we import <code>app/main</code> as our first ES6 module that serves the application.</p>
+
+<h3>Create a simple React based class.</h3>
+
+<p>Thanks to SystemJs, we can now fully write application modules, lets create our
+<code>main</code> application entry point</p>
+
+<p>Create a file <code>app/main.js</code> with the following content:</p>
+
+<p>``` javascript
+import React from &lsquo;react&rsquo;;
+import App from &lsquo;./app&rsquo;;</p>
+
+<p>React.render(<App/>, document.body);
+```</p>
+
+<p>This just import <code>React</code> and renders our <code>App</code> component.</p>
+
+<p>Her eis the <code>app/app.js</code> file content:</p>
+
+<p>``` javascript
+import React from &lsquo;react&rsquo;;
+var {Component} = React;</p>
+
+<p>export default class MyApp extends Component {</p>
+
+<pre><code>static propTypes = {
+   flux: React.PropTypes.object.isRequired
+</code></pre>
+
+<p>   }</p>
+
+<pre><code>render () {
+    return (
+        &lt;div&gt;Hello&lt;/div&gt;
+    )
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Now run <code>http-server</code> in your folder,</p>
+
+<p>hitting <a href="http://localhost:8080">http://localhost:8080</a> should display <em>Hello</em> :)</p>
+
+<h2>Summary</h2>
+
+<p>The combination of React, JSX transformation via Babel, and ES6/7 support via
+SystemJS provides a great clean and elegant way to write React code without the
+overhead of build systems and ugly scripts around.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook React - simplified work flow.]]></title>
+    <link href="http://asaf.github.io/blog/2015/05/01/react/"/>
+    <updated>2015-05-01T01:39:00+03:00</updated>
+    <id>http://asaf.github.io/blog/2015/05/01/react</id>
+    <content type="html"><![CDATA[<p>React is a really game changer in the world of web development,
+As most web frameworks (such Angular, Ember, etc) supports <a href="http://https://docs.angularjs.org/tutorial/step_04">two way bindings</a> that really simplifies
+development life, when applications start to get bigger things start to get clashed
+as multiple views may be bound to multiple models and getting
+unexpected behaviors is not something imaginary,</p>
+
+<p>React solve these problems by exposing a new flow that is based on unidirectional
+binding, combined with the usage of <a href="https://facebook.github.io/react/docs/glossary.html">virtual DOM</a>,
+DOM reconciliation should result a better performance than two way bindings based
+frameworks, Well, if Facebook uses it, then it scales :)</p>
+
+<p>You can read about it in <a href="https://facebook.github.io/react">React&rsquo;s web site</a>,
+especially the <a href="http://facebook.github.io/react/docs/tutorial.html">Tutorial</a> should
+give you a great starting point,</p>
+
+<p>Watch out my next post about how to setup a React environment using great tools
+that will simplify your development lifecycle.</p>
+]]></content>
+  </entry>
+  
+</feed>

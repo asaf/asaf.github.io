@@ -9,7 +9,8 @@
   <meta name="author" content="Asaf Shakarchi">
 
   
-  <meta name="description" content="About Ratpack Ratpack is a set of Java libraries that facilitate fast, efficient, evolvable and well tested HTTP applications built on Netty event &hellip;">
+  <meta name="description" content="React, JSX, ES6. So you want React, JSX the markup and write ES6/7 code style, but setting a working
+environment may be pain in the ass, More to say &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,287 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/">Elegant Way to Use React With ES6/ES7 Features.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-19T01:51:00+03:00" pubdate data-updated="true">Jun 19<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>React, JSX, ES6.</h2>
+
+<p>So you want React, JSX the markup and write ES6/7 code style, but setting a working
+environment may be pain in the ass,</p>
+
+<p>More to say, Facebook announced that its JSTransformer and react-tools going to be <a href="https://facebook.github.io/react/blog/2015/06/12/deprecating-jstransform-and-react-tools.html">deprecated</a>,</p>
+
+<p>It seems like it&rsquo;s starting to get confusing how to set a full working environment
+with JSX transformation and ES6/ES7 support.</p>
+
+<p>While React 0.13.0-beta-1 announced great support for ES6, it still unclear how
+to build a full working environment that supports ES6 either,</p>
+
+<p>You can find multiple boilerplate projects at <a href="http://www.github.com">github</a> using
+WebPack, Browserify and other module loader tools available nowadays but I found all
+of them unclean, full of build scripts and things that just make things more complicated,</p>
+
+<p>After doing some research, I feel like the best approach would be to go with <a href="http://jspm.io/">JSPM</a> repository that is based on <a href="https://github.com/systemjs/systemjs">SystemJs</a> dynamic module loader.</p>
+
+<p>The chosen tools:</p>
+
+<ol>
+<li>SytemJs &ndash; It is a Universal dynamic module loader, it supports AMD, CommonJS
+but the best of it is its native support for ES6 modules, with native support for
+Babel as its transpiler to ES5, it also uses <a href="http://jspm.io">JSPM</a> which supports
+NPM and Github repos such as Bower does, so you can enjoy packages from both worlds.</li>
+<li><a href="https://babeljs.io">Babel</a> as the ES6 transpiler, this transpiler is responsible
+to translate ES6 coding to ES5 as ES6 is not supported yet by most browsers, Babel is
+also supported by Facebook and provides JSX native transformation.</li>
+</ol>
+
+
+<p>Enough said, here&rsquo;s some code, we&rsquo;ll start with empty folder!</p>
+
+<h2>Setting a clean working environment</h2>
+
+<h3>Pre requisites</h3>
+
+<p>Lets install pre requisites:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>npm install -g jspm
+</span><span class='line'>npm install -g http-server
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Initializing Project</h3>
+
+<p>Create an empty folder and run</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>jspm init
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can choose default answers for all questions if not sure,</p>
+
+<p>This will create a <code>package.json</code> and a <code>config.js</code> file required for SystemJs
+to work properly.</p>
+
+<p>Now lets tweak <code>config.js</code> a bit to support ES7 so you can enjoy ES7+ property
+initializers and other ES7 cool features</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="s2">&quot;babelOptions&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">blacklist</span><span class="o">:</span> <span class="p">[],</span>
+</span><span class='line'>  <span class="nx">stage</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;optional&quot;</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="s2">&quot;runtime&quot;</span>
+</span><span class='line'>  <span class="p">]</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>blacklist: []</code> tells Babel not to ignore JSX transformation as by default it&rsquo;s disabled,
+<code>stage: 0</code> tells Babel that we want to use experimental ES7 syntax.</p>
+
+<h3>Creating an index.html file</h3>
+
+<p>Lets create our index file as every web app that respect itself has one!</p>
+
+<p>Simply create <code>index.html</code> in the root folder with your favorite editor</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;viewport&quot;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">Title</span> <span class="nx">Here</span><span class="o">&lt;</span><span class="err">/title&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/head&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="c">&lt;!--</span> <span class="nx">build</span><span class="o">:</span><span class="nx">js</span> <span class="o">--&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;jspm_packages/system.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;config.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span><span class='line'>            <span class="nx">System</span><span class="p">.</span><span class="kr">import</span><span class="p">(</span><span class="s1">&#39;app/main&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>        <span class="c">&lt;!--</span> <span class="nx">endbuild</span> <span class="o">--&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/body&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>See how clean and elegant is it? we just load <code>system.js</code> as our dynamic module loader
+and the generated <code>config.js</code> that holds our <code>SystemJs</code> configuration.</p>
+
+<p>Then we import <code>app/main</code> as our first ES6 module that serves the application.</p>
+
+<h3>Create a simple React based class.</h3>
+
+<p>Thanks to SystemJs, we can now fully write application modules, lets create our
+<code>main</code> application entry point</p>
+
+<p>Create a file <code>app/main.js</code> with the following content:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">&#39;./app&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">React</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span><span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This just import <code>React</code> and renders our <code>App</code> component.</p>
+
+<p>Her eis the <code>app/app.js</code> file content:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="o">=</span> <span class="nx">React</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyApp</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kr">static</span> <span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>       <span class="nx">flux</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">isRequired</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">render</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>        <span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now run <code>http-server</code> in your folder,</p>
+
+<p>hitting <a href="http://localhost:8080">http://localhost:8080</a> should display <em>Hello</em> :)</p>
+
+<h2>Summary</h2>
+
+<p>The combination of React, JSX transformation via Babel, and ES6/7 support via
+SystemJS provides a great clean and elegant way to write React code without the
+overhead of build systems and ugly scripts around.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/01/react/">Facebook React - Simplified Work Flow.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-01T01:39:00+03:00" pubdate data-updated="true">May 1<span>st</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>React is a really game changer in the world of web development,
+As most web frameworks (such Angular, Ember, etc) supports <a href="http://https://docs.angularjs.org/tutorial/step_04">two way bindings</a> that really simplifies
+development life, when applications start to get bigger things start to get clashed
+as multiple views may be bound to multiple models and getting
+unexpected behaviors is not something imaginary,</p>
+
+<p>React solve these problems by exposing a new flow that is based on unidirectional
+binding, combined with the usage of <a href="https://facebook.github.io/react/docs/glossary.html">virtual DOM</a>,
+DOM reconciliation should result a better performance than two way bindings based
+frameworks, Well, if Facebook uses it, then it scales :)</p>
+
+<p>You can read about it in <a href="https://facebook.github.io/react">React&rsquo;s web site</a>,
+especially the <a href="http://facebook.github.io/react/docs/tutorial.html">Tutorial</a> should
+give you a great starting point,</p>
+
+<p>Watch out my next post about how to setup a React environment using great tools
+that will simplify your development lifecycle.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -660,618 +942,6 @@ in the other hand once the application grows a little bit more than a contact li
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/">Nodejs Deployment: Building and Configuring on Amazon Linux AMI</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-10T12:17:00+03:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>Logging in and updating system to latest</h3>
-
-<p>SSH your shiny new VM,</p>
-
-<p>Now lets update the system to the latest:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo yum update
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Install OS dependencies</h3>
-
-<p>We&#8217;r going to build Node.js from sources, some dependencies (such as gcc) are required:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo yum install gcc-c++ make openssl-devel git
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Cloning n Building Node.js</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span>
-</span><span class='line'>git clone git://github.com/joyent/node.git
-</span><span class='line'><span class="nb">cd </span>node
-</span><span class='line'>git checkout v0.10.13 <span class="c">#check for other stable tags by executing &#39;git tag&#39;</span>
-</span><span class='line'>./configure --prefix<span class="o">=</span>/usr/local/node
-</span><span class='line'>make
-</span><span class='line'>sudo make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Go grab a cup of coffee&hellip; :&ndash;)
-&hellip;</p>
-
-<h3>Configuration</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo useradd _yourappuser_
-</span><span class='line'>passwd _yourappuser_
-</span><span class='line'>sudo su - _yourappuser_
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Put your app</h3>
-
-<p>Now put your app in ~, for instance:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span>
-</span><span class='line'><span class="nb">pwd</span>
-</span><span class='line'><span class="c">#/home/_yourappuser_</span>
-</span><span class='line'>git clone _https://myhost.com/myapp myapp_
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Init.d</h3>
-
-<p>We would like to have nodejs to start automatically as a service, to do so, lets create an init.d file
-<em>Note: you have to change the properties in the file such as yourappuser, myapp to your app folder and server.js to your node app file.</em></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat <span class="s">&lt;&lt; &#39;EOF&#39; &gt; /etc/init.d/nodejs</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">#!/bin/sh</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">#</span>
-</span><span class='line'><span class="s"># chkconfig: 35 99 99</span>
-</span><span class='line'><span class="s"># description: Node.js /home/yourappuser/myapp/app.js</span>
-</span><span class='line'><span class="s">#</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">. /etc/rc.d/init.d/functions</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">USER=&quot;_yourappuser_&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">NODE_ENV=&quot;production&quot;</span>
-</span><span class='line'><span class="s">DAEMON=&quot;/usr/local/node/bin/node&quot;</span>
-</span><span class='line'><span class="s">ROOT_DIR=&quot;/home/yourappuser/myapp&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">SERVER=&quot;$ROOT_DIR/server.js&quot;</span>
-</span><span class='line'><span class="s">LOG_FILE=&quot;$ROOT_DIR/app.js.log&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">LOCK_FILE=&quot;/var/lock/subsys/node-server&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">do_start()</span>
-</span><span class='line'><span class="s">{</span>
-</span><span class='line'><span class="s">        if [ ! -f &quot;$LOCK_FILE&quot; ] ; then</span>
-</span><span class='line'><span class="s">                echo -n $&quot;Starting $SERVER: &quot;</span>
-</span><span class='line'><span class="s">                runuser -l &quot;$USER&quot; -c &quot;NODE_ENV=$NODE_ENV $DAEMON $SERVER &gt;&gt; $LOG_FILE &amp;&quot; &amp;&amp; echo_success || echo_failure</span>
-</span><span class='line'><span class="s">                RETVAL=$?</span>
-</span><span class='line'><span class="s">                echo</span>
-</span><span class='line'><span class="s">                [ $RETVAL -eq 0 ] &amp;&amp; touch $LOCK_FILE</span>
-</span><span class='line'><span class="s">        else</span>
-</span><span class='line'><span class="s">                echo &quot;$SERVER is locked.&quot;</span>
-</span><span class='line'><span class="s">                RETVAL=1</span>
-</span><span class='line'><span class="s">        fi</span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'><span class="s">do_stop()</span>
-</span><span class='line'><span class="s">{</span>
-</span><span class='line'><span class="s">        echo -n $&quot;Stopping $SERVER: &quot;</span>
-</span><span class='line'><span class="s">        pid=`ps -aefw | grep &quot;$DAEMON $SERVER&quot; | grep -v &quot; grep &quot; | awk &#39;{print $2}&#39;`</span>
-</span><span class='line'><span class="s">        kill -9 $pid &gt; /dev/null 2&gt;&amp;1 &amp;&amp; echo_success || echo_failure</span>
-</span><span class='line'><span class="s">        RETVAL=$?</span>
-</span><span class='line'><span class="s">        echo</span>
-</span><span class='line'><span class="s">        [ $RETVAL -eq 0 ] &amp;&amp; rm -f $LOCK_FILE</span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">case &quot;$1&quot; in</span>
-</span><span class='line'><span class="s">        start)</span>
-</span><span class='line'><span class="s">                do_start</span>
-</span><span class='line'><span class="s">                ;;</span>
-</span><span class='line'><span class="s">        stop)</span>
-</span><span class='line'><span class="s">                do_stop</span>
-</span><span class='line'><span class="s">                ;;</span>
-</span><span class='line'><span class="s">        restart)</span>
-</span><span class='line'><span class="s">                do_stop</span>
-</span><span class='line'><span class="s">                do_start</span>
-</span><span class='line'><span class="s">                ;;</span>
-</span><span class='line'><span class="s">        *)</span>
-</span><span class='line'><span class="s">                echo &quot;Usage: $0 {start|stop|restart}&quot;</span>
-</span><span class='line'><span class="s">                RETVAL=1</span>
-</span><span class='line'><span class="s">esac</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">exit $RETVAL</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">EOF</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add execution permission to the nodejs init script</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo chmod +x /etc/init.d/nodejs
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Pre Routing to port 80</h3>
-
-<p>Linux does not allow non super users to listen to ports &lt; 1024, assuming your application listen to port <em>8080</em>,
-You would probably like to pre route any traffic arriving from port <em>80</em> to your node app that listens to port <em>8080</em></p>
-
-<p>You can do this by the pre routing nat capability of <em>Iptables</em></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>chkconfig iptables on
-</span><span class='line'>service iptables start
-</span><span class='line'>iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
-</span><span class='line'>iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443 <span class="c">#if you want SSL too</span>
-</span><span class='line'>service iptables save
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Configuring node-http-proxy</h3>
-
-<p>It is common to install http proxies such as <em>nginx</em> on front of nodejs,
-This architecture has many advantages such as raising security level, listening natively to port 80, load balancing, multiple node apps support
-via url rewrite, etc&hellip;</p>
-
-<p>I personally think that the best approach, which is very native to node apps is to use <a href="https://github.com/nodejitsu/node-http-proxy,">https://github.com/nodejitsu/node-http-proxy,</a></p>
-
-<p>Which have several advantages:</p>
-
-<ol>
-<li>Reverse proxies incoming http.ServerRequest streams, WebSockets, HTTPS</li>
-<li>Minimal request overhead and latency</li>
-<li>Battled-hardened through production usage</li>
-<li>Very native for nodejs apps</li>
-</ol>
-
-
-<p>TODO: Will post more details in the future but you can simply visit <a href="node-http-proxy">&ldquo;https://github.com/nodejitsu/node-http-proxy&rdquo;</a> site.</p>
-
-<p><a href="https://github.com/pkrumins/nodejs-proxy">https://github.com/pkrumins/nodejs-proxy</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/">Installing CouchDB Instance on Amazon AMI Using Build-couchdb</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-10T10:54:00+03:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://couchdb.apache.org/image/couch.png" width="160" height="180" title="Couch" ></p>
-
-<p>This post explains how to install CouchDB on Amazon AMI using <a href="https://github.com/iriscouch/build-couchdb">build-couchdb</a>/</p>
-
-<p>If you want to install couch from sources without build-couchdb tool, read:
-<a href="/blog/2013/07/08/installing-couch-db-on-amazon-ami/">Installing CouchDB instance on Amazon AMI</a> is a working link</p>
-
-<p>build-couchdb does the following things:</p>
-
-<ol>
-<li>Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.)</li>
-<li>Clone the &lsquo;build-couchdb&rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc),
-These are all the dependencies that CouchDB needs in order to be compiled.</li>
-<li>Compiles all dependencies</li>
-<li>Compiles CouchDB linked with the compiled dependencies.</li>
-</ol>
-
-
-<p>Okay, go grab coffee and lets start!</p>
-
-<h3>Launch Instance</h3>
-
-<p>Login into EC2, and launch a new instanc and choose <em>Amazon Linux AMI</em>,
-You can of course choose other Linux flavours (you are not going to use Windows right?),</p>
-
-<p>But I really suggest going with Amazon AMI, it is EBS backed, ships with AWS tools installed and has a
-RHEL style package management using <em>yum</em>.</p>
-
-<p>Once your instance is launched, SSH it, i&rsquo;m sure you can do.</p>
-
-<p>Now lets updated the system to latest:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo yum update
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Installation</h3>
-
-<h4>Installing OS dependencies</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo yum install gcc gcc-c++ libtool curl-devel python27 help2man texinfo ruby-rdoc zlib-devel openssl-devel make automake rubygems perl git-core
-</span><span class='line'>sudo gem install rake --no-ri --no-rdoc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you don&rsquo;t want to get into troubles where build-couch tries to patch autoconf-2.69 because of old python version (&lt; 2.6) then link to python 2.7,
-at least during the time couch is being built.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo mv /usr/bin/python /usr/bin/python_org
-</span><span class='line'>sudo ln -s /usr/bin/python2.7 /usr/bin/python
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Clone build-couchdb</h4>
-
-<p>git clone git://github.com/iriscouch/build-couchdb
-cd build-couchdb
-git submodule init
-git submodule update</p>
-
-<h4>Optional: Upgrade SpiderMonkey</h4>
-
-<p>build-couch uses not an official Mozilla SpiderMonkey version, but considered to be very stable,
-if you would like to replace it with other versions then do the following,
-<em>You can safely skip this, proceed only if you have a good reason to do so</em></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo yum install mercurial
-</span><span class='line'><span class="nb">cd</span>
-</span><span class='line'>hg clone --verbose http://hg.mozilla.org/releases/mozilla-release
-</span><span class='line'><span class="nb">cd </span>mozilla-release
-</span><span class='line'>hg checkout FIREFOX_XX_0_RELEASE --clean <span class="c">#replace XX with the tag you wish</span>
-</span><span class='line'>rm -rf ~/build-couchdb/dependencies/spidermonkey/js
-</span><span class='line'>rm -rf ~/build-couchdb/dependencies/spidermonkey/mfbt
-</span><span class='line'>cp -r js mfbt ~/build-couchdb/dependencies/spidermonkey
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Building CouchDB and its dependencies</h4>
-
-<p>Now lets build Couch, you can replace <em>1.3.1</em> with any CouchDB release you wish to build,
-Or change the installation location.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo rake <span class="nv">git</span><span class="o">=</span><span class="s2">&quot;git://git.apache.org/couchdb.git tags/1.3.1&quot;</span> <span class="nv">install</span><span class="o">=</span>/usr/local/couchdb-1.3.1
-</span><span class='line'>sudo ln -s /usr/local/couchdb-1.3.1 /usr/local/couchdb
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now go eat something, drink (another?) coffee, take a shower (you will have time for all of them, I promise.)</p>
-
-<p>You should expect the following output:</p>
-
-<blockquote><p>Plugins done</p></blockquote>
-
-<p>Now lets see what we&rsquo;ve built:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /usr/local/couchdb-1.3.1
-</span><span class='line'>ls bin
-</span><span class='line'>
-</span><span class='line'>&gt; aclocal       autoheader2.13  autom4te2.69    autoreconf2.69  autoupdate2.59  ct_run       erl       genctd       ifnames2.62  pkgdata
-</span><span class='line'>&gt; aclocal-1.11  autoheader2.59  automake        autoscan2.13    autoupdate2.62  curl         erlc      genrb        ifnames2.69  run_erl
-</span><span class='line'>&gt; autoconf2.13  autoheader2.62  automake-1.11   autoscan2.59    autoupdate2.69  curl-config  escript   icu-config   js-config    run_test
-</span><span class='line'>&gt; autoconf2.59  autoheader2.69  autoreconf2.13  autoscan2.62    couch-config    derb         genbrk    icuinfo      libtool      to_erl
-</span><span class='line'>&gt; autoconf2.62  autom4te2.59    autoreconf2.59  autoscan2.69    couchdb         dialyzer     gencfu    ifnames2.13  libtoolize   typer
-</span><span class='line'>&gt; autoconf2.69  autom4te2.62    autoreconf2.62  autoupdate2.13  couchjs         epmd         gencnval  ifnames2.59  makeconv     uconv
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Lets execute Couch to ensure it can be executed.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo ./bin/couchdb
-</span><span class='line'>
-</span><span class='line'>&gt; Apache CouchDB 1.3.1 <span class="o">(</span><span class="nv">LogLevel</span><span class="o">=</span>info<span class="o">)</span> is starting.
-</span><span class='line'>&gt; Apache CouchDB has started. Time to relax.
-</span><span class='line'>&gt; <span class="o">[</span>info<span class="o">]</span> <span class="o">[</span>&lt;0.32.0&gt;<span class="o">]</span> Apache CouchDB has started on http://127.0.0.1:5984/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can open another terminal to ensure Couch replies properly:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl http://127.0.0.1:5984
-</span><span class='line'>
-</span><span class='line'>&gt; <span class="o">{</span><span class="s2">&quot;couchdb&quot;</span>:<span class="s2">&quot;Welcome&quot;</span>,<span class="s2">&quot;uuid&quot;</span>:<span class="s2">&quot;9db29433ea76ccfaa81726f6ace742f4&quot;</span>,<span class="s2">&quot;version&quot;</span>:<span class="s2">&quot;1.3.1&quot;</span>,<span class="s2">&quot;vendor&quot;</span>:<span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;The Apache Software Foundation&quot;</span>,<span class="s2">&quot;version&quot;</span>:<span class="s2">&quot;1.3.1&quot;</span><span class="o">}}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Configuration</h3>
-
-<h4>Replace Python link</h4>
-
-<p>To avoid breaking yum and other things, it is adviced to return the python binary link back to its original version</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo rm /usr/bin/python
-</span><span class='line'>sudo mv /usr/bin/python_org /usr/bin/python
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Run Couch on isolated user and correct files ownership</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># add couchdb user</span>
-</span><span class='line'>sudo adduser --system --home /usr/local/couchdb/var/lib/couchdb -M --shell /bin/bash --comment <span class="s2">&quot;CouchDB&quot;</span> couchdb
-</span><span class='line'>
-</span><span class='line'><span class="c"># change file ownership</span>
-</span><span class='line'>sudo chown -R couchdb:couchdb /usr/local/couchdb/etc/couchdb /usr/local/couchdb/var/lib/couchdb /usr/local/couchdb/var/log/couchdb /usr/local/couchdb/var/run/couchdb
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>couch ini file</h4>
-
-<p>Lets create couch ini file</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat <span class="s">&lt;&lt; &#39;EOF&#39; &gt; /usr/local/couchdb/etc/couchdb/local.ini</span>
-</span><span class='line'><span class="s">[couchdb]</span>
-</span><span class='line'><span class="s">#read more here: http://guide.couchdb.org/draft/performance.html</span>
-</span><span class='line'><span class="s">delayed_commits = false</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">[httpd]</span>
-</span><span class='line'><span class="s">port = 80</span>
-</span><span class='line'><span class="s">bind_address = 0.0.0.0</span>
-</span><span class='line'><span class="s">socket_options = [{recbuf, 262144}, {sndbuf, 262144}, {nodelay, true}]</span>
-</span><span class='line'><span class="s">WWW-Authenticate = Basic realm=&quot;administrator&quot;</span>
-</span><span class='line'><span class="s">;WWW-Authenticate = bummer</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">[couch_httpd_auth]</span>
-</span><span class='line'><span class="s">require_valid_user = true</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">[log]</span>
-</span><span class='line'><span class="s">level = error</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">[admins]</span>
-</span><span class='line'><span class="s">EOF</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Password protection</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span><span class="nv">PASS</span><span class="o">=</span><span class="sb">`</span>&lt;/dev/urandom tr -dc <span class="s1">&#39;12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB&#39;</span> | head -c20; <span class="nb">echo</span> <span class="s2">&quot;&quot;</span><span class="sb">`</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;admin = ${ADMIN_PASSWORD}&quot;</span> &gt;&gt; /usr/local/etc/couchdb/local.ini
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Couch is smart enough to hash the passwords.</p>
-
-<h4>Logs Rotation</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">if</span> <span class="o">[</span> ! -e <span class="s2">&quot;/etc/logrotate.d/couchdb&quot;</span> <span class="o">]</span>
-</span><span class='line'><span class="k">then</span>
-</span><span class='line'>  <span class="c"># add couch.log to logrotate</span>
-</span><span class='line'>  sudo ln -s /usr/local/couchdb/etc/logrotate.d/couchdb /etc/logrotate.d/
-</span><span class='line'>  <span class="c"># change to daily rotation</span>
-</span><span class='line'>  sudo sed -e s/weekly/daily/g -i /usr/local/couchdb/etc/logrotate.d/couchdb
-</span><span class='line'>  <span class="c">#logrotate -v -f /etc/logrotate.d/couchdb </span>
-</span><span class='line'><span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Run CouchDB on startup</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># run couchdb on startup</span>
-</span><span class='line'>sudo ln -s /usr/local/couchdb/etc/rc.d/couchdb /etc/init.d/couchdb
-</span><span class='line'>sudo chkconfig --add couchdb
-</span><span class='line'>sudo chkconfig --level 345 couchdb on
-</span><span class='line'>
-</span><span class='line'>sudo service couchdb status
-</span><span class='line'><span class="c">#Apache CouchDB is not running.</span>
-</span><span class='line'>
-</span><span class='line'>sudo service couchdb start
-</span><span class='line'><span class="c">#Apache CouchDB is running as process 5047, time to relax.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now it&rsquo;s really time to relax, enjoy :&ndash;)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1291,6 +961,14 @@ Or change the installation location.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/">Elegant Way to Use React With ES6/ES7 Features.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/01/react/">Facebook React - Simplified Work Flow.</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/02/15/ratpack_hello_world/">Hello World Using Ratpack.</a>
       </li>
     
@@ -1300,14 +978,6 @@ Or change the installation location.</p>
     
       <li class="post">
         <a href="/blog/2014/09/19/ember-components/">New Ember Components Suite!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/02/ember-forms/">Ember Forms</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/">Bootstrap for Ember - More Than 100 Stars in 1 Week</a>
       </li>
     
   </ul>
