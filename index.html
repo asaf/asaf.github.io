@@ -9,8 +9,7 @@
   <meta name="author" content="Asaf Shakarchi">
 
   
-  <meta name="description" content="React, JSX, ES6. So you want React, JSX the markup and write ES6/7 code style, but setting a working
-environment may be pain in the ass, More to say &hellip;">
+  <meta name="description" content="About Mixins &amp; Higher Order Components Sometimes it makes sense to extends a behavior of a component, while mixins are still alive, they&#8217;r &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,217 @@ environment may be pain in the ass, More to say &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/">Extending Behavior of React Components by ES6 Decorators & Higher Order Components</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-23T18:04:00+03:00" pubdate data-updated="true">Jun 23<span>rd</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>About Mixins &amp; Higher Order Components</h2>
+
+<p>Sometimes it makes sense to extends a behavior of a component, while <a href="https://facebook.github.io/react/docs/reusable-components.html#mixins">mixins</a> are still alive, they&#8217;r <a href="https://twitter.com/sebmarkbage/status/571389309586051072">not recommended</a> anylonger, use <a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">Higher Order Components</a> instead.</p>
+
+<p>So instead of doing this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">function</span> <span class="nx">StoreMixin</span><span class="p">(...</span><span class="nx">stores</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">Mixin</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">getInitialState</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">getStateFromStores</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">UserProfilePage</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">mixins</span><span class="o">:</span> <span class="p">[</span><span class="nx">StoreMixin</span><span class="p">(</span><span class="nx">UserStore</span><span class="p">)],</span>
+</span><span class='line'>  <span class="nx">propTypes</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">userId</span><span class="o">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">.</span><span class="nx">isRequired</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="p">...</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can do that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">function</span> <span class="nx">connectToStores</span><span class="p">(</span><span class="nx">Component</span><span class="p">,</span> <span class="nx">stores</span><span class="p">,</span> <span class="nx">getStateFromStores</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kr">const</span> <span class="nx">StoreConnection</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">getInitialState</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">getStateFromStores</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'>    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Component</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">}</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">})</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We just wrap the component and passes some additional props to it, it is a clean and generic solution for extending
+components without merging behaviors being implemented by React&rsquo;s mixin merge logic.</p>
+
+<p>You can read more about <em>Higher Order Components</em> <a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">here</a></p>
+
+<h2>Extending via ES6 Decorators</h2>
+
+<p>Sometimes it makes sense to extends a component without the need to wrap it manually, this technique is common in different <a href="https://github.com/gaearon/redux/blob/master/src/components/createConnectDecorator.js">frameworks</a> to define components less verbosely when extra functionality is demanded.</p>
+
+<p>Here is a short example how it works,
+Lets extends the <a href="https://www.tildedave.com/2014/11/15/introduction-to-contexts-in-react-js.html">context</a> of our component hierarchy with a <code>print</code> function, so we use it in our <code>render</code> method:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">MyPage</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kr">static</span> <span class="nx">contextTypes</span> <span class="o">=</span> <span class="nx">contextTypes</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span><span class="p">(</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">)}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>        <span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Assuming <code>MyPage</code> is a child component of <code>App</code>, here is how our <code>App</code> component looks like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">contextTypes</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">print</span><span class="o">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">func</span><span class="p">.</span><span class="nx">isRequired</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">myContext</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">print</span><span class="o">:</span> <span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">m</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">@</span><span class="nx">context</span><span class="p">(</span><span class="nx">contextTypes</span><span class="p">,</span> <span class="nx">myContext</span><span class="p">)</span>
+</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">MyPage</span><span class="o">/&gt;</span>
+</span><span class='line'>        <span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here is the code of the <em>decorator</em>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">context</span><span class="p">(</span><span class="nx">contextTypes</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">DecoratedComponent</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kr">class</span> <span class="p">{</span>
+</span><span class='line'>            <span class="kr">static</span> <span class="nx">childContextTypes</span> <span class="o">=</span> <span class="nx">contextTypes</span><span class="p">;</span>
+</span><span class='line'>            <span class="nx">getChildContext</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="nx">context</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">DecoratedComponent</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">}</span> <span class="o">/&gt;</span>
+</span><span class='line'>              <span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <em>Decorator</em> expects an expression and invokes the function with the given parameters and must return a function that expects the annotated component as a parameter, then we just return a <code>class</code> with some context the <em>wraps</em> our component.</p>
+
+<p>You can read more about <a href="https://github.com/wycats/javascript-decorators">Decorators</a> here.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -887,61 +1097,6 @@ doesnt make Bootstrap usage more complex than using it as-is but providing great
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/06/nodejs-model-is-born/">Nodejs-model Is Born</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-06T03:22:00+03:00" pubdate data-updated="true">Aug 6<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve been struggling lately to find an appropriate way to handle models correctly,
-In one hand, these noSQL DBs such <em>CouchDB</em> have great flexibility and I didn&rsquo;t want to ruin that with a blowing up ORM framework,
-in the other hand once the application grows a little bit more than a contact list app, then things become messy.</p>
-
-<p>While writing a larger app with Node, I find myself struggling with finding solutions to problems such:
-(there are few more but these are the main)</p>
-
-<ul>
-<li><strong>Validating a document (model) properties (application level) before storing it in the DB.</strong></li>
-<li><strong>A minimal schema where each attribute is defined per model to ensure no allowed attributes leaks into the model.</strong></li>
-<li><strong>Automatically convert a property value when a value is set.</strong></li>
-<li><strong>Filter critical, sensitive attributes when transfering the model on the wire to external clients.</strong></li>
-<li><strong>Updating an existing domain via an accessibility-aware method (you may want users to update their profile but not letting them directly change their password attribute)</strong></li>
-</ul>
-
-
-<p>So I couldn&rsquo;t really find a good module to achieve all of that without sticking a giant into my lightweight app, so I built one, it&rsquo;s named
-<a href="https://github.com/asaf/nodejs-model">nodejs-model</a>, available here: <a href="https://github.com/asaf/nodejs-model">https://github.com/asaf/nodejs-model</a></p>
-
-<p>For now, read the docs on the github repo for more info, i will post series of posts about <em>nodejs-model</em> in the near future.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -961,6 +1116,10 @@ in the other hand once the application grows a little bit more than a contact li
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/">Extending Behavior of React Components by ES6 Decorators & Higher Order Components</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/">Elegant Way to Use React With ES6/ES7 Features.</a>
       </li>
     
@@ -974,10 +1133,6 @@ in the other hand once the application grows a little bit more than a contact li
     
       <li class="post">
         <a href="/blog/2015/02/01/searching_for_new_java_backend/">Choosing Java Backend Framework in 2015.</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/09/19/ember-components/">New Ember Components Suite!</a>
       </li>
     
   </ul>

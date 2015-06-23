@@ -4,7 +4,7 @@
   <title><![CDATA[Category: html5 | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2015-06-19T02:19:13+03:00</updated>
+  <updated>2015-06-23T18:37:43+03:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,146 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Extending behavior of React Components by ES6 Decorators & Higher Order Components]]></title>
+    <link href="http://asaf.github.io/blog/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/"/>
+    <updated>2015-06-23T18:04:00+03:00</updated>
+    <id>http://asaf.github.io/blog/2015/06/23/extending-behavior-of-react-components-by-es6-decorators</id>
+    <content type="html"><![CDATA[<h2>About Mixins &amp; Higher Order Components</h2>
+
+<p>Sometimes it makes sense to extends a behavior of a component, while <a href="https://facebook.github.io/react/docs/reusable-components.html#mixins">mixins</a> are still alive, they'r <a href="https://twitter.com/sebmarkbage/status/571389309586051072">not recommended</a> anylonger, use <a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">Higher Order Components</a> instead.</p>
+
+<p>So instead of doing this:</p>
+
+<p>```js
+function StoreMixin(&hellip;stores) {
+  var Mixin = {</p>
+
+<pre><code>getInitialState() {
+  return this.getStateFromStores(this.props);
+},
+...
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>var UserProfilePage = React.createClass({
+  mixins: [StoreMixin(UserStore)],
+  propTypes: {</p>
+
+<pre><code>userId: PropTypes.number.isRequired
+</code></pre>
+
+<p>  },
+  &hellip;
+})
+```</p>
+
+<p>You can do that:</p>
+
+<p>```js
+function connectToStores(Component, stores, getStateFromStores) {
+  const StoreConnection = React.createClass({</p>
+
+<pre><code>getInitialState() {
+  return getStateFromStores(this.props);
+},
+...
+render() {
+  return &lt;Component {...this.props} {...this.state} /&gt;;
+}
+</code></pre>
+
+<p>  })
+}
+```</p>
+
+<p>We just wrap the component and passes some additional props to it, it is a clean and generic solution for extending
+components without merging behaviors being implemented by React&rsquo;s mixin merge logic.</p>
+
+<p>You can read more about <em>Higher Order Components</em> <a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">here</a></p>
+
+<h2>Extending via ES6 Decorators</h2>
+
+<p>Sometimes it makes sense to extends a component without the need to wrap it manually, this technique is common in different <a href="https://github.com/gaearon/redux/blob/master/src/components/createConnectDecorator.js">frameworks</a> to define components less verbosely when extra functionality is demanded.</p>
+
+<p>Here is a short example how it works,
+Lets extends the <a href="https://www.tildedave.com/2014/11/15/introduction-to-contexts-in-react-js.html">context</a> of our component hierarchy with a <code>print</code> function, so we use it in our <code>render</code> method:</p>
+
+<p>```js
+class MyPage extends Component {</p>
+
+<pre><code>static contextTypes = contextTypes;
+render() {
+    return(
+        &lt;div&gt;{this.context.print('Hello World')}&lt;/div&gt;
+    )
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Assuming <code>MyPage</code> is a child component of <code>App</code>, here is how our <code>App</code> component looks like:</p>
+
+<p>```js
+var contextTypes = {</p>
+
+<pre><code>print: PropTypes.func.isRequired
+</code></pre>
+
+<p>}</p>
+
+<p>var myContext = {</p>
+
+<pre><code>print: (m) =&gt; (m)
+</code></pre>
+
+<p>}</p>
+
+<p>@context(contextTypes, myContext)
+export default class App extends Component {</p>
+
+<pre><code>render() {
+    return (
+        &lt;MyPage/&gt;
+    )
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>And here is the code of the <em>decorator</em>:</p>
+
+<p>```js
+export default function context(contextTypes, context) {</p>
+
+<pre><code>return function (DecoratedComponent) {
+    return class {
+        static childContextTypes = contextTypes;
+        getChildContext() {
+          return context;
+        }
+        render() {
+          return (
+            &lt;DecoratedComponent {...this.props} /&gt;
+          );
+        }
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The <em>Decorator</em> expects an expression and invokes the function with the given parameters and must return a function that expects the annotated component as a parameter, then we just return a <code>class</code> with some context the <em>wraps</em> our component.</p>
+
+<p>You can read more about <a href="https://github.com/wycats/javascript-decorators">Decorators</a> here.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Elegant way to use React with ES6/ES7 features.]]></title>

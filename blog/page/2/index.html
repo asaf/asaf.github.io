@@ -9,8 +9,8 @@
   <meta name="author" content="Asaf Shakarchi">
 
   
-  <meta name="description" content="Logging in and updating system to latest SSH your shiny new VM, Now lets update the system to the latest: 1
-sudo yum update Install OS dependencies &hellip;">
+  <meta name="description" content="I&rsquo;ve been struggling lately to find an appropriate way to handle models correctly,
+In one hand, these noSQL DBs such CouchDB have great &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,61 @@ sudo yum update Install OS dependencies &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/06/nodejs-model-is-born/">Nodejs-model Is Born</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-06T03:22:00+03:00" pubdate data-updated="true">Aug 6<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve been struggling lately to find an appropriate way to handle models correctly,
+In one hand, these noSQL DBs such <em>CouchDB</em> have great flexibility and I didn&rsquo;t want to ruin that with a blowing up ORM framework,
+in the other hand once the application grows a little bit more than a contact list app, then things become messy.</p>
+
+<p>While writing a larger app with Node, I find myself struggling with finding solutions to problems such:
+(there are few more but these are the main)</p>
+
+<ul>
+<li><strong>Validating a document (model) properties (application level) before storing it in the DB.</strong></li>
+<li><strong>A minimal schema where each attribute is defined per model to ensure no allowed attributes leaks into the model.</strong></li>
+<li><strong>Automatically convert a property value when a value is set.</strong></li>
+<li><strong>Filter critical, sensitive attributes when transfering the model on the wire to external clients.</strong></li>
+<li><strong>Updating an existing domain via an accessibility-aware method (you may want users to update their profile but not letting them directly change their password attribute)</strong></li>
+</ul>
+
+
+<p>So I couldn&rsquo;t really find a good module to achieve all of that without sticking a giant into my lightweight app, so I built one, it&rsquo;s named
+<a href="https://github.com/asaf/nodejs-model">nodejs-model</a>, available here: <a href="https://github.com/asaf/nodejs-model">https://github.com/asaf/nodejs-model</a></p>
+
+<p>For now, read the docs on the github repo for more info, i will post series of posts about <em>nodejs-model</em> in the near future.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1291,6 +1346,42 @@ Then <a href="Signup%20for%20a%20new%20application">https://disqus.com/admin/sig
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/08/web-in-realtime-using-nodejs-socketstream-emberjs-and-more/">Web in Realtime: Using Nodejs Socketstream Emberjs and More</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-08T10:08:00+03:00" pubdate data-updated="true">Jul 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>now here we go with some content :)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/07/08/blogging-with-octopress-add-about-page/">Blogging With Octopress: Add About Page</a></h1>
     
     
@@ -1565,6 +1656,10 @@ rake deploy</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/">Extending Behavior of React Components by ES6 Decorators & Higher Order Components</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/">Elegant Way to Use React With ES6/ES7 Features.</a>
       </li>
     
@@ -1578,10 +1673,6 @@ rake deploy</p>
     
       <li class="post">
         <a href="/blog/2015/02/01/searching_for_new_java_backend/">Choosing Java Backend Framework in 2015.</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/09/19/ember-components/">New Ember Components Suite!</a>
       </li>
     
   </ul>
