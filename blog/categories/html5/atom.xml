@@ -4,7 +4,7 @@
   <title><![CDATA[Category: html5 | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2015-06-23T18:37:43+03:00</updated>
+  <updated>2015-09-05T19:35:19+03:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,111 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ES6, React & Browserify]]></title>
+    <link href="http://asaf.github.io/blog/2015/09/05/react/"/>
+    <updated>2015-09-05T19:20:00+03:00</updated>
+    <id>http://asaf.github.io/blog/2015/09/05/react</id>
+    <content type="html"><![CDATA[<h2>ES6, React &amp; Browserify</h2>
+
+<p><a href="http://browserify.org/">Browserify</a> is a <em>lightweight</em> build tool for JS, you can start <em>&lsquo;require&rsquo;</em> modules with zero configuration,
+Thanks to <a href="https://github.com/babel/babelify">Babelify</a>, you can start writing ES6 code (via <a href="babeljs.io">Babel</a>) write away,</p>
+
+<p>Here&rsquo;s a proof how simple it is,</p>
+
+<p>Lets create a <code>package.json</code> file and install minimal dependencies</p>
+
+<p><code>bash
+npm init
+npm install --save react
+npm install --save-dev browserify babelify watchify
+</code></p>
+
+<p>Lets give Browserify a hint that it should perform code transformation via <code>babelify</code> by adding this json tag to <code>package.json</code></p>
+
+<p>```js
+&ldquo;browserify&rdquo;: {
+  &ldquo;transform&rdquo;: [</p>
+
+<pre><code>"babelify"
+</code></pre>
+
+<p>  ]
+}
+```</p>
+
+<p>It can also be nice to just type <code>npm start</code> when developing, so lets add a <code>start</code> script to <code>package.json</code> as well</p>
+
+<p>&ldquo;start&rdquo;: &ldquo;watchify &mdash;extension=js -o bundle.js index.js &amp; python -m SimpleHTTPServer&rdquo;,</p>
+
+<p>Note: Watchify is not mandatory but it&rsquo;s great tool for watching your code changes and auto rebuild when a change gets discovered.</p>
+
+<p>Lets put the simplest index file ever:</p>
+
+<p>```html
+<html>
+  <body></p>
+
+<pre><code>&lt;script type="text/javascript" src="bundle.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>Here&rsquo;s a simple ES6 class with React.</p>
+
+<p>```js
+import React from &lsquo;react&rsquo;;</p>
+
+<p>class Hello extends React.Component {
+  constructor(props) {</p>
+
+<pre><code>super(props)
+this.state = {count: props.initCount}
+this.tick = this.tick.bind(this)
+</code></pre>
+
+<p>  }</p>
+
+<p>  tick () {</p>
+
+<pre><code>this.setState({count: this.state.count + 1});
+</code></pre>
+
+<p>  }
+  render(){</p>
+
+<pre><code>let { name } = this.props
+let { count } = this.state
+return (
+  &lt;button onClick={this.tick}&gt;Hello {name} {count}&lt;/button&gt;
+);
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>React.render(<Hello name="Stranger" initCount={5}/>, document.body)</p>
+
+<p>```</p>
+
+<h2>Running the code:</h2>
+
+<p><code>bash
+npm start
+</code></p>
+
+<p>Open browser <a href="http://localhost:8000">http://localhost:8000</a></p>
+
+<p>To summary:</p>
+
+<p>1) Browserify is lightweight build tool, it handles modularity by understanding <code>require</code>
+2) Labelify is a plugin for Browserify, it takes care of transpilling ES6 code to ES5 via Babel.
+3) Thanks to Babel &amp; React integration, there&rsquo;s no need for any extra plugins to perform JSX transformations.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Extending behavior of React Components by ES6 Decorators & Higher Order Components]]></title>

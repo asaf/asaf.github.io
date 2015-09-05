@@ -9,7 +9,7 @@
   <meta name="author" content="Asaf Shakarchi">
 
   
-  <meta name="description" content="About Mixins &amp; Higher Order Components Sometimes it makes sense to extends a behavior of a component, while mixins are still alive, they&#8217;r &hellip;">
+  <meta name="description" content="ES6, React &amp; Browserify Browserify is a lightweight build tool for JS, you can start &lsquo;require&rsquo; modules with zero configuration, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,158 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/09/05/react/">ES6, React & Browserify</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-09-05T19:20:00+03:00" pubdate data-updated="true">Sep 5<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>ES6, React &amp; Browserify</h2>
+
+<p><a href="http://browserify.org/">Browserify</a> is a <em>lightweight</em> build tool for JS, you can start <em>&lsquo;require&rsquo;</em> modules with zero configuration,
+Thanks to <a href="https://github.com/babel/babelify">Babelify</a>, you can start writing ES6 code (via <a href="babeljs.io">Babel</a>) write away,</p>
+
+<p>Here&rsquo;s a proof how simple it is,</p>
+
+<p>Lets create a <code>package.json</code> file and install minimal dependencies</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>npm init
+</span><span class='line'>npm install --save react
+</span><span class='line'>npm install --save-dev browserify babelify watchify
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets give Browserify a hint that it should perform code transformation via <code>babelify</code> by adding this json tag to <code>package.json</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="s2">&quot;browserify&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;transform&quot;</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="s2">&quot;babelify&quot;</span>
+</span><span class='line'>  <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It can also be nice to just type <code>npm start</code> when developing, so lets add a <code>start</code> script to <code>package.json</code> as well</p>
+
+<p>&ldquo;start&rdquo;: &ldquo;watchify &mdash;extension=js -o bundle.js index.js &amp; python -m SimpleHTTPServer&rdquo;,</p>
+
+<p>Note: Watchify is not mandatory but it&rsquo;s great tool for watching your code changes and auto rebuild when a change gets discovered.</p>
+
+<p>Lets put the simplest index file ever:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;bundle.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&rsquo;s a simple ES6 class with React.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">class</span> <span class="nx">Hello</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="nx">count</span><span class="o">:</span> <span class="nx">props</span><span class="p">.</span><span class="nx">initCount</span><span class="p">}</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">tick</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">tick</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">tick</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="nx">count</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">});</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">render</span><span class="p">(){</span>
+</span><span class='line'>    <span class="kd">let</span> <span class="p">{</span> <span class="nx">name</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span>
+</span><span class='line'>    <span class="kd">let</span> <span class="p">{</span> <span class="nx">count</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">tick</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="p">{</span><span class="nx">name</span><span class="p">}</span> <span class="p">{</span><span class="nx">count</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">React</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Hello</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;Stranger&quot;</span> <span class="nx">initCount</span><span class="o">=</span><span class="p">{</span><span class="mi">5</span><span class="p">}</span><span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Running the code:</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>npm start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Open browser <a href="http://localhost:8000">http://localhost:8000</a></p>
+
+<p>To summary:</p>
+
+<p>1) Browserify is lightweight build tool, it handles modularity by understanding <code>require</code>
+2) Labelify is a plugin for Browserify, it takes care of transpilling ES6 code to ES5 via Babel.
+3) Thanks to Babel &amp; React integration, there&rsquo;s no need for any extra plugins to perform JSX transformations.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1030,73 +1182,6 @@ We released today the 2nd minor version 0.2.0,</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/26/bootstrap-for-ember-is-born/">Bootstrap for Ember Is Born</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-26T07:29:00+03:00" pubdate data-updated="true">Aug 26<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of
-making web applications right.</p>
-
-<p>You can just hook both projects together by using Bootstrap as is in Handlebars templates,
-But soon enough, you will find yourself asking questions sucha s:</p>
-
-<ul>
-<li>How do I interact between Bootstrap events and Ember (such as Controllers)?</li>
-<li>How to pass Bootstrap components data from Ember (such as Controllers)</li>
-</ul>
-
-
-<p>I&rsquo;ve seen few options about the integration between both, but:</p>
-
-<ul>
-<li>They are not easy and fun to use, they make the ease of Bootstrap too complex.</li>
-<li>They are not well documented.</li>
-<li>Development is too slow, I haven&rsquo;t seen anything new lately.</li>
-</ul>
-
-
-<p>So! I&rsquo;m excited about a project I&rsquo;ve been working lately with some guys to integrate Bootstrap &amp; EmberJs together in a way that
-doesnt make Bootstrap usage more complex than using it as-is but providing great integration with EmberJs components.</p>
-
-<h1>Links!</h1>
-
-<ul>
-<li>Github Page: <a href="https://github.com/ember-addons/bootstrap-for-ember">https://github.com/ember-addons/bootstrap-for-ember</a></li>
-<li>Showcase: <a href="http://ember-addons.github.io/bootstrap-for-ember/dist/">http://ember-addons.github.io/bootstrap-for-ember/dist/</a></li>
-<li>Twitter: <a href="https://twitter.com/bs_for_ember">https://twitter.com/bs_for_ember</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1116,6 +1201,10 @@ doesnt make Bootstrap usage more complex than using it as-is but providing great
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/09/05/react/">ES6, React & Browserify</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/">Extending Behavior of React Components by ES6 Decorators & Higher Order Components</a>
       </li>
     
@@ -1129,10 +1218,6 @@ doesnt make Bootstrap usage more complex than using it as-is but providing great
     
       <li class="post">
         <a href="/blog/2015/02/15/ratpack_hello_world/">Hello World Using Ratpack.</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/02/01/searching_for_new_java_backend/">Choosing Java Backend Framework in 2015.</a>
       </li>
     
   </ul>
