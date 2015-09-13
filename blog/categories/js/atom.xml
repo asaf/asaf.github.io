@@ -4,7 +4,7 @@
   <title><![CDATA[Category: js | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/js/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2015-09-05T19:35:19+03:00</updated>
+  <updated>2015-09-13T15:41:40+03:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Add additional properties to a result of a function or a fucntion map using ES6 spread operator.]]></title>
+    <link href="http://asaf.github.io/blog/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/"/>
+    <updated>2015-09-13T15:08:00+03:00</updated>
+    <id>http://asaf.github.io/blog/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator</id>
+    <content type="html"><![CDATA[<p>Sometimes it makes sense to add additional properties to a result of a function,</p>
+
+<p>Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,</p>
+
+<p>Using ES6, we could easily achieve this by:</p>
+
+<p>```js
+bindData(oper, props) {
+  if (typeof oper === &lsquo;function&rsquo;) {</p>
+
+<pre><code>return (...args) =&gt; ({
+  ...oper(...args),
+  ...props
+});
+</code></pre>
+
+<p>  }
+  if (typeof oper === &lsquo;object&rsquo;) {</p>
+
+<pre><code>return Object.keys(oper).reduce((prev, key) =&gt; ({
+  ...prev,
+  [key]: bindData(oper[key], props)
+}), {});
+</code></pre>
+
+<p>  }
+  return oper;
+}
+```</p>
+
+<p>Here are some clarifications:</p>
+
+<ol>
+<li>If <code>oper</code> is a function, we decorate the original function by a closure,
+<code>return (...args)</code> is the closure (read more about the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">spread</a> operator.</li>
+</ol>
+
+
+<p>In general, <code>myFunction(...args);</code> is equelevent to <code>(args) { oper.apply(null, args); }</code>,</p>
+
+<ol>
+<li>When the returned function is invoked, the result of the original function <code>...oper(...args)</code> is then merged with the <code>props</code> object, in other words:</li>
+</ol>
+
+
+<p><code>...oper(), ...props</code> is equelevent to: <code>Object.assign({}, oper(), props);</code>
+Read more about <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign</a></p>
+
+<ol>
+<li>If <code>oper</code> is an object, we bind each of its key&rsquo;s recursively (assuming each property is a function).</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ES6, React & Browserify]]></title>

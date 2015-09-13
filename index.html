@@ -9,7 +9,7 @@
   <meta name="author" content="Asaf Shakarchi">
 
   
-  <meta name="description" content="ES6, React &amp; Browserify Browserify is a lightweight build tool for JS, you can start &lsquo;require&rsquo; modules with zero configuration, &hellip;">
+  <meta name="description" content="Sometimes it makes sense to add additional properties to a result of a function, Examples could be enhancing an operation result with some meta data &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,102 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/">Add Additional Properties to a Result of a Function or a Fucntion Map Using ES6 Spread Operator.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-09-13T15:08:00+03:00" pubdate data-updated="true">Sep 13<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometimes it makes sense to add additional properties to a result of a function,</p>
+
+<p>Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,</p>
+
+<p>Using ES6, we could easily achieve this by:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">bindData</span><span class="p">(</span><span class="nx">oper</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">oper</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+</span><span class='line'>      <span class="p">...</span><span class="nx">oper</span><span class="p">(...</span><span class="nx">args</span><span class="p">),</span>
+</span><span class='line'>      <span class="p">...</span><span class="nx">props</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">oper</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">oper</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+</span><span class='line'>      <span class="p">...</span><span class="nx">prev</span><span class="p">,</span>
+</span><span class='line'>      <span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="o">:</span> <span class="nx">bindData</span><span class="p">(</span><span class="nx">oper</span><span class="p">[</span><span class="nx">key</span><span class="p">],</span> <span class="nx">props</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">}),</span> <span class="p">{});</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">oper</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here are some clarifications:</p>
+
+<ol>
+<li>If <code>oper</code> is a function, we decorate the original function by a closure,
+<code>return (...args)</code> is the closure (read more about the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">spread</a> operator.</li>
+</ol>
+
+
+<p>In general, <code>myFunction(...args);</code> is equelevent to <code>(args) { oper.apply(null, args); }</code>,</p>
+
+<ol>
+<li>When the returned function is invoked, the result of the original function <code>...oper(...args)</code> is then merged with the <code>props</code> object, in other words:</li>
+</ol>
+
+
+<p><code>...oper(), ...props</code> is equelevent to: <code>Object.assign({}, oper(), props);</code>
+Read more about <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign</a></p>
+
+<ol>
+<li>If <code>oper</code> is an object, we bind each of its key&rsquo;s recursively (assuming each property is a function).</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1119,69 +1215,6 @@ We found ourself spending too much time on convertions between Vertx&rsquo;s Jso
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/">Bootstrap for Ember v0.2.0 Released</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-29T09:27:00+03:00" pubdate data-updated="true">Aug 29<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Few days ago I submitted a post about <a href="blog/2013/08/26/bootstrap-for-ember-is-born/">Bootstrap for Ember</a>,
-We released today the 2nd minor version 0.2.0,</p>
-
-<p>So far, version 0.2.0 contains the following components:</p>
-
-<ul>
-<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/alert">Alert</a></li>
-<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/label">Label</a></li>
-<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/badge">Badge</a></li>
-<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/well">Well</a></li>
-<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/page-header">Page Header</a></li>
-<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/button">Button</a></li>
-<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/progressbar">ProgressBar</a></li>
-<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/pills">Pills Navigation</a></li>
-<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/tabs">Tabs Navigation</a></li>
-</ul>
-
-
-<p>Project details:</p>
-
-<ul>
-<li><a href="https://github.com/ember-addons/bootstrap-for-ember">Github</a></li>
-<li><a href="https://github.com/ember-addons/bootstrap-for-ember/releases/tag/0.2.0">Release</a></li>
-<li><a href="http://ember-addons.github.io/bootstrap-for-ember">Showcase</a></li>
-</ul>
-
-
-<p>Have fun!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1201,6 +1234,10 @@ We released today the 2nd minor version 0.2.0,</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/">Add Additional Properties to a Result of a Function or a Fucntion Map Using ES6 Spread Operator.</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/09/05/react/">ES6, React & Browserify</a>
       </li>
     
@@ -1214,10 +1251,6 @@ We released today the 2nd minor version 0.2.0,</p>
     
       <li class="post">
         <a href="/blog/2015/05/01/react/">Facebook React - Simplified Work Flow.</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/02/15/ratpack_hello_world/">Hello World Using Ratpack.</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2015-09-05T19:35:19+03:00</updated>
+  <updated>2015-09-13T15:41:40+03:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Add additional properties to a result of a function or a fucntion map using ES6 spread operator.]]></title>
+    <link href="http://asaf.github.io/blog/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/"/>
+    <updated>2015-09-13T15:08:00+03:00</updated>
+    <id>http://asaf.github.io/blog/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator</id>
+    <content type="html"><![CDATA[<p>Sometimes it makes sense to add additional properties to a result of a function,</p>
+
+<p>Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,</p>
+
+<p>Using ES6, we could easily achieve this by:</p>
+
+<p>```js
+bindData(oper, props) {
+  if (typeof oper === &lsquo;function&rsquo;) {</p>
+
+<pre><code>return (...args) =&gt; ({
+  ...oper(...args),
+  ...props
+});
+</code></pre>
+
+<p>  }
+  if (typeof oper === &lsquo;object&rsquo;) {</p>
+
+<pre><code>return Object.keys(oper).reduce((prev, key) =&gt; ({
+  ...prev,
+  [key]: bindData(oper[key], props)
+}), {});
+</code></pre>
+
+<p>  }
+  return oper;
+}
+```</p>
+
+<p>Here are some clarifications:</p>
+
+<ol>
+<li>If <code>oper</code> is a function, we decorate the original function by a closure,
+<code>return (...args)</code> is the closure (read more about the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">spread</a> operator.</li>
+</ol>
+
+
+<p>In general, <code>myFunction(...args);</code> is equelevent to <code>(args) { oper.apply(null, args); }</code>,</p>
+
+<ol>
+<li>When the returned function is invoked, the result of the original function <code>...oper(...args)</code> is then merged with the <code>props</code> object, in other words:</li>
+</ol>
+
+
+<p><code>...oper(), ...props</code> is equelevent to: <code>Object.assign({}, oper(), props);</code>
+Read more about <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign</a></p>
+
+<ol>
+<li>If <code>oper</code> is an object, we bind each of its key&rsquo;s recursively (assuming each property is a function).</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[New Ember Components Suite!]]></title>
@@ -108,46 +168,6 @@ We released today the 2nd minor version 0.2.0,</p>
 
 
 <p>Have fun!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bootstrap for Ember is born]]></title>
-    <link href="http://asaf.github.io/blog/2013/08/26/bootstrap-for-ember-is-born/"/>
-    <updated>2013-08-26T07:29:00+03:00</updated>
-    <id>http://asaf.github.io/blog/2013/08/26/bootstrap-for-ember-is-born</id>
-    <content type="html"><![CDATA[<p>Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of
-making web applications right.</p>
-
-<p>You can just hook both projects together by using Bootstrap as is in Handlebars templates,
-But soon enough, you will find yourself asking questions sucha s:</p>
-
-<ul>
-<li>How do I interact between Bootstrap events and Ember (such as Controllers)?</li>
-<li>How to pass Bootstrap components data from Ember (such as Controllers)</li>
-</ul>
-
-
-<p>I&rsquo;ve seen few options about the integration between both, but:</p>
-
-<ul>
-<li>They are not easy and fun to use, they make the ease of Bootstrap too complex.</li>
-<li>They are not well documented.</li>
-<li>Development is too slow, I haven&rsquo;t seen anything new lately.</li>
-</ul>
-
-
-<p>So! I&rsquo;m excited about a project I&rsquo;ve been working lately with some guys to integrate Bootstrap &amp; EmberJs together in a way that
-doesnt make Bootstrap usage more complex than using it as-is but providing great integration with EmberJs components.</p>
-
-<h1>Links!</h1>
-
-<ul>
-<li>Github Page: <a href="https://github.com/ember-addons/bootstrap-for-ember">https://github.com/ember-addons/bootstrap-for-ember</a></li>
-<li>Showcase: <a href="http://ember-addons.github.io/bootstrap-for-ember/dist/">http://ember-addons.github.io/bootstrap-for-ember/dist/</a></li>
-<li>Twitter: <a href="https://twitter.com/bs_for_ember">https://twitter.com/bs_for_ember</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
