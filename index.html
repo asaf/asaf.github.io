@@ -9,7 +9,7 @@
   <meta name="author" content="Asaf Shakarchi">
 
   
-  <meta name="description" content="Sometimes it makes sense to add additional properties to a result of a function, Examples could be enhancing an operation result with some meta data &hellip;">
+  <meta name="description" content="ES6 opens up a clean approach to define function options stash thanks to the destructuring assignment syntax, Assuming we want options but let the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/09/14/js-default-function-options-stash-with-es6/">Default Function Options Stash With ES6 Destructuring Assignment.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-09-14T15:28:00+03:00" pubdate data-updated="true">Sep 14<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ES6 opens up a clean approach to define function options stash thanks to the destructuring assignment syntax,</p>
+
+<p>Assuming we want options but let the user overrides it, we can declare our function that way:</p>
+
+<p>function hello(param1, {debug = true, whatever = false} = {}) {
+}</p>
+
+<p>The advantages are, clearly there is no code in the body function to achieve default options &amp; user overrides.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1172,49 +1215,6 @@ We found ourself spending too much time on convertions between Vertx&rsquo;s Jso
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/">Bootstrap for Ember - More Than 100 Stars in 1 Week</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-02T16:31:00+03:00" pubdate data-updated="true">Sep 2<span>nd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is awesome! <em>Bootstrap for Ember</em> got more than 100 github <strong>stars</strong> in less than a week,</p>
-
-<p>Thanks for the great feedbacks, here&rsquo;s an interesting tweet of the author of Handlebars and Ember.js, <em>Yehuda Katz</em>.</p>
-
-<blockquote class="twitter-tweet"><p>Also, <a href="http://t.co/NtqRMNtsA4">http://t.co/NtqRMNtsA4</a> (Bootstrap for <a href="https://twitter.com/search?q=%23emberjs&amp;src=hash">#emberjs</a> using components) is kind of awesome!</p>&mdash; Yehuda Katz (@wycats) <a href="https://twitter.com/wycats/statuses/373875479096205312">August 31, 2013</a></blockquote>
-
-
-<p>Visit the project: <a href="https://github.com/ember-addons/bootstrap-for-ember">https://github.com/ember-addons/bootstrap-for-ember</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1234,6 +1234,10 @@ We found ourself spending too much time on convertions between Vertx&rsquo;s Jso
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/09/14/js-default-function-options-stash-with-es6/">Default Function Options Stash With ES6 Destructuring Assignment.</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/">Add Additional Properties to a Result of a Function or a Fucntion Map Using ES6 Spread Operator.</a>
       </li>
     
@@ -1247,10 +1251,6 @@ We found ourself spending too much time on convertions between Vertx&rsquo;s Jso
     
       <li class="post">
         <a href="/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/">Elegant Way to Use React With ES6/ES7 Features.</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/01/react/">Facebook React - Simplified Work Flow.</a>
       </li>
     
   </ul>

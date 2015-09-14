@@ -4,7 +4,7 @@
   <title><![CDATA[Category: js | Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/blog/categories/js/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2015-09-13T15:41:40+03:00</updated>
+  <updated>2015-09-14T15:34:39+03:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Default function options stash with ES6 destructuring assignment.]]></title>
+    <link href="http://asaf.github.io/blog/2015/09/14/js-default-function-options-stash-with-es6/"/>
+    <updated>2015-09-14T15:28:00+03:00</updated>
+    <id>http://asaf.github.io/blog/2015/09/14/js-default-function-options-stash-with-es6</id>
+    <content type="html"><![CDATA[<p>ES6 opens up a clean approach to define function options stash thanks to the destructuring assignment syntax,</p>
+
+<p>Assuming we want options but let the user overrides it, we can declare our function that way:</p>
+
+<p>function hello(param1, {debug = true, whatever = false} = {}) {
+}</p>
+
+<p>The advantages are, clearly there is no code in the body function to achieve default options &amp; user overrides.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Add additional properties to a result of a function or a fucntion map using ES6 spread operator.]]></title>
@@ -483,31 +499,6 @@ var {Component} = React;</p>
 <p>The combination of React, JSX transformation via Babel, and ES6/7 support via
 SystemJS provides a great clean and elegant way to write React code without the
 overhead of build systems and ugly scripts around.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Facebook React - simplified work flow.]]></title>
-    <link href="http://asaf.github.io/blog/2015/05/01/react/"/>
-    <updated>2015-05-01T01:39:00+03:00</updated>
-    <id>http://asaf.github.io/blog/2015/05/01/react</id>
-    <content type="html"><![CDATA[<p>React is a really game changer in the world of web development,
-As most web frameworks (such Angular, Ember, etc) supports <a href="http://https://docs.angularjs.org/tutorial/step_04">two way bindings</a> that really simplifies
-development life, when applications start to get bigger things start to get clashed
-as multiple views may be bound to multiple models and getting
-unexpected behaviors is not something imaginary,</p>
-
-<p>React solve these problems by exposing a new flow that is based on unidirectional
-binding, combined with the usage of <a href="https://facebook.github.io/react/docs/glossary.html">virtual DOM</a>,
-DOM reconciliation should result a better performance than two way bindings based
-frameworks, Well, if Facebook uses it, then it scales :)</p>
-
-<p>You can read about it in <a href="https://facebook.github.io/react">React&rsquo;s web site</a>,
-especially the <a href="http://facebook.github.io/react/docs/tutorial.html">Tutorial</a> should
-give you a great starting point,</p>
-
-<p>Watch out my next post about how to setup a React environment using great tools
-that will simplify your development lifecycle.</p>
 ]]></content>
   </entry>
   

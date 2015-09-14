@@ -4,7 +4,7 @@
   <title><![CDATA[Asaf Shakarchi]]></title>
   <link href="http://asaf.github.io/atom.xml" rel="self"/>
   <link href="http://asaf.github.io/"/>
-  <updated>2015-09-13T15:41:40+03:00</updated>
+  <updated>2015-09-14T15:34:39+03:00</updated>
   <id>http://asaf.github.io/</id>
   <author>
     <name><![CDATA[Asaf Shakarchi]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Default function options stash with ES6 destructuring assignment.]]></title>
+    <link href="http://asaf.github.io/blog/2015/09/14/js-default-function-options-stash-with-es6/"/>
+    <updated>2015-09-14T15:28:00+03:00</updated>
+    <id>http://asaf.github.io/blog/2015/09/14/js-default-function-options-stash-with-es6</id>
+    <content type="html"><![CDATA[<p>ES6 opens up a clean approach to define function options stash thanks to the destructuring assignment syntax,</p>
+
+<p>Assuming we want options but let the user overrides it, we can declare our function that way:</p>
+
+<p>function hello(param1, {debug = true, whatever = false} = {}) {
+}</p>
+
+<p>The advantages are, clearly there is no code in the body function to achieve default options &amp; user overrides.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Add additional properties to a result of a function or a fucntion map using ES6 spread operator.]]></title>
@@ -2024,92 +2040,6 @@ Then <a href="Signup%20for%20a%20new%20application">https://disqus.com/admin/sig
 
 
 <p>Done!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Blogging with Octopress: Add About Page]]></title>
-    <link href="http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-about-page/"/>
-    <updated>2013-07-08T09:58:00+03:00</updated>
-    <id>http://asaf.github.io/blog/2013/07/08/blogging-with-octopress-add-about-page</id>
-    <content type="html"><![CDATA[<p>Adding About Me page, probably one of the first thing to do, right?</p>
-
-<p><em>Note: If you just want to say few words about yourself on the aside panel, skip to <em>About Me on the aside panel</em></em></p>
-
-<h3>Adding About Page</h3>
-
-<p>Create the page:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_page<span class="o">[</span><span class="s2">&quot;about&quot;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>rake creates a new page located in <em>source/about/index.markdown</em></p>
-
-<p>I edited mine to look like:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="nn">---</span>
-</span><span class='line'><span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">page</span>
-</span><span class='line'><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;About</span><span class="nv"> </span><span class="s">Me&quot;</span>
-</span><span class='line'><span class="l-Scalar-Plain">comments</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
-</span><span class='line'><span class="l-Scalar-Plain">sharing</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
-</span><span class='line'><span class="l-Scalar-Plain">footer</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
-</span><span class='line'><span class="nn">---</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note that I removed the <em>date</em> line because it doesn&rsquo;t make sense in this page.</p>
-
-<h4>Add About page in the top menu</h4>
-
-<p>You probably want to add the <em>About</em> page in the top menu, right?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>vi <span class="nb">source</span>/_includes/custom/navigation.html
-</span><span class='line'>
-</span><span class='line'><span class="c">#add the line to the bottom of the page:</span>
-</span><span class='line'>&lt;li&gt;&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;/about&quot;</span>&gt;About&lt;/a&gt;&lt;/li&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>About on the aside panel</h3>
-
-<p>If u want to put some words about yourself on the side panel panel, do this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>vi <span class="nb">source</span>/_includes/custom/asides/about.html
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;your name&lt;h1/&gt;
-</span><span class='line'>&lt;p&gt;some words about you, not longer than a line.&lt;/p&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then enable the about html in the aside bar by:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>vi _config.yml
-</span><span class='line'>
-</span><span class='line'>default_asides: <span class="o">[</span>custom/asides/about.html, OTHER STUFF<span class="o">]</span> <span class="c"># leave all other pages as is</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now the world knows about who you are :&ndash;)</p>
 ]]></content>
   </entry>
   
