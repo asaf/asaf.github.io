@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decorators &middot; Asaf Shakarchi</title>
+
+    <meta name="description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <meta name="generator" content="Hugo 0.17-DEV" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Decorators &middot; Asaf Shakarchi">
+    <meta name="twitter:description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Decorators &middot; Asaf Shakarchi">
+    <meta property="og:description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="http://asaf.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Asaf Shakarchi" href="http://asaf.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://asaf.github.io/">Asaf Shakarchi</a></h1>
+            <h2 class="brand-tagline"> &#34;Talk is cheap. Show me the code.&#34; </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://asaf.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <h1 class="content-subhead">23 Jun 2015, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/" class="post-title">Extending behavior of React Components by ES6 Decorators &amp; Higher Order Components</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-react" href="http://asaf.github.io//categories/react">react</a><a class="post-category post-category-js" href="http://asaf.github.io//categories/js">js</a><a class="post-category post-category-html5" href="http://asaf.github.io//categories/html5">html5</a><a class="post-category post-category-facebook" href="http://asaf.github.io//categories/facebook">facebook</a><a class="post-category post-category-es6" href="http://asaf.github.io//categories/es6">es6</a><a class="post-category post-category-decorators" href="http://asaf.github.io//categories/decorators">decorators</a><a class="post-category post-category-annotations" href="http://asaf.github.io//categories/annotations">annotations</a><a class="post-category post-category-higher-order-components" href="http://asaf.github.io//categories/higher-order-components">higher-order-components</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<h2 id="about-mixins-higher-order-components">About Mixins &amp; Higher Order Components</h2>
+
+<p>Sometimes it makes sense to extends a behavior of a component, while <a href="https://facebook.github.io/react/docs/reusable-components.html#mixins">mixins</a> are still alive, they&rsquo;r <a href="https://twitter.com/sebmarkbage/status/571389309586051072">not recommended</a> anylonger, use <a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">Higher Order Components</a> instead.</p>
+
+<p>So instead of doing this:</p>
+
+<pre><code class="language-js">function StoreMixin(...stores) {
+  var Mixin = {
+    getInitialState() {
+      return this.getStateFromStores(this.props);
+    },
+    ...
+  }
+}
+
+var UserProfilePage = React.createClass({
+  mixins: [StoreMixin(UserStore)],
+  propTypes: {
+    userId: PropTypes.number.isRequired
+  },
+  ...
+})
+</code></pre>
+
+<p>You can do that:</p>
+
+<pre><code class="language-js">function connectToStores(Component, stores, getStateFromStores) {
+  const StoreConnection = React.createClass({
+    getInitialState() {
+      return getStateFromStores(this.props);
+    },
+    ...
+    render() {
+      return &lt;Component {...this.props} {...this.state} /&gt;;
+    }
+  })
+}
+</code></pre>
+
+<p>We just wrap the component and passes some additional props to it, it is a clean and generic solution for extending
+components without merging behaviors being implemented by React&rsquo;s mixin merge logic.</p>
+
+<p>You can read more about <em>Higher Order Components</em> <a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">here</a></p>
+
+<h2 id="extending-via-es6-decorators">Extending via ES6 Decorators</h2>
+
+<p>Sometimes it makes sense to extends a component without the need to wrap it manually, this technique is common in different <a href="https://github.com/gaearon/redux/blob/master/src/components/createConnectDecorator.js">frameworks</a> to define components less verbosely when extra functionality is demanded.</p>
+
+<p>Here is a short example how it works,
+Lets extends the <a href="https://www.tildedave.com/2014/11/15/introduction-to-contexts-in-react-js.html">context</a> of our component hierarchy with a <code>print</code> function, so we use it in our <code>render</code> method:</p>
+
+<pre><code class="language-js">class MyPage extends Component {
+    static contextTypes = contextTypes;
+    render() {
+        return(
+            &lt;div&gt;{this.context.print('Hello World')}&lt;/div&gt;
+        )
+    }
+}
+</code></pre>
+
+<p>Assuming <code>MyPage</code> is a child component of <code>App</code>, here is how our <code>App</code> component looks like:</p>
+
+<pre><code class="language-js">var contextTypes = {
+    print: PropTypes.func.isRequired
+}
+
+var myContext = {
+    print: (m) =&gt; (m)
+}
+
+@context(contextTypes, myContext)
+export default class App extends Component {
+    render() {
+        return (
+            &lt;MyPage/&gt;
+        )
+    }
+}
+</code></pre>
+
+<p>And here is the code of the <em>decorator</em>:</p>
+
+<pre><code class="language-js">export default function context(contextTypes, context) {
+
+    return function (DecoratedComponent) {
+        return class {
+            static childContextTypes = contextTypes;
+            getChildContext() {
+              return context;
+            }
+            render() {
+              return (
+                &lt;DecoratedComponent {...this.props} /&gt;
+              );
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>The <em>Decorator</em> expects an expression and invokes the function with the given parameters and must return a function that expects the annotated component as a parameter, then we just return a <code>class</code> with some context the <em>wraps</em> our component.</p>
+
+<p>You can read more about <a href="https://github.com/wycats/javascript-decorators">Decorators</a> here.</p>
+
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="http://asaf.github.io//js/all.min.js"></script>
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

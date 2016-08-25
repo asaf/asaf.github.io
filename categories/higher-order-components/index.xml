@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Higher Order Components on Asaf Shakarchi</title>
+    <link>http://asaf.github.io/categories/higher-order-components/</link>
+    <description>Recent content in Higher Order Components on Asaf Shakarchi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Jun 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://asaf.github.io/categories/higher-order-components/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Extending behavior of React Components by ES6 Decorators &amp; Higher Order Components</title>
+      <link>http://asaf.github.io/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/</link>
+      <pubDate>Tue, 23 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/</guid>
+      <description>
+
+&lt;h2 id=&#34;about-mixins-higher-order-components&#34;&gt;About Mixins &amp;amp; Higher Order Components&lt;/h2&gt;
+
+&lt;p&gt;Sometimes it makes sense to extends a behavior of a component, while &lt;a href=&#34;https://facebook.github.io/react/docs/reusable-components.html#mixins&#34;&gt;mixins&lt;/a&gt; are still alive, they&amp;rsquo;r &lt;a href=&#34;https://twitter.com/sebmarkbage/status/571389309586051072&#34;&gt;not recommended&lt;/a&gt; anylonger, use &lt;a href=&#34;https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750&#34;&gt;Higher Order Components&lt;/a&gt; instead.&lt;/p&gt;
+
+&lt;p&gt;So instead of doing this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function StoreMixin(...stores) {
+  var Mixin = {
+    getInitialState() {
+      return this.getStateFromStores(this.props);
+    },
+    ...
+  }
+}
+
+var UserProfilePage = React.createClass({
+  mixins: [StoreMixin(UserStore)],
+  propTypes: {
+    userId: PropTypes.number.isRequired
+  },
+  ...
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can do that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function connectToStores(Component, stores, getStateFromStores) {
+  const StoreConnection = React.createClass({
+    getInitialState() {
+      return getStateFromStores(this.props);
+    },
+    ...
+    render() {
+      return &amp;lt;Component {...this.props} {...this.state} /&amp;gt;;
+    }
+  })
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We just wrap the component and passes some additional props to it, it is a clean and generic solution for extending
+components without merging behaviors being implemented by React&amp;rsquo;s mixin merge logic.&lt;/p&gt;
+
+&lt;p&gt;You can read more about &lt;em&gt;Higher Order Components&lt;/em&gt; &lt;a href=&#34;https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;extending-via-es6-decorators&#34;&gt;Extending via ES6 Decorators&lt;/h2&gt;
+
+&lt;p&gt;Sometimes it makes sense to extends a component without the need to wrap it manually, this technique is common in different &lt;a href=&#34;https://github.com/gaearon/redux/blob/master/src/components/createConnectDecorator.js&#34;&gt;frameworks&lt;/a&gt; to define components less verbosely when extra functionality is demanded.&lt;/p&gt;
+
+&lt;p&gt;Here is a short example how it works,
+Lets extends the &lt;a href=&#34;https://www.tildedave.com/2014/11/15/introduction-to-contexts-in-react-js.html&#34;&gt;context&lt;/a&gt; of our component hierarchy with a &lt;code&gt;print&lt;/code&gt; function, so we use it in our &lt;code&gt;render&lt;/code&gt; method:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class MyPage extends Component {
+    static contextTypes = contextTypes;
+    render() {
+        return(
+            &amp;lt;div&amp;gt;{this.context.print(&#39;Hello World&#39;)}&amp;lt;/div&amp;gt;
+        )
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Assuming &lt;code&gt;MyPage&lt;/code&gt; is a child component of &lt;code&gt;App&lt;/code&gt;, here is how our &lt;code&gt;App&lt;/code&gt; component looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var contextTypes = {
+    print: PropTypes.func.isRequired
+}
+
+var myContext = {
+    print: (m) =&amp;gt; (m)
+}
+
+@context(contextTypes, myContext)
+export default class App extends Component {
+    render() {
+        return (
+            &amp;lt;MyPage/&amp;gt;
+        )
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here is the code of the &lt;em&gt;decorator&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;export default function context(contextTypes, context) {
+
+    return function (DecoratedComponent) {
+        return class {
+            static childContextTypes = contextTypes;
+            getChildContext() {
+              return context;
+            }
+            render() {
+              return (
+                &amp;lt;DecoratedComponent {...this.props} /&amp;gt;
+              );
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;em&gt;Decorator&lt;/em&gt; expects an expression and invokes the function with the given parameters and must return a function that expects the annotated component as a parameter, then we just return a &lt;code&gt;class&lt;/code&gt; with some context the &lt;em&gt;wraps&lt;/em&gt; our component.&lt;/p&gt;
+
+&lt;p&gt;You can read more about &lt;a href=&#34;https://github.com/wycats/javascript-decorators&#34;&gt;Decorators&lt;/a&gt; here.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

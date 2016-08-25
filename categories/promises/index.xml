@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Promises on Asaf Shakarchi</title>
+    <link>http://asaf.github.io/categories/promises/</link>
+    <description>Recent content in Promises on Asaf Shakarchi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 09 Jul 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://asaf.github.io/categories/promises/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Q promises with CoffeeScript</title>
+      <link>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</guid>
+      <description>&lt;p&gt;If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across &lt;a href=&#34;Q Promises&#34;&gt;&amp;ldquo;https://github.com/kriskowal/q&amp;rdquo;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s an example:&lt;/p&gt;
+
+&lt;p&gt;Defining promises with CoffeeScript:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coffeescript&#34;&gt;q = require &#39;q&#39;
+
+exports.hello = () -&amp;gt;
+  d = q.defer()
+  d.resolve &#39;hello&#39;
+  d.promise
+
+exports.world = () -&amp;gt;
+  d = q.defer()
+  d.resolve &#39;world&#39;
+  d.promise
+
+exports.die = () -&amp;gt;
+  d = q.defer()
+  d.reject &#39;bye world&#39;
+  d.promise
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here are Mocha sample of Q propagations and error handling&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coffeescript&#34;&gt;assert = require &#39;assert&#39;,
+promises = require &#39;./promises&#39;
+
+describe(&#39;Promises&#39;, () -&amp;gt;
+  it &#39;Simple&#39;, (done) -&amp;gt;
+    promises.die().then(
+      (val) =&amp;gt;
+        #handle val
+      (err) =&amp;gt;
+        assert.equal err, &#39;bye world&#39;
+        done()
+    )
+
+  it &#39;Test Promises Propagation&#39;, (done) -&amp;gt;
+    promises.hello().then(
+      (val) =&amp;gt;
+        assert.equal val, &#39;hello&#39;
+        promises.world()
+    ).then((val) =&amp;gt;
+        assert.equal val, &#39;world&#39;
+        done()
+    )
+
+  it &#39;Test promises propagation with error&#39;, (done) -&amp;gt;
+    promises.hello().then(
+      (val) =&amp;gt;
+        assert.equal val, &#39;hello&#39;
+        promises.die()
+    ).then((val) =&amp;gt;
+        promises.world()
+    ).then(
+      (val) =&amp;gt;
+        #we wont get here
+      (err) =&amp;gt;
+        assert.equal err, &#39;bye world&#39;
+        promises.world()
+    ).then((val) =&amp;gt;
+      assert.equal val, &#39;world&#39;
+      done()
+    )
+)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

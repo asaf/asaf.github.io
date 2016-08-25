@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Asaf Shakarchi</title>
+    <link>http://asaf.github.io/</link>
+    <description>Recent content on Asaf Shakarchi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Aug 2016 23:30:26 +0300</lastBuildDate>
+    <atom:link href="http://asaf.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Export Certificate and Private key from JKS</title>
+      <link>http://asaf.github.io/post/export_certificate_and_private_key_from_jks/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/post/export_certificate_and_private_key_from_jks/</guid>
+      <description>&lt;p&gt;I had to migrate web application written in Java to NodesJS,&lt;/p&gt;
+
+&lt;p&gt;Java web containers store certificates inside JKS Keystore where NodeJS requires certificate and private key in &lt;a href=&#34;https://nodejs.org/api/https.html&#34;&gt;PEM format&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Exporting certificate directly from JKS is easy by using &lt;em&gt;keytool&lt;/em&gt;, but exporting private key is not allowed,
+To export the private key using Java, we need to interact with the keystore by writing some custom code using the Keystore java API,&lt;/p&gt;
+
+&lt;p&gt;the other alternative is simply convert the JKS into a &lt;a href=&#34;https://en.wikipedia.org/wiki/PKCS_12&#34;&gt;PKCS12&lt;/a&gt; and export the certificate &amp;amp; key using &lt;em&gt;openssl&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Convert JKS to PKCS12 format:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;keytool -importkeystore -srckeystore mykeystore.jks -destkeystore mykeystore.p12 -deststoretype PKCS12
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note: The &lt;em&gt;-importkeystore&lt;/em&gt; parameter is only supported with the keytool that ships with Java ver 1.6+&lt;/p&gt;
+
+&lt;p&gt;you can view the content of the pkcs12 keystore by:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;openssl pkcs12 -in mykeystore.p12
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(Specifically look for the &lt;em&gt;friendlyName&lt;/em&gt; that corresponds to the &lt;em&gt;alias&lt;/em&gt; property of in &lt;em&gt;JKS&lt;/em&gt;)&lt;/p&gt;
+
+&lt;p&gt;Export the certificate:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;openssl pkcs12 -in mykeystore.p12 -nokeys -out cert.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Export the private key (unencrypted)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;openssl pkcs12 -in mykeystore.p12  -nodes -nocerts -out key.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;the &lt;em&gt;-nodes&lt;/em&gt; means &amp;ldquo;No DES&amp;rdquo;, that is &amp;ldquo;do not encrypt the private key that will be exported to key.pem&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Make sure you keep the private key safe (recommended: &lt;em&gt;chmod 600 key.pem&lt;/em&gt;)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Migrate Octopress to Hugo</title>
+      <link>http://asaf.github.io/post/migrate-octopress-to-hugo/</link>
+      <pubDate>Tue, 23 Aug 2016 22:43:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/post/migrate-octopress-to-hugo/</guid>
+      <description>
+
+&lt;p&gt;My blog was based on &lt;a href=&#34;https://github.com/imathis/octopress&#34;&gt;Octopress&lt;/a&gt; blogging system, based on &lt;a href=&#34;https://github.com/jekyll/jekyll&#34;&gt;jekyll&lt;/a&gt;,
+but I was never a ruby person, it also seems like Octopress is not so active lately,&lt;/p&gt;
+
+&lt;p&gt;In the other hand, Hugo feels super slim and simple, thanks to &lt;em&gt;Go&lt;/em&gt; and &lt;em&gt;Hugo&lt;/em&gt;, it takes only few lines to start a blog,&lt;/p&gt;
+
+&lt;p&gt;You can download a binary package of Hugo, but I have Go installed so it&amp;rsquo;s simply 1 command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;go get -u -v github.com/spf13/hugo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Creating a new blog is simply one command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;hugo new site myblog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command creates the &lt;code&gt;myblog&lt;/code&gt; folder with some initial data that serves as a baseline for our blog.&lt;/p&gt;
+
+&lt;p&gt;Adding a new post is simple as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;hugo new post/welcome.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This generates the &lt;code&gt;content/post/welcome.md&lt;/code&gt; file, a post is just a simple file, no magic!&lt;/p&gt;
+
+&lt;p&gt;A theme defines how the blog look like visually, there are many &lt;a href=&#34;themes.gohugo.io&#34;&gt;themes&lt;/a&gt;, choose the one you like, in this post, I use the &lt;a href=&#34;http://themes.gohugo.io/purehugo/&#34;&gt;purehugo&lt;/a&gt; theme because it&amp;rsquo;s clean and simple.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd themes
+git clone https://github.com/dplesca/purehugo.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lets star a local server to see our shining new blog:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;hugo server --theme=hugo_theme_robust --buildDrafts
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hit in browser: &lt;a href=&#34;http://localhost:1313&#34;&gt;http://localhost:1313&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You should see the &lt;em&gt;welcome&lt;/em&gt; blog entry we just added.&lt;/p&gt;
+
+&lt;h2 id=&#34;migrate-from-octopress&#34;&gt;Migrate from Octopress&lt;/h2&gt;
+
+&lt;p&gt;Hugo has a built in support to &lt;a href=&#34;https://gohugo.io/commands/hugo_import_jekyll/&#34;&gt;migrate from jekyll&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd my_octopress_blog
+ls
+config.yaml ... source/ ...
+hugo import jekyll source/ hugo-import/
+Congratulations! 26 post(s) imported!
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure to have &lt;em&gt;config.yaml&lt;/em&gt; and the &lt;em&gt;source&lt;/em&gt; folder in current directory, running the import command should import all files&lt;/p&gt;
+
+&lt;p&gt;Simply move the &lt;em&gt;posts&lt;/em&gt; folder into your new blog &lt;em&gt;content&lt;/em&gt; folder by:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mv hugo-import/content/post/* &amp;lt;location_of_new_hugo_blog&amp;gt;/content/post`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Happy blogging!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Default function options stash with ES6 destructuring assignment.</title>
+      <link>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</link>
+      <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</guid>
+      <description>&lt;p&gt;ES6 opens up a clean approach to define function options stash thanks to the destructuring assignment syntax,&lt;/p&gt;
+
+&lt;p&gt;Assuming we want options but let the user overrides it, we can declare our function that way:&lt;/p&gt;
+
+&lt;p&gt;function hello(param1, {debug = true, whatever = false} = {}) {
+}&lt;/p&gt;
+
+&lt;p&gt;The advantages are, clearly there is no code in the body function to achieve default options &amp;amp; user overrides.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Add additional properties to a result of a function or a fucntion map using ES6 spread operator.</title>
+      <link>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</link>
+      <pubDate>Sun, 13 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</guid>
+      <description>&lt;p&gt;Sometimes it makes sense to add additional properties to a result of a function,&lt;/p&gt;
+
+&lt;p&gt;Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,&lt;/p&gt;
+
+&lt;p&gt;Using ES6, we could easily achieve this by:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;bindData(oper, props) {
+  if (typeof oper === &#39;function&#39;) {
+    return (...args) =&amp;gt; ({
+      ...oper(...args),
+      ...props
+    });
+  }
+  if (typeof oper === &#39;object&#39;) {
+    return Object.keys(oper).reduce((prev, key) =&amp;gt; ({
+      ...prev,
+      [key]: bindData(oper[key], props)
+    }), {});
+  }
+  return oper;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here are some clarifications:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;If &lt;code&gt;oper&lt;/code&gt; is a function, we decorate the original function by a closure,
+&lt;code&gt;return (...args)&lt;/code&gt; is the closure (read more about the &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator&#34;&gt;spread&lt;/a&gt; operator.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In general, &lt;code&gt;myFunction(...args);&lt;/code&gt; is equelevent to &lt;code&gt;(args) { oper.apply(null, args); }&lt;/code&gt;,&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;When the returned function is invoked, the result of the original function &lt;code&gt;...oper(...args)&lt;/code&gt; is then merged with the &lt;code&gt;props&lt;/code&gt; object, in other words:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;...oper(), ...props&lt;/code&gt; is equelevent to: &lt;code&gt;Object.assign({}, oper(), props);&lt;/code&gt;
+Read more about &lt;a href=&#34;https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign&#34;&gt;Object.assign&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;If &lt;code&gt;oper&lt;/code&gt; is an object, we bind each of its key&amp;rsquo;s recursively (assuming each property is a function).&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ES6, React &amp; Browserify</title>
+      <link>http://asaf.github.io/2015/09/05/react/</link>
+      <pubDate>Sat, 05 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/05/react/</guid>
+      <description>
+
+&lt;h2 id=&#34;es6-react-browserify&#34;&gt;ES6, React &amp;amp; Browserify&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://browserify.org/&#34;&gt;Browserify&lt;/a&gt; is a &lt;em&gt;lightweight&lt;/em&gt; build tool for JS, you can start &lt;em&gt;&amp;lsquo;require&amp;rsquo;&lt;/em&gt; modules with zero configuration,
+Thanks to &lt;a href=&#34;https://github.com/babel/babelify&#34;&gt;Babelify&lt;/a&gt;, you can start writing ES6 code (via &lt;a href=&#34;babeljs.io&#34;&gt;Babel&lt;/a&gt;) write away,&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a proof how simple it is,&lt;/p&gt;
+
+&lt;p&gt;Lets create a &lt;code&gt;package.json&lt;/code&gt; file and install minimal dependencies&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm init
+npm install --save react
+npm install --save-dev browserify babelify watchify
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lets give Browserify a hint that it should perform code transformation via &lt;code&gt;babelify&lt;/code&gt; by adding this json tag to &lt;code&gt;package.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&amp;quot;browserify&amp;quot;: {
+  &amp;quot;transform&amp;quot;: [
+    &amp;quot;babelify&amp;quot;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It can also be nice to just type &lt;code&gt;npm start&lt;/code&gt; when developing, so lets add a &lt;code&gt;start&lt;/code&gt; script to &lt;code&gt;package.json&lt;/code&gt; as well&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;start&amp;rdquo;: &amp;ldquo;watchify &amp;ndash;extension=js -o bundle.js index.js &amp;amp; python -m SimpleHTTPServer&amp;rdquo;,&lt;/p&gt;
+
+&lt;p&gt;Note: Watchify is not mandatory but it&amp;rsquo;s great tool for watching your code changes and auto rebuild when a change gets discovered.&lt;/p&gt;
+
+&lt;p&gt;Lets put the simplest index file ever:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;bundle.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a simple ES6 class with React.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import React from &#39;react&#39;;
+
+class Hello extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {count: props.initCount}
+    this.tick = this.tick.bind(this)
+  }
+
+  tick () {
+    this.setState({count: this.state.count + 1});
+  }
+  render(){
+    let { name } = this.props
+    let { count } = this.state
+    return (
+      &amp;lt;button onClick={this.tick}&amp;gt;Hello {name} {count}&amp;lt;/button&amp;gt;
+    );
+  }
+}
+
+React.render(&amp;lt;Hello name=&amp;quot;Stranger&amp;quot; initCount={5}/&amp;gt;, document.body)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;running-the-code&#34;&gt;Running the code:&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Open browser &lt;a href=&#34;http://localhost:8000&#34;&gt;http://localhost:8000&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;To summary:&lt;/p&gt;
+
+&lt;p&gt;1) Browserify is lightweight build tool, it handles modularity by understanding &lt;code&gt;require&lt;/code&gt;
+2) Labelify is a plugin for Browserify, it takes care of transpilling ES6 code to ES5 via Babel.
+3) Thanks to Babel &amp;amp; React integration, there&amp;rsquo;s no need for any extra plugins to perform JSX transformations.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Extending behavior of React Components by ES6 Decorators &amp; Higher Order Components</title>
+      <link>http://asaf.github.io/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/</link>
+      <pubDate>Tue, 23 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/</guid>
+      <description>
+
+&lt;h2 id=&#34;about-mixins-higher-order-components&#34;&gt;About Mixins &amp;amp; Higher Order Components&lt;/h2&gt;
+
+&lt;p&gt;Sometimes it makes sense to extends a behavior of a component, while &lt;a href=&#34;https://facebook.github.io/react/docs/reusable-components.html#mixins&#34;&gt;mixins&lt;/a&gt; are still alive, they&amp;rsquo;r &lt;a href=&#34;https://twitter.com/sebmarkbage/status/571389309586051072&#34;&gt;not recommended&lt;/a&gt; anylonger, use &lt;a href=&#34;https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750&#34;&gt;Higher Order Components&lt;/a&gt; instead.&lt;/p&gt;
+
+&lt;p&gt;So instead of doing this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function StoreMixin(...stores) {
+  var Mixin = {
+    getInitialState() {
+      return this.getStateFromStores(this.props);
+    },
+    ...
+  }
+}
+
+var UserProfilePage = React.createClass({
+  mixins: [StoreMixin(UserStore)],
+  propTypes: {
+    userId: PropTypes.number.isRequired
+  },
+  ...
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can do that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function connectToStores(Component, stores, getStateFromStores) {
+  const StoreConnection = React.createClass({
+    getInitialState() {
+      return getStateFromStores(this.props);
+    },
+    ...
+    render() {
+      return &amp;lt;Component {...this.props} {...this.state} /&amp;gt;;
+    }
+  })
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We just wrap the component and passes some additional props to it, it is a clean and generic solution for extending
+components without merging behaviors being implemented by React&amp;rsquo;s mixin merge logic.&lt;/p&gt;
+
+&lt;p&gt;You can read more about &lt;em&gt;Higher Order Components&lt;/em&gt; &lt;a href=&#34;https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;extending-via-es6-decorators&#34;&gt;Extending via ES6 Decorators&lt;/h2&gt;
+
+&lt;p&gt;Sometimes it makes sense to extends a component without the need to wrap it manually, this technique is common in different &lt;a href=&#34;https://github.com/gaearon/redux/blob/master/src/components/createConnectDecorator.js&#34;&gt;frameworks&lt;/a&gt; to define components less verbosely when extra functionality is demanded.&lt;/p&gt;
+
+&lt;p&gt;Here is a short example how it works,
+Lets extends the &lt;a href=&#34;https://www.tildedave.com/2014/11/15/introduction-to-contexts-in-react-js.html&#34;&gt;context&lt;/a&gt; of our component hierarchy with a &lt;code&gt;print&lt;/code&gt; function, so we use it in our &lt;code&gt;render&lt;/code&gt; method:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class MyPage extends Component {
+    static contextTypes = contextTypes;
+    render() {
+        return(
+            &amp;lt;div&amp;gt;{this.context.print(&#39;Hello World&#39;)}&amp;lt;/div&amp;gt;
+        )
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Assuming &lt;code&gt;MyPage&lt;/code&gt; is a child component of &lt;code&gt;App&lt;/code&gt;, here is how our &lt;code&gt;App&lt;/code&gt; component looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var contextTypes = {
+    print: PropTypes.func.isRequired
+}
+
+var myContext = {
+    print: (m) =&amp;gt; (m)
+}
+
+@context(contextTypes, myContext)
+export default class App extends Component {
+    render() {
+        return (
+            &amp;lt;MyPage/&amp;gt;
+        )
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here is the code of the &lt;em&gt;decorator&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;export default function context(contextTypes, context) {
+
+    return function (DecoratedComponent) {
+        return class {
+            static childContextTypes = contextTypes;
+            getChildContext() {
+              return context;
+            }
+            render() {
+              return (
+                &amp;lt;DecoratedComponent {...this.props} /&amp;gt;
+              );
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;em&gt;Decorator&lt;/em&gt; expects an expression and invokes the function with the given parameters and must return a function that expects the annotated component as a parameter, then we just return a &lt;code&gt;class&lt;/code&gt; with some context the &lt;em&gt;wraps&lt;/em&gt; our component.&lt;/p&gt;
+
+&lt;p&gt;You can read more about &lt;a href=&#34;https://github.com/wycats/javascript-decorators&#34;&gt;Decorators&lt;/a&gt; here.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Elegant way to use React with ES6/ES7 features.</title>
+      <link>http://asaf.github.io/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/</link>
+      <pubDate>Fri, 19 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/</guid>
+      <description>
+
+&lt;h2 id=&#34;react-jsx-es6&#34;&gt;React, JSX, ES6.&lt;/h2&gt;
+
+&lt;p&gt;So you want React, JSX the markup and write ES6/7 code style, but setting a working
+environment may be pain in the ass,&lt;/p&gt;
+
+&lt;p&gt;More to say, Facebook announced that its JSTransformer and react-tools going to be &lt;a href=&#34;https://facebook.github.io/react/blog/2015/06/12/deprecating-jstransform-and-react-tools.html&#34;&gt;deprecated&lt;/a&gt;,&lt;/p&gt;
+
+&lt;p&gt;It seems like it&amp;rsquo;s starting to get confusing how to set a full working environment
+with JSX transformation and ES6/ES7 support.&lt;/p&gt;
+
+&lt;p&gt;While React 0.13.0-beta-1 announced great support for ES6, it still unclear how
+to build a full working environment that supports ES6 either,&lt;/p&gt;
+
+&lt;p&gt;You can find multiple boilerplate projects at &lt;a href=&#34;http://www.github.com&#34;&gt;github&lt;/a&gt; using
+WebPack, Browserify and other module loader tools available nowadays but I found all
+of them unclean, full of build scripts and things that just make things more complicated,&lt;/p&gt;
+
+&lt;p&gt;After doing some research, I feel like the best approach would be to go with &lt;a href=&#34;http://jspm.io/&#34;&gt;JSPM&lt;/a&gt; repository that is based on &lt;a href=&#34;https://github.com/systemjs/systemjs&#34;&gt;SystemJs&lt;/a&gt; dynamic module loader.&lt;/p&gt;
+
+&lt;p&gt;The chosen tools:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;SytemJs - It is a Universal dynamic module loader, it supports AMD, CommonJS
+but the best of it is its native support for ES6 modules, with native support for
+Babel as its transpiler to ES5, it also uses &lt;a href=&#34;http://jspm.io&#34;&gt;JSPM&lt;/a&gt; which supports
+NPM and Github repos such as Bower does, so you can enjoy packages from both worlds.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://babeljs.io&#34;&gt;Babel&lt;/a&gt; as the ES6 transpiler, this transpiler is responsible
+to translate ES6 coding to ES5 as ES6 is not supported yet by most browsers, Babel is
+also supported by Facebook and provides JSX native transformation.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Enough said, here&amp;rsquo;s some code, we&amp;rsquo;ll start with empty folder!&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-a-clean-working-environment&#34;&gt;Setting a clean working environment&lt;/h2&gt;
+
+&lt;h3 id=&#34;pre-requisites&#34;&gt;Pre requisites&lt;/h3&gt;
+
+&lt;p&gt;Lets install pre requisites:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm install -g jspm
+npm install -g http-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;initializing-project&#34;&gt;Initializing Project&lt;/h3&gt;
+
+&lt;p&gt;Create an empty folder and run&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;jspm init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can choose default answers for all questions if not sure,&lt;/p&gt;
+
+&lt;p&gt;This will create a &lt;code&gt;package.json&lt;/code&gt; and a &lt;code&gt;config.js&lt;/code&gt; file required for SystemJs
+to work properly.&lt;/p&gt;
+
+&lt;p&gt;Now lets tweak &lt;code&gt;config.js&lt;/code&gt; a bit to support ES7 so you can enjoy ES7+ property
+initializers and other ES7 cool features&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&amp;quot;babelOptions&amp;quot;: {
+  blacklist: [],
+  stage: 0,
+  &amp;quot;optional&amp;quot;: [
+    &amp;quot;runtime&amp;quot;
+  ]
+},
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;blacklist: []&lt;/code&gt; tells Babel not to ignore JSX transformation as by default it&amp;rsquo;s disabled,
+&lt;code&gt;stage: 0&lt;/code&gt; tells Babel that we want to use experimental ES7 syntax.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-an-index-html-file&#34;&gt;Creating an index.html file&lt;/h3&gt;
+
+&lt;p&gt;Lets create our index file as every web app that respect itself has one!&lt;/p&gt;
+
+&lt;p&gt;Simply create &lt;code&gt;index.html&lt;/code&gt; in the root folder with your favorite editor&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html&amp;gt;
+    &amp;lt;head&amp;gt;
+        &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
+        &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt;
+        &amp;lt;title&amp;gt;Title Here&amp;lt;/title&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body&amp;gt;
+        &amp;lt;!-- build:js --&amp;gt;
+        &amp;lt;script src=&amp;quot;jspm_packages/system.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+        &amp;lt;script src=&amp;quot;config.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+        &amp;lt;script&amp;gt;
+            System.import(&#39;app/main&#39;);
+        &amp;lt;/script&amp;gt;
+        &amp;lt;!-- endbuild --&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See how clean and elegant is it? we just load &lt;code&gt;system.js&lt;/code&gt; as our dynamic module loader
+and the generated &lt;code&gt;config.js&lt;/code&gt; that holds our &lt;code&gt;SystemJs&lt;/code&gt; configuration.&lt;/p&gt;
+
+&lt;p&gt;Then we import &lt;code&gt;app/main&lt;/code&gt; as our first ES6 module that serves the application.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-a-simple-react-based-class&#34;&gt;Create a simple React based class.&lt;/h3&gt;
+
+&lt;p&gt;Thanks to SystemJs, we can now fully write application modules, lets create our
+&lt;code&gt;main&lt;/code&gt; application entry point&lt;/p&gt;
+
+&lt;p&gt;Create a file &lt;code&gt;app/main.js&lt;/code&gt; with the following content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import React from &#39;react&#39;;
+import App from &#39;./app&#39;;
+
+React.render(&amp;lt;App/&amp;gt;, document.body);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This just import &lt;code&gt;React&lt;/code&gt; and renders our &lt;code&gt;App&lt;/code&gt; component.&lt;/p&gt;
+
+&lt;p&gt;Her eis the &lt;code&gt;app/app.js&lt;/code&gt; file content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import React from &#39;react&#39;;
+var {Component} = React;
+
+export default class MyApp extends Component {
+    static propTypes = {
+       flux: React.PropTypes.object.isRequired
+   }
+
+    render () {
+        return (
+            &amp;lt;div&amp;gt;Hello&amp;lt;/div&amp;gt;
+        )
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now run &lt;code&gt;http-server&lt;/code&gt; in your folder,&lt;/p&gt;
+
+&lt;p&gt;hitting &lt;a href=&#34;http://localhost:8080&#34;&gt;http://localhost:8080&lt;/a&gt; should display &lt;em&gt;Hello&lt;/em&gt; :)&lt;/p&gt;
+
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;The combination of React, JSX transformation via Babel, and ES6/7 support via
+SystemJS provides a great clean and elegant way to write React code without the
+overhead of build systems and ugly scripts around.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Facebook React - simplified work flow.</title>
+      <link>http://asaf.github.io/2015/05/01/react/</link>
+      <pubDate>Fri, 01 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/05/01/react/</guid>
+      <description>&lt;p&gt;React is a really game changer in the world of web development,
+As most web frameworks (such Angular, Ember, etc) supports &lt;a href=&#34;http://https://docs.angularjs.org/tutorial/step_04&#34;&gt;two way bindings&lt;/a&gt; that really simplifies
+development life, when applications start to get bigger things start to get clashed
+as multiple views may be bound to multiple models and getting
+unexpected behaviors is not something imaginary,&lt;/p&gt;
+
+&lt;p&gt;React solve these problems by exposing a new flow that is based on unidirectional
+binding, combined with the usage of &lt;a href=&#34;https://facebook.github.io/react/docs/glossary.html&#34;&gt;virtual DOM&lt;/a&gt;,
+DOM reconciliation should result a better performance than two way bindings based
+frameworks, Well, if Facebook uses it, then it scales :)&lt;/p&gt;
+
+&lt;p&gt;You can read about it in &lt;a href=&#34;https://facebook.github.io/react&#34;&gt;React&amp;rsquo;s web site&lt;/a&gt;,
+especially the &lt;a href=&#34;http://facebook.github.io/react/docs/tutorial.html&#34;&gt;Tutorial&lt;/a&gt; should
+give you a great starting point,&lt;/p&gt;
+
+&lt;p&gt;Watch out my next post about how to setup a React environment using great tools
+that will simplify your development lifecycle.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hello world using Ratpack.</title>
+      <link>http://asaf.github.io/2015/02/09/ratpack_hello_world/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/02/09/ratpack_hello_world/</guid>
+      <description>
+
+&lt;h2 id=&#34;about-ratpack&#34;&gt;About Ratpack&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.ratpack.io&#34;&gt;Ratpack&lt;/a&gt; is a set of Java libraries that facilitate fast, efficient, evolvable and well tested HTTP applications built on &lt;em&gt;Netty&lt;/em&gt; event driven networking engine,&lt;/p&gt;
+
+&lt;p&gt;After crawling into its source code, I find it simple and easy to use and it feels right, why? because:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;It&amp;rsquo;s super simple, its core has very limited number of &lt;a href=&#34;https://github.com/ratpack/ratpack/blob/master/ratpack-core/ratpack-core.gradle&#34;&gt;dependencies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Has out of the box extensions such as Guice, Jackson, etc, but nothing dictates you using them thanks to Guice modular architecture.&lt;/li&gt;
+&lt;li&gt;Compatible with Java8 lambda syntax&lt;/li&gt;
+&lt;li&gt;Testing is very easy.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Code can be written in &lt;em&gt;Groovy&lt;/em&gt; or &lt;em&gt;Java&lt;/em&gt;, and since java8 lambda syntax is so pretty, I find it suitable for the Ratpack handlers architecture quit well.&lt;/p&gt;
+
+&lt;p&gt;So here&amp;rsquo;s a simple hello world using &lt;em&gt;Ratpack&lt;/em&gt; and Java8,&lt;/p&gt;
+
+&lt;h2 id=&#34;the-build-file-gradle&#34;&gt;The build file (Gradle)&lt;/h2&gt;
+
+&lt;p&gt;While used to Maven, It feels like Ratpack folks like Gradle, so I said why not use it?&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a simple &lt;em&gt;build.gradle&lt;/em&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-groovy&#34;&gt;buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath &amp;quot;io.ratpack:ratpack-gradle:0.9.13&amp;quot;
+  }
+}
+
+apply plugin: &amp;quot;io.ratpack.ratpack-java&amp;quot;
+apply plugin: &amp;quot;idea&amp;quot;
+
+dependencies {
+  //Ratpack uses slf4j for logging
+  runtime &amp;quot;org.slf4j:slf4j-simple:1.7.5&amp;quot;
+}
+
+//we need this since 0.9.13 is based on snapshot version of Netty
+repositories {
+  jcenter()
+    maven {
+      url &amp;quot;http://clinker.netty.io/nexus/content/repositories/snapshots&amp;quot;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create basic directories&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mkdir -p src/main/java
+mkdir -p src/ratpack
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run in the command like &lt;code&gt;gradle idea&lt;/code&gt; to create Intellij project:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gradle idea
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One of the things I mostly like about &lt;em&gt;Ratpack&lt;/em&gt; is that it has no real notion of a &amp;ldquo;container&amp;rdquo;, you can simply start it a plain &lt;em&gt;main&lt;/em&gt; method just like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import ratpack.server.RatpackServer;
+import ratpack.server.ServerConfig;
+
+/**
+ */
+public class Server {
+    public static void main(String[] args) throws Exception {
+        RatpackServer server = RatpackServer.of(b -&amp;gt; b
+                        .serverConfig(ServerConfig.embedded()) //default config
+                        .registryOf(r -&amp;gt; r.add(String.class, &amp;quot;world&amp;quot;))  // registry of supporting objects - optional
+                        .handlers(chain -&amp;gt; chain                    // request handlers - required
+                                        .get(&amp;quot;hello&amp;quot;, ctx -&amp;gt; ctx.render(ctx.get(String.class) + &amp;quot; !&amp;quot;))
+                        )
+        );
+
+        server.start();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Server will start with on some available port and will print:
+&lt;code&gt;Ratpack started for http://localhost:65478&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;now hit in the browser &lt;code&gt;http://localhost:65478/hello&lt;/code&gt; ! :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Choosing Java Backend framework in 2015.</title>
+      <link>http://asaf.github.io/2015/02/01/searching_for_new_java_backend/</link>
+      <pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/02/01/searching_for_new_java_backend/</guid>
+      <description>
+
+&lt;p&gt;So it&amp;rsquo;s year 2015 and I&amp;rsquo;m taking a role in a new cloud service, helping to choose the right backend technology,&lt;/p&gt;
+
+&lt;p&gt;This is the summary of our requirements:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Can quickly come up with some POC.&lt;/li&gt;
+&lt;li&gt;HTTP driven.&lt;/li&gt;
+&lt;li&gt;Native support for Async.&lt;/li&gt;
+&lt;li&gt;Modular.&lt;/li&gt;
+&lt;li&gt;Avoid frameworks that dictates specific code structure.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Here are few options we tried but decided to pivot and seek for alternatives,&lt;/p&gt;
+
+&lt;h2 id=&#34;akka&#34;&gt;Akka&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.akka.io&#34;&gt;Akka&lt;/a&gt; seems very promising, it feels lightweight, highly concurrent and distributed,
+Akka is based on actors pattern, an old pattern invented by &lt;em&gt;Carl Hewitt&lt;/em&gt; and friends, promoted lately by Erlang,&lt;/p&gt;
+
+&lt;p&gt;We tried to create a POC with Akka, in conjuction with their new &lt;a href=&#34;http://doc.akka.io/docs/akka-stream-and-http-experimental/current&#34;&gt;Akka Streams&lt;/a&gt; (which seems to replace &lt;a href=&#34;http://www.spray.io&#34;&gt;Spray&lt;/a&gt;), both felt like a complete solution, but we decided to pivot out of it, I think I can summarize it in one sentence.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Although Akka seems to have support for Java, it&amp;rsquo;s just not a java project,
+Akka is written in &lt;em&gt;Scala&lt;/em&gt;, and exposes Java APIs via bindings layers, I felt like its community is Scala oriented debugging code of Scala is something tough for people that plans to stick in the Java domain.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;vert-x&#34;&gt;Vert.x&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.vertx.io&#34;&gt;Vert.x&lt;/a&gt; is similar to NodeJs, written in Java,
+It is Netty based and works in a non blocking mode,&lt;/p&gt;
+
+&lt;p&gt;Vertx 3 seems to be very promising we found some advantages of it,&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;We quickly could create a web app using &lt;a href=&#34;https://github.com/vert-x3/vertx-apex&#34;&gt;Apex&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Almost no configuration and deployment code is required to see real results.&lt;/li&gt;
+&lt;li&gt;Completely written in Java (which was a big releaf after Akka)&lt;/li&gt;
+&lt;li&gt;Scale out by levaraging an internal even bus.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;But we decided to pivot again, but why?!
+because Vert.x makes certain irreversible decisions about how applications should be written, and working with the event bus was a nightmare, we tried to use &lt;a href=&#34;https://github.com/vert-x3/vertx-service-factory&#34;&gt;Vertx Service Factory&lt;/a&gt; which eliminates most of the boilerplate code required to perform actions over the event bus, &lt;strong&gt;but it restrictions of passing only JsonObject and JsonArray frustrated us&lt;/strong&gt;,
+We found ourself spending too much time on convertions between Vertx&amp;rsquo;s JsonObjects and application / core services models.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-now&#34;&gt;What now?&lt;/h2&gt;
+
+&lt;p&gt;So what now? we&amp;rsquo;r still seeking for a better solution that hopefully will satisfy our needs.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>New Ember Components Suite!</title>
+      <link>http://asaf.github.io/2014/09/19/ember-components/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2014/09/19/ember-components/</guid>
+      <description>&lt;p&gt;Introducing a new Ember Components suite!&lt;/p&gt;
+
+&lt;p&gt;Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.&lt;/p&gt;
+
+&lt;p&gt;This project aims to be the successor of our Bootstrap for Ember project as all components on this suite are not bound to any specific CSS framework.&lt;/p&gt;
+
+&lt;p&gt;Github repo: &lt;a href=&#34;https://github.com/indexiatech/ember-components&#34;&gt;https://github.com/indexiatech/ember-components&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Demo &amp;amp; docs: &lt;a href=&#34;http://indexiatech.github.io/ember-components&#34;&gt;http://indexiatech.github.io/ember-components&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ember Forms</title>
+      <link>http://asaf.github.io/2014/08/02/ember-forms/</link>
+      <pubDate>Sat, 02 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2014/08/02/ember-forms/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Smart, Intuitive forms for Ember.js styled with Bootstrap, Multi layouts and Validation support.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;As my favorite web framework is &lt;em&gt;emberjs&lt;/em&gt;, I lately needed forms support for one of my projects with the following set of features in mind:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Styled for Bootstrap but easy to stil differently.&lt;/li&gt;
+&lt;li&gt;Different layouts such &lt;em&gt;inline&lt;/em&gt; and &lt;em&gt;horizontal&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Validations where validation rules are defined in model/controller and &lt;em&gt;form&lt;/em&gt; supports for:
+
+&lt;ul&gt;
+&lt;li&gt;Change color &amp;amp; icons when validation rule fails.&lt;/li&gt;
+&lt;li&gt;Show error message per form input.&lt;/li&gt;
+&lt;li&gt;Submit button with async support that changes its styles &amp;amp; get disabled during async call.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So here is the result: &lt;a href=&#34;https://github.com/indexiatech/ember-forms&#34;&gt;https://github.com/indexiatech/ember-forms&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Demo &amp;amp; docs: &lt;a href=&#34;http://indexiatech.github.io/ember-forms&#34;&gt;http://indexiatech.github.io/ember-forms&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember - more than 100 stars in 1 week</title>
+      <link>http://asaf.github.io/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</link>
+      <pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</guid>
+      <description>&lt;p&gt;This is awesome! &lt;em&gt;Bootstrap for Ember&lt;/em&gt; got more than 100 github &lt;strong&gt;stars&lt;/strong&gt; in less than a week,&lt;/p&gt;
+
+&lt;p&gt;Thanks for the great feedbacks, here&amp;rsquo;s an interesting tweet of the author of Handlebars and Ember.js, &lt;em&gt;Yehuda Katz&lt;/em&gt;.&lt;/p&gt;
+
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p&gt;Also, &lt;a href=&#34;http://t.co/NtqRMNtsA4&#34;&gt;http://t.co/NtqRMNtsA4&lt;/a&gt; (Bootstrap for &lt;a href=&#34;https://twitter.com/search?q=%23emberjs&amp;amp;src=hash&#34;&gt;#emberjs&lt;/a&gt; using components) is kind of awesome!&lt;/p&gt;&amp;mdash; Yehuda Katz (@wycats) &lt;a href=&#34;https://twitter.com/wycats/statuses/373875479096205312&#34;&gt;August 31, 2013&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Visit the project: &lt;a href=&#34;https://github.com/ember-addons/bootstrap-for-ember&#34;&gt;https://github.com/ember-addons/bootstrap-for-ember&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember v0.2.0 released</title>
+      <link>http://asaf.github.io/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</link>
+      <pubDate>Thu, 29 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</guid>
+      <description>&lt;p&gt;Few days ago I submitted a post about &lt;a href=&#34;blog/2013/08/26/bootstrap-for-ember-is-born/&#34;&gt;Bootstrap for Ember&lt;/a&gt;,
+We released today the 2nd minor version 0.2.0,&lt;/p&gt;
+
+&lt;p&gt;So far, version 0.2.0 contains the following components:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/alert&#34;&gt;Alert&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/label&#34;&gt;Label&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/badge&#34;&gt;Badge&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/well&#34;&gt;Well&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/page-header&#34;&gt;Page Header&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/button&#34;&gt;Button&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/progressbar&#34;&gt;ProgressBar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/pills&#34;&gt;Pills Navigation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/tabs&#34;&gt;Tabs Navigation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Project details:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ember-addons/bootstrap-for-ember&#34;&gt;Github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ember-addons/bootstrap-for-ember/releases/tag/0.2.0&#34;&gt;Release&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember&#34;&gt;Showcase&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Have fun!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember is born</title>
+      <link>http://asaf.github.io/2013/08/26/bootstrap-for-ember-is-born/</link>
+      <pubDate>Mon, 26 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/08/26/bootstrap-for-ember-is-born/</guid>
+      <description>
+
+&lt;p&gt;Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of
+making web applications right.&lt;/p&gt;
+
+&lt;p&gt;You can just hook both projects together by using Bootstrap as is in Handlebars templates,
+But soon enough, you will find yourself asking questions sucha s:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How do I interact between Bootstrap events and Ember (such as Controllers)?&lt;/li&gt;
+&lt;li&gt;How to pass Bootstrap components data from Ember (such as Controllers)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;ve seen few options about the integration between both, but:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;They are not easy and fun to use, they make the ease of Bootstrap too complex.&lt;/li&gt;
+&lt;li&gt;They are not well documented.&lt;/li&gt;
+&lt;li&gt;Development is too slow, I haven&amp;rsquo;t seen anything new lately.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So! I&amp;rsquo;m excited about a project I&amp;rsquo;ve been working lately with some guys to integrate Bootstrap &amp;amp; EmberJs together in a way that
+doesnt make Bootstrap usage more complex than using it as-is but providing great integration with EmberJs components.&lt;/p&gt;
+
+&lt;h1 id=&#34;links&#34;&gt;Links!&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Github Page: &lt;a href=&#34;https://github.com/ember-addons/bootstrap-for-ember&#34;&gt;https://github.com/ember-addons/bootstrap-for-ember&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Showcase: &lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/&#34;&gt;http://ember-addons.github.io/bootstrap-for-ember/dist/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Twitter: &lt;a href=&#34;https://twitter.com/bs_for_ember&#34;&gt;https://twitter.com/bs_for_ember&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

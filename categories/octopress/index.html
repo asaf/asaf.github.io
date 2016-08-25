@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Octopress &middot; Asaf Shakarchi</title>
+
+    <meta name="description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <meta name="generator" content="Hugo 0.17-DEV" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Octopress &middot; Asaf Shakarchi">
+    <meta name="twitter:description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Octopress &middot; Asaf Shakarchi">
+    <meta property="og:description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="http://asaf.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Asaf Shakarchi" href="http://asaf.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://asaf.github.io/">Asaf Shakarchi</a></h1>
+            <h2 class="brand-tagline"> &#34;Talk is cheap. Show me the code.&#34; </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://asaf.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <h1 class="content-subhead">23 Aug 2016, 22:43</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/post/migrate-octopress-to-hugo/" class="post-title">Migrate Octopress to Hugo</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-blogging" href="http://asaf.github.io//categories/blogging">blogging</a><a class="post-category post-category-blog" href="http://asaf.github.io//categories/blog">blog</a><a class="post-category post-category-hugo" href="http://asaf.github.io//categories/hugo">hugo</a><a class="post-category post-category-octopress" href="http://asaf.github.io//categories/octopress">octopress</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>My blog was based on <a href="https://github.com/imathis/octopress">Octopress</a> blogging system, based on <a href="https://github.com/jekyll/jekyll">jekyll</a>,
+but I was never a ruby person, it also seems like Octopress is not so active lately,</p>
+
+<p>In the other hand, Hugo feels super slim and simple, thanks to <em>Go</em> and <em>Hugo</em>, it takes only few lines to start a blog,</p>
+
+<p>You can download a binary package of Hugo, but I have Go installed so it&rsquo;s simply 1 command:</p>
+
+<pre><code class="language-bash">go get -u -v github.com/spf13/hugo
+</code></pre>
+
+<p>Creating a new blog is simply one command:</p>
+
+<pre><code class="language-bash">hugo new site myblog
+</code></pre>
+
+<p>This command creates the <code>myblog</code> folder with some initial data that serves as a baseline for our blog.</p>
+
+<p>Adding a new post is simple as:</p>
+
+<pre><code class="language-bash">hugo new post/welcome.md
+</code></pre>
+
+<p>This generates the <code>content/post/welcome.md</code> file, a post is just a simple file, no magic!</p>
+
+<p>A theme defines how the blog look like visually, there are many <a href="themes.gohugo.io">themes</a>, choose the one you like, in this post, I use the <a href="http://themes.gohugo.io/purehugo/">purehugo</a> theme because it&rsquo;s clean and simple.</p>
+
+<pre><code class="language-bash">cd themes
+git clone https://github.com/dplesca/purehugo.git
+</code></pre>
+
+<p>Lets star a local server to see our shining new blog:</p>
+
+<pre><code class="language-bash">hugo server --theme=hugo_theme_robust --buildDrafts
+</code></pre>
+
+<p>Hit in browser: <a href="http://localhost:1313">http://localhost:1313</a></p>
+
+<p>You should see the <em>welcome</em> blog entry we just added.</p>
+
+<h2 id="migrate-from-octopress">Migrate from Octopress</h2>
+
+<p>Hugo has a built in support to <a href="https://gohugo.io/commands/hugo_import_jekyll/">migrate from jekyll</a></p>
+
+<pre><code class="language-bash">cd my_octopress_blog
+ls
+config.yaml ... source/ ...
+hugo import jekyll source/ hugo-import/
+Congratulations! 26 post(s) imported!
+...
+</code></pre>
+
+<p>Make sure to have <em>config.yaml</em> and the <em>source</em> folder in current directory, running the import command should import all files</p>
+
+<p>Simply move the <em>posts</em> folder into your new blog <em>content</em> folder by:</p>
+
+<pre><code class="language-bash">mv hugo-import/content/post/* &lt;location_of_new_hugo_blog&gt;/content/post`
+</code></pre>
+
+<p>Happy blogging!</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">08 Jul 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/2013/07/08/blogging-with-octopress-add-about-page/" class="post-title">Blogging with Octopress: Add About Page</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-blog" href="http://asaf.github.io//categories/blog">blog</a><a class="post-category post-category-blogging" href="http://asaf.github.io//categories/blogging">blogging</a><a class="post-category post-category-octopress" href="http://asaf.github.io//categories/octopress">octopress</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>Adding About Me page, probably one of the first thing to do, right?</p>
+
+<p><em>Note: If you just want to say few words about yourself on the aside panel, skip to <em>About Me on the aside panel</em></em></p>
+
+<h3 id="adding-about-page">Adding About Page</h3>
+
+<p>Create the page:</p>
+
+<pre><code class="language-bash">rake new_page[&quot;about&quot;]
+</code></pre>
+
+<p>rake creates a new page located in <em>source/about/index.markdown</em></p>
+
+<p>I edited mine to look like:</p>
+
+<pre><code class="language-yaml">---
+layout: page
+title: &quot;About Me&quot;
+comments: true
+sharing: true
+footer: true
+---
+</code></pre>
+
+<p>Note that I removed the <em>date</em> line because it doesn&rsquo;t make sense in this page.</p>
+
+<h4 id="add-about-page-in-the-top-menu">Add About page in the top menu</h4>
+
+<p>You probably want to add the <em>About</em> page in the top menu, right?</p>
+
+<pre><code class="language-bash">vi source/_includes/custom/navigation.html
+
+#add the line to the bottom of the page:
+&lt;li&gt;&lt;a href=&quot;{{ root_url }}/about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+</code></pre>
+
+<h3 id="about-on-the-aside-panel">About on the aside panel</h3>
+
+<p>If u want to put some words about yourself on the side panel panel, do this:</p>
+
+<pre><code class="language-bash">vi source/_includes/custom/asides/about.html
+
+&lt;h1&gt;your name&lt;h1/&gt;
+&lt;p&gt;some words about you, not longer than a line.&lt;/p&gt;
+</code></pre>
+
+<p>Then enable the about html in the aside bar by:</p>
+
+<pre><code class="language-bash">vi _config.yml
+
+default_asides: [custom/asides/about.html, OTHER STUFF] # leave all other pages as is
+</code></pre>
+
+<p>Now the world knows about who you are :-)</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">08 Jul 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/2013/07/08/blogging-with-octopress-add-comments/" class="post-title">Blogging with Octopress: Add Comments</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-blog" href="http://asaf.github.io//categories/blog">blog</a><a class="post-category post-category-blogging" href="http://asaf.github.io//categories/blogging">blogging</a><a class="post-category post-category-octopress" href="http://asaf.github.io//categories/octopress">octopress</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>If you want your blog to support comments, follow this:</p>
+
+<p>Octopress has a native 3rd party plugin for Disqus that will host all your blog&rsquo;s comments.</p>
+
+<p>Visit <a href="Disqus">http://www.disqus.com</a> web site and sign in,
+Then <a href="Signup for a new application">https://disqus.com/admin/signup/</a>.</p>
+
+<p>Here&rsquo;s example how I file the signup form my blog which is hosted in GitHub pages.</p>
+
+<pre><code>Site Url: asaf.github.io
+Site Name: Asaf Shakarchi's Blog
+Site Shortname: asafshakarchisblog
+</code></pre>
+
+<p><em>Remember the site short name, you need it soon!</em></p>
+
+<p>Then configure <em>Octopress</em> to be aware of your new <em>Disqus</em> application:</p>
+
+<pre><code class="language-bash">cd octopress #or wherever your octopress folder is located
+vi _config.yml
+
+#then change discqus_short_name line:
+disqus_short_name: asafshakarchisblog #replace with the short name you've put in the app signup form
+</code></pre>
+
+<p>Done!</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">08 Jul 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/2013/07/08/blogging-with-octopress-quick-installation/" class="post-title">Blogging with Octopress: Quick Installation</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-octopress" href="http://asaf.github.io//categories/octopress">octopress</a><a class="post-category post-category-blog" href="http://asaf.github.io//categories/blog">blog</a><a class="post-category post-category-blogging" href="http://asaf.github.io//categories/blogging">blogging</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>I really wanted to revive my blog (which was hosted in Blogger), but I wanted to have more control over it,
+It just feels very natural for guys like me who uses vi more than GUI =)</p>
+
+<p>Since Octopress docs are too long and frustrating (oh common, i just wanted a blog), I decided to dedicate few posts for it,
+I hope I&rsquo;ll have the time to record (blog, post, whatever) all the cool things i&rsquo;m gonna add to my blog in the future.</p>
+
+<p>15 minutes and you have a pro blog, so there we go:</p>
+
+<h3 id="installing-ruby">Installing Ruby</h3>
+
+<p>####Ubuntu</p>
+
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install ruby 1.9.3
+</code></pre>
+
+<h4 id="macos">MacOS</h4>
+
+<pre><code class="language-bash">brew update
+brew install rbenv
+brew install ruby-build
+rbenv install 1.9.3-p0
+rbenv rehash
+</code></pre>
+
+<p>(If you don&rsquo;t have brew, visit: <a href="http://mxcl.github.io/homebrew">http://mxcl.github.io/homebrew</a>)</p>
+
+<h3 id="installing-octopress">Installing Octopress</h3>
+
+<p>Now Ocotopress !</p>
+
+<pre><code class="language-bash">cd ~ #or wherever u want the octopress folder to be located
+git clone git://github.com/imathis/octopress.git octopress
+cd octipress
+gem install bundler
+rbenv rehash #only if using rbenv
+bundle install
+</code></pre>
+
+<p>Thats it!</p>
+
+<h3 id="deploying-your-blog-in-github-pages">Deploying your blog in GitHub pages.</h3>
+
+<p>There are other alternatives, but I personally love GitHub, to deploy your blog in GitHub pages:</p>
+
+<ul>
+<li><p><a href="https://github.com/new">Create a GitHub repo</a> and name it _your<em>user.github.io</em>, where _your<em>user</em> is your github username, mine is <em>asaf</em>,
+so it&rsquo;ll be: <em>asaf.github.io</em></p></li>
+
+<li><p>Lets tell Octopress about your github created repo (that&rsquo;ll hold your blog):</p>
+
+<pre><code class="language-bash">rake setup_github_pages
+</code></pre>
+
+<p>When it asks for your git repo, paste: _git@github.com:your_user/your<em>user.github.io</em>, for example mine is: <em>git@github.com:asaf/asaf.github.io</em></p></li>
+
+<li><p>Now lets deploy and see our new shiny blog!</p></li>
+</ul>
+
+<pre><code class="language-bash">rake generate
+rake deploy
+</code></pre>
+
+<p>This generates the blog site from the (default) sources, commit it via <em>git</em> and deploy it in the created github repo.</p>
+
+<p>Thats all!</p>
+
+<p>now visit: <a href="http://your_user.github.io">http://your_user.github.io</a> to see your blog!</p>
+
+<h3 id="minimal-configuration">Minimal Configuration</h3>
+
+<p>And if we&rsquo;r already here, lets quickly configure the minimal details:</p>
+
+<pre><code class="language-bash">vi _config.yml
+title: Blog title, I put my full name.
+subtitle: What are you going to blog about?
+author: Your full name
+</code></pre>
+
+<p>rake generate
+rake deploy</p>
+
+<p>But it looks gray and dark and missing some cool stuff, isn&rsquo;t it? follow the next blog about how to customize OctoPress =)</p>
+
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="http://asaf.github.io//js/all.min.js"></script>
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

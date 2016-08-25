@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foo &middot; Asaf Shakarchi</title>
+
+    <meta name="description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <meta name="generator" content="Hugo 0.17-DEV" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Foo &middot; Asaf Shakarchi">
+    <meta name="twitter:description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Foo &middot; Asaf Shakarchi">
+    <meta property="og:description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="http://asaf.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Asaf Shakarchi" href="http://asaf.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://asaf.github.io/">Asaf Shakarchi</a></h1>
+            <h2 class="brand-tagline"> &#34;Talk is cheap. Show me the code.&#34; </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://asaf.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <h1 class="content-subhead">23 Aug 2016, 22:43</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/post/migrate-octopress-to-hugo/" class="post-title">Migrate Octopress to Hugo</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-blogging" href="http://asaf.github.io//categories/blogging">blogging</a><a class="post-category post-category-blog" href="http://asaf.github.io//categories/blog">blog</a><a class="post-category post-category-hugo" href="http://asaf.github.io//categories/hugo">hugo</a><a class="post-category post-category-octopress" href="http://asaf.github.io//categories/octopress">octopress</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>My blog was based on <a href="https://github.com/imathis/octopress">Octopress</a> blogging system, based on <a href="https://github.com/jekyll/jekyll">jekyll</a>,
+but I was never a ruby person, it also seems like Octopress is not so active lately,</p>
+
+<p>In the other hand, Hugo feels super slim and simple, thanks to <em>Go</em> and <em>Hugo</em>, it takes only few lines to start a blog,</p>
+
+<p>You can download a binary package of Hugo, but I have Go installed so it&rsquo;s simply 1 command:</p>
+
+<pre><code class="language-bash">go get -u -v github.com/spf13/hugo
+</code></pre>
+
+<p>Creating a new blog is simply one command:</p>
+
+<pre><code class="language-bash">hugo new site myblog
+</code></pre>
+
+<p>This command creates the <code>myblog</code> folder with some initial data that serves as a baseline for our blog.</p>
+
+<p>Adding a new post is simple as:</p>
+
+<pre><code class="language-bash">hugo new post/welcome.md
+</code></pre>
+
+<p>This generates the <code>content/post/welcome.md</code> file, a post is just a simple file, no magic!</p>
+
+<p>A theme defines how the blog look like visually, there are many <a href="themes.gohugo.io">themes</a>, choose the one you like, in this post, I use the <a href="http://themes.gohugo.io/purehugo/">purehugo</a> theme because it&rsquo;s clean and simple.</p>
+
+<pre><code class="language-bash">cd themes
+git clone https://github.com/dplesca/purehugo.git
+</code></pre>
+
+<p>Lets star a local server to see our shining new blog:</p>
+
+<pre><code class="language-bash">hugo server --theme=hugo_theme_robust --buildDrafts
+</code></pre>
+
+<p>Hit in browser: <a href="http://localhost:1313">http://localhost:1313</a></p>
+
+<p>You should see the <em>welcome</em> blog entry we just added.</p>
+
+<h2 id="migrate-from-octopress">Migrate from Octopress</h2>
+
+<p>Hugo has a built in support to <a href="https://gohugo.io/commands/hugo_import_jekyll/">migrate from jekyll</a></p>
+
+<pre><code class="language-bash">cd my_octopress_blog
+ls
+config.yaml ... source/ ...
+hugo import jekyll source/ hugo-import/
+Congratulations! 26 post(s) imported!
+...
+</code></pre>
+
+<p>Make sure to have <em>config.yaml</em> and the <em>source</em> folder in current directory, running the import command should import all files</p>
+
+<p>Simply move the <em>posts</em> folder into your new blog <em>content</em> folder by:</p>
+
+<pre><code class="language-bash">mv hugo-import/content/post/* &lt;location_of_new_hugo_blog&gt;/content/post`
+</code></pre>
+
+<p>Happy blogging!</p>
+
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="http://asaf.github.io//js/all.min.js"></script>
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
