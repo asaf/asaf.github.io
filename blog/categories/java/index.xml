@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on Asaf Shakarchi</title>
+    <link>http://asaf.github.io/blog/categories/java/</link>
+    <description>Recent content in Java on Asaf Shakarchi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Aug 2016 23:30:26 +0300</lastBuildDate>
+    <atom:link href="http://asaf.github.io/blog/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Export Certificate and Private key from JKS</title>
+      <link>http://asaf.github.io/blog/post/export_certificate_and_private_key_from_jks/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/blog/post/export_certificate_and_private_key_from_jks/</guid>
+      <description>&lt;p&gt;I had to migrate web application written in Java to NodesJS,&lt;/p&gt;
+
+&lt;p&gt;Java web containers store certificates inside JKS Keystore where NodeJS requires certificate and private key in &lt;a href=&#34;https://nodejs.org/api/https.html&#34;&gt;PEM format&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Exporting certificate directly from JKS is easy by using &lt;em&gt;keytool&lt;/em&gt;, but exporting private key is not allowed,
+To export the private key using Java, we need to interact with the keystore by writing some custom code using the Keystore java API,&lt;/p&gt;
+
+&lt;p&gt;the other alternative is simply convert the JKS into a &lt;a href=&#34;https://en.wikipedia.org/wiki/PKCS_12&#34;&gt;PKCS12&lt;/a&gt; and export the certificate &amp;amp; key using &lt;em&gt;openssl&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Convert JKS to PKCS12 format:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;keytool -importkeystore -srckeystore mykeystore.jks -destkeystore mykeystore.p12 -deststoretype PKCS12
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note: The &lt;em&gt;-importkeystore&lt;/em&gt; parameter is only supported with the keytool that ships with Java ver 1.6+&lt;/p&gt;
+
+&lt;p&gt;you can view the content of the pkcs12 keystore by:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;openssl pkcs12 -in mykeystore.p12
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(Specifically look for the &lt;em&gt;friendlyName&lt;/em&gt; that corresponds to the &lt;em&gt;alias&lt;/em&gt; property of in &lt;em&gt;JKS&lt;/em&gt;)&lt;/p&gt;
+
+&lt;p&gt;Export the certificate:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;openssl pkcs12 -in mykeystore.p12 -nokeys -out cert.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Export the private key (unencrypted)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;openssl pkcs12 -in mykeystore.p12  -nodes -nocerts -out key.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;the &lt;em&gt;-nodes&lt;/em&gt; means &amp;ldquo;No DES&amp;rdquo;, that is &amp;ldquo;do not encrypt the private key that will be exported to key.pem&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Make sure you keep the private key safe (recommended: &lt;em&gt;chmod 600 key.pem&lt;/em&gt;)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hello world using Ratpack.</title>
+      <link>http://asaf.github.io/blog/2015/02/09/ratpack_hello_world/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/blog/2015/02/09/ratpack_hello_world/</guid>
+      <description>
+
+&lt;h2 id=&#34;about-ratpack&#34;&gt;About Ratpack&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.ratpack.io&#34;&gt;Ratpack&lt;/a&gt; is a set of Java libraries that facilitate fast, efficient, evolvable and well tested HTTP applications built on &lt;em&gt;Netty&lt;/em&gt; event driven networking engine,&lt;/p&gt;
+
+&lt;p&gt;After crawling into its source code, I find it simple and easy to use and it feels right, why? because:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;It&amp;rsquo;s super simple, its core has very limited number of &lt;a href=&#34;https://github.com/ratpack/ratpack/blob/master/ratpack-core/ratpack-core.gradle&#34;&gt;dependencies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Has out of the box extensions such as Guice, Jackson, etc, but nothing dictates you using them thanks to Guice modular architecture.&lt;/li&gt;
+&lt;li&gt;Compatible with Java8 lambda syntax&lt;/li&gt;
+&lt;li&gt;Testing is very easy.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Code can be written in &lt;em&gt;Groovy&lt;/em&gt; or &lt;em&gt;Java&lt;/em&gt;, and since java8 lambda syntax is so pretty, I find it suitable for the Ratpack handlers architecture quit well.&lt;/p&gt;
+
+&lt;p&gt;So here&amp;rsquo;s a simple hello world using &lt;em&gt;Ratpack&lt;/em&gt; and Java8,&lt;/p&gt;
+
+&lt;h2 id=&#34;the-build-file-gradle&#34;&gt;The build file (Gradle)&lt;/h2&gt;
+
+&lt;p&gt;While used to Maven, It feels like Ratpack folks like Gradle, so I said why not use it?&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a simple &lt;em&gt;build.gradle&lt;/em&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-groovy&#34;&gt;buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath &amp;quot;io.ratpack:ratpack-gradle:0.9.13&amp;quot;
+  }
+}
+
+apply plugin: &amp;quot;io.ratpack.ratpack-java&amp;quot;
+apply plugin: &amp;quot;idea&amp;quot;
+
+dependencies {
+  //Ratpack uses slf4j for logging
+  runtime &amp;quot;org.slf4j:slf4j-simple:1.7.5&amp;quot;
+}
+
+//we need this since 0.9.13 is based on snapshot version of Netty
+repositories {
+  jcenter()
+    maven {
+      url &amp;quot;http://clinker.netty.io/nexus/content/repositories/snapshots&amp;quot;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create basic directories&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mkdir -p src/main/java
+mkdir -p src/ratpack
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run in the command like &lt;code&gt;gradle idea&lt;/code&gt; to create Intellij project:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gradle idea
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One of the things I mostly like about &lt;em&gt;Ratpack&lt;/em&gt; is that it has no real notion of a &amp;ldquo;container&amp;rdquo;, you can simply start it a plain &lt;em&gt;main&lt;/em&gt; method just like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import ratpack.server.RatpackServer;
+import ratpack.server.ServerConfig;
+
+/**
+ */
+public class Server {
+    public static void main(String[] args) throws Exception {
+        RatpackServer server = RatpackServer.of(b -&amp;gt; b
+                        .serverConfig(ServerConfig.embedded()) //default config
+                        .registryOf(r -&amp;gt; r.add(String.class, &amp;quot;world&amp;quot;))  // registry of supporting objects - optional
+                        .handlers(chain -&amp;gt; chain                    // request handlers - required
+                                        .get(&amp;quot;hello&amp;quot;, ctx -&amp;gt; ctx.render(ctx.get(String.class) + &amp;quot; !&amp;quot;))
+                        )
+        );
+
+        server.start();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Server will start with on some available port and will print:
+&lt;code&gt;Ratpack started for http://localhost:65478&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;now hit in the browser &lt;code&gt;http://localhost:65478/hello&lt;/code&gt; ! :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Choosing Java Backend framework in 2015.</title>
+      <link>http://asaf.github.io/blog/2015/02/01/searching_for_new_java_backend/</link>
+      <pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/blog/2015/02/01/searching_for_new_java_backend/</guid>
+      <description>
+
+&lt;p&gt;So it&amp;rsquo;s year 2015 and I&amp;rsquo;m taking a role in a new cloud service, helping to choose the right backend technology,&lt;/p&gt;
+
+&lt;p&gt;This is the summary of our requirements:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Can quickly come up with some POC.&lt;/li&gt;
+&lt;li&gt;HTTP driven.&lt;/li&gt;
+&lt;li&gt;Native support for Async.&lt;/li&gt;
+&lt;li&gt;Modular.&lt;/li&gt;
+&lt;li&gt;Avoid frameworks that dictates specific code structure.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Here are few options we tried but decided to pivot and seek for alternatives,&lt;/p&gt;
+
+&lt;h2 id=&#34;akka&#34;&gt;Akka&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.akka.io&#34;&gt;Akka&lt;/a&gt; seems very promising, it feels lightweight, highly concurrent and distributed,
+Akka is based on actors pattern, an old pattern invented by &lt;em&gt;Carl Hewitt&lt;/em&gt; and friends, promoted lately by Erlang,&lt;/p&gt;
+
+&lt;p&gt;We tried to create a POC with Akka, in conjuction with their new &lt;a href=&#34;http://doc.akka.io/docs/akka-stream-and-http-experimental/current&#34;&gt;Akka Streams&lt;/a&gt; (which seems to replace &lt;a href=&#34;http://www.spray.io&#34;&gt;Spray&lt;/a&gt;), both felt like a complete solution, but we decided to pivot out of it, I think I can summarize it in one sentence.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Although Akka seems to have support for Java, it&amp;rsquo;s just not a java project,
+Akka is written in &lt;em&gt;Scala&lt;/em&gt;, and exposes Java APIs via bindings layers, I felt like its community is Scala oriented debugging code of Scala is something tough for people that plans to stick in the Java domain.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;vert-x&#34;&gt;Vert.x&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.vertx.io&#34;&gt;Vert.x&lt;/a&gt; is similar to NodeJs, written in Java,
+It is Netty based and works in a non blocking mode,&lt;/p&gt;
+
+&lt;p&gt;Vertx 3 seems to be very promising we found some advantages of it,&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;We quickly could create a web app using &lt;a href=&#34;https://github.com/vert-x3/vertx-apex&#34;&gt;Apex&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Almost no configuration and deployment code is required to see real results.&lt;/li&gt;
+&lt;li&gt;Completely written in Java (which was a big releaf after Akka)&lt;/li&gt;
+&lt;li&gt;Scale out by levaraging an internal even bus.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;But we decided to pivot again, but why?!
+because Vert.x makes certain irreversible decisions about how applications should be written, and working with the event bus was a nightmare, we tried to use &lt;a href=&#34;https://github.com/vert-x3/vertx-service-factory&#34;&gt;Vertx Service Factory&lt;/a&gt; which eliminates most of the boilerplate code required to perform actions over the event bus, &lt;strong&gt;but it restrictions of passing only JsonObject and JsonArray frustrated us&lt;/strong&gt;,
+We found ourself spending too much time on convertions between Vertx&amp;rsquo;s JsonObjects and application / core services models.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-now&#34;&gt;What now?&lt;/h2&gt;
+
+&lt;p&gt;So what now? we&amp;rsquo;r still seeking for a better solution that hopefully will satisfy our needs.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

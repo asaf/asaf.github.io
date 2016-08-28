@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jspm on Asaf Shakarchi</title>
+    <link>http://asaf.github.io/blog/categories/jspm/</link>
+    <description>Recent content in Jspm on Asaf Shakarchi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 19 Jun 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://asaf.github.io/blog/categories/jspm/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Elegant way to use React with ES6/ES7 features.</title>
+      <link>http://asaf.github.io/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/</link>
+      <pubDate>Fri, 19 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/blog/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/</guid>
+      <description>
+
+&lt;h2 id=&#34;react-jsx-es6&#34;&gt;React, JSX, ES6.&lt;/h2&gt;
+
+&lt;p&gt;So you want React, JSX the markup and write ES6/7 code style, but setting a working
+environment may be pain in the ass,&lt;/p&gt;
+
+&lt;p&gt;More to say, Facebook announced that its JSTransformer and react-tools going to be &lt;a href=&#34;https://facebook.github.io/react/blog/2015/06/12/deprecating-jstransform-and-react-tools.html&#34;&gt;deprecated&lt;/a&gt;,&lt;/p&gt;
+
+&lt;p&gt;It seems like it&amp;rsquo;s starting to get confusing how to set a full working environment
+with JSX transformation and ES6/ES7 support.&lt;/p&gt;
+
+&lt;p&gt;While React 0.13.0-beta-1 announced great support for ES6, it still unclear how
+to build a full working environment that supports ES6 either,&lt;/p&gt;
+
+&lt;p&gt;You can find multiple boilerplate projects at &lt;a href=&#34;http://www.github.com&#34;&gt;github&lt;/a&gt; using
+WebPack, Browserify and other module loader tools available nowadays but I found all
+of them unclean, full of build scripts and things that just make things more complicated,&lt;/p&gt;
+
+&lt;p&gt;After doing some research, I feel like the best approach would be to go with &lt;a href=&#34;http://jspm.io/&#34;&gt;JSPM&lt;/a&gt; repository that is based on &lt;a href=&#34;https://github.com/systemjs/systemjs&#34;&gt;SystemJs&lt;/a&gt; dynamic module loader.&lt;/p&gt;
+
+&lt;p&gt;The chosen tools:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;SytemJs - It is a Universal dynamic module loader, it supports AMD, CommonJS
+but the best of it is its native support for ES6 modules, with native support for
+Babel as its transpiler to ES5, it also uses &lt;a href=&#34;http://jspm.io&#34;&gt;JSPM&lt;/a&gt; which supports
+NPM and Github repos such as Bower does, so you can enjoy packages from both worlds.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://babeljs.io&#34;&gt;Babel&lt;/a&gt; as the ES6 transpiler, this transpiler is responsible
+to translate ES6 coding to ES5 as ES6 is not supported yet by most browsers, Babel is
+also supported by Facebook and provides JSX native transformation.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Enough said, here&amp;rsquo;s some code, we&amp;rsquo;ll start with empty folder!&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-a-clean-working-environment&#34;&gt;Setting a clean working environment&lt;/h2&gt;
+
+&lt;h3 id=&#34;pre-requisites&#34;&gt;Pre requisites&lt;/h3&gt;
+
+&lt;p&gt;Lets install pre requisites:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm install -g jspm
+npm install -g http-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;initializing-project&#34;&gt;Initializing Project&lt;/h3&gt;
+
+&lt;p&gt;Create an empty folder and run&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;jspm init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can choose default answers for all questions if not sure,&lt;/p&gt;
+
+&lt;p&gt;This will create a &lt;code&gt;package.json&lt;/code&gt; and a &lt;code&gt;config.js&lt;/code&gt; file required for SystemJs
+to work properly.&lt;/p&gt;
+
+&lt;p&gt;Now lets tweak &lt;code&gt;config.js&lt;/code&gt; a bit to support ES7 so you can enjoy ES7+ property
+initializers and other ES7 cool features&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&amp;quot;babelOptions&amp;quot;: {
+  blacklist: [],
+  stage: 0,
+  &amp;quot;optional&amp;quot;: [
+    &amp;quot;runtime&amp;quot;
+  ]
+},
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;blacklist: []&lt;/code&gt; tells Babel not to ignore JSX transformation as by default it&amp;rsquo;s disabled,
+&lt;code&gt;stage: 0&lt;/code&gt; tells Babel that we want to use experimental ES7 syntax.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-an-index-html-file&#34;&gt;Creating an index.html file&lt;/h3&gt;
+
+&lt;p&gt;Lets create our index file as every web app that respect itself has one!&lt;/p&gt;
+
+&lt;p&gt;Simply create &lt;code&gt;index.html&lt;/code&gt; in the root folder with your favorite editor&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html&amp;gt;
+    &amp;lt;head&amp;gt;
+        &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
+        &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt;
+        &amp;lt;title&amp;gt;Title Here&amp;lt;/title&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body&amp;gt;
+        &amp;lt;!-- build:js --&amp;gt;
+        &amp;lt;script src=&amp;quot;jspm_packages/system.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+        &amp;lt;script src=&amp;quot;config.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+        &amp;lt;script&amp;gt;
+            System.import(&#39;app/main&#39;);
+        &amp;lt;/script&amp;gt;
+        &amp;lt;!-- endbuild --&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See how clean and elegant is it? we just load &lt;code&gt;system.js&lt;/code&gt; as our dynamic module loader
+and the generated &lt;code&gt;config.js&lt;/code&gt; that holds our &lt;code&gt;SystemJs&lt;/code&gt; configuration.&lt;/p&gt;
+
+&lt;p&gt;Then we import &lt;code&gt;app/main&lt;/code&gt; as our first ES6 module that serves the application.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-a-simple-react-based-class&#34;&gt;Create a simple React based class.&lt;/h3&gt;
+
+&lt;p&gt;Thanks to SystemJs, we can now fully write application modules, lets create our
+&lt;code&gt;main&lt;/code&gt; application entry point&lt;/p&gt;
+
+&lt;p&gt;Create a file &lt;code&gt;app/main.js&lt;/code&gt; with the following content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import React from &#39;react&#39;;
+import App from &#39;./app&#39;;
+
+React.render(&amp;lt;App/&amp;gt;, document.body);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This just import &lt;code&gt;React&lt;/code&gt; and renders our &lt;code&gt;App&lt;/code&gt; component.&lt;/p&gt;
+
+&lt;p&gt;Her eis the &lt;code&gt;app/app.js&lt;/code&gt; file content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import React from &#39;react&#39;;
+var {Component} = React;
+
+export default class MyApp extends Component {
+    static propTypes = {
+       flux: React.PropTypes.object.isRequired
+   }
+
+    render () {
+        return (
+            &amp;lt;div&amp;gt;Hello&amp;lt;/div&amp;gt;
+        )
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now run &lt;code&gt;http-server&lt;/code&gt; in your folder,&lt;/p&gt;
+
+&lt;p&gt;hitting &lt;a href=&#34;http://localhost:8080&#34;&gt;http://localhost:8080&lt;/a&gt; should display &lt;em&gt;Hello&lt;/em&gt; :)&lt;/p&gt;
+
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;The combination of React, JSX transformation via Babel, and ES6/7 support via
+SystemJS provides a great clean and elegant way to write React code without the
+overhead of build systems and ugly scripts around.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

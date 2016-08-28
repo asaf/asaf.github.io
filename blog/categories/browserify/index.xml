@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Browserify on Asaf Shakarchi</title>
+    <link>http://asaf.github.io/blog/categories/browserify/</link>
+    <description>Recent content in Browserify on Asaf Shakarchi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 05 Sep 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://asaf.github.io/blog/categories/browserify/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ES6, React &amp; Browserify</title>
+      <link>http://asaf.github.io/blog/2015/09/05/react/</link>
+      <pubDate>Sat, 05 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/blog/2015/09/05/react/</guid>
+      <description>
+
+&lt;h2 id=&#34;es6-react-browserify&#34;&gt;ES6, React &amp;amp; Browserify&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://browserify.org/&#34;&gt;Browserify&lt;/a&gt; is a &lt;em&gt;lightweight&lt;/em&gt; build tool for JS, you can start &lt;em&gt;&amp;lsquo;require&amp;rsquo;&lt;/em&gt; modules with zero configuration,
+Thanks to &lt;a href=&#34;https://github.com/babel/babelify&#34;&gt;Babelify&lt;/a&gt;, you can start writing ES6 code (via &lt;a href=&#34;babeljs.io&#34;&gt;Babel&lt;/a&gt;) write away,&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a proof how simple it is,&lt;/p&gt;
+
+&lt;p&gt;Lets create a &lt;code&gt;package.json&lt;/code&gt; file and install minimal dependencies&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm init
+npm install --save react
+npm install --save-dev browserify babelify watchify
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lets give Browserify a hint that it should perform code transformation via &lt;code&gt;babelify&lt;/code&gt; by adding this json tag to &lt;code&gt;package.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&amp;quot;browserify&amp;quot;: {
+  &amp;quot;transform&amp;quot;: [
+    &amp;quot;babelify&amp;quot;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It can also be nice to just type &lt;code&gt;npm start&lt;/code&gt; when developing, so lets add a &lt;code&gt;start&lt;/code&gt; script to &lt;code&gt;package.json&lt;/code&gt; as well&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;start&amp;rdquo;: &amp;ldquo;watchify &amp;ndash;extension=js -o bundle.js index.js &amp;amp; python -m SimpleHTTPServer&amp;rdquo;,&lt;/p&gt;
+
+&lt;p&gt;Note: Watchify is not mandatory but it&amp;rsquo;s great tool for watching your code changes and auto rebuild when a change gets discovered.&lt;/p&gt;
+
+&lt;p&gt;Lets put the simplest index file ever:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;bundle.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a simple ES6 class with React.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import React from &#39;react&#39;;
+
+class Hello extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {count: props.initCount}
+    this.tick = this.tick.bind(this)
+  }
+
+  tick () {
+    this.setState({count: this.state.count + 1});
+  }
+  render(){
+    let { name } = this.props
+    let { count } = this.state
+    return (
+      &amp;lt;button onClick={this.tick}&amp;gt;Hello {name} {count}&amp;lt;/button&amp;gt;
+    );
+  }
+}
+
+React.render(&amp;lt;Hello name=&amp;quot;Stranger&amp;quot; initCount={5}/&amp;gt;, document.body)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;running-the-code&#34;&gt;Running the code:&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Open browser &lt;a href=&#34;http://localhost:8000&#34;&gt;http://localhost:8000&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;To summary:&lt;/p&gt;
+
+&lt;p&gt;1) Browserify is lightweight build tool, it handles modularity by understanding &lt;code&gt;require&lt;/code&gt;
+2) Labelify is a plugin for Browserify, it takes care of transpilling ES6 code to ES5 via Babel.
+3) Thanks to Babel &amp;amp; React integration, there&amp;rsquo;s no need for any extra plugins to perform JSX transformations.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

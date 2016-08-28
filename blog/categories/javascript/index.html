@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript &middot; Asaf Shakarchi</title>
+
+    <meta name="description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <meta name="generator" content="Hugo 0.17-DEV" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Javascript &middot; Asaf Shakarchi">
+    <meta name="twitter:description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Javascript &middot; Asaf Shakarchi">
+    <meta property="og:description" content="&#34;Talk is cheap. Show me the code.&#34;">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="http://asaf.github.io/blog/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Asaf Shakarchi" href="http://asaf.github.io/blog/index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://asaf.github.io/blog">Asaf Shakarchi</a></h1>
+            <h2 class="brand-tagline"> &#34;Talk is cheap. Show me the code.&#34; </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://asaf.github.io/blog/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <h1 class="content-subhead">14 Sep 2015, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/blog/2015/09/14/js-default-function-options-stash-with-es6/" class="post-title">Default function options stash with ES6 destructuring assignment.</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-es6" href="http://asaf.github.io/blog/categories/es6">es6</a><a class="post-category post-category-js" href="http://asaf.github.io/blog/categories/js">js</a><a class="post-category post-category-javascript" href="http://asaf.github.io/blog/categories/javascript">javascript</a><a class="post-category post-category-destructuring" href="http://asaf.github.io/blog/categories/destructuring">destructuring</a><a class="post-category post-category-tips" href="http://asaf.github.io/blog/categories/tips">tips</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>ES6 opens up a clean approach to define function options stash thanks to the destructuring assignment syntax,</p>
+
+<p>Assuming we want options but let the user overrides it, we can declare our function that way:</p>
+
+<p>function hello(param1, {debug = true, whatever = false} = {}) {
+}</p>
+
+<p>The advantages are, clearly there is no code in the body function to achieve default options &amp; user overrides.</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">13 Sep 2015, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/blog/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/" class="post-title">Add additional properties to a result of a function or a fucntion map using ES6 spread operator.</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-js" href="http://asaf.github.io/blog/categories/js">js</a><a class="post-category post-category-javascript" href="http://asaf.github.io/blog/categories/javascript">javascript</a><a class="post-category post-category-es6" href="http://asaf.github.io/blog/categories/es6">es6</a><a class="post-category post-category-spread" href="http://asaf.github.io/blog/categories/spread">spread</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Sometimes it makes sense to add additional properties to a result of a function,</p>
+
+<p>Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,</p>
+
+<p>Using ES6, we could easily achieve this by:</p>
+
+<pre><code class="language-js">bindData(oper, props) {
+  if (typeof oper === 'function') {
+    return (...args) =&gt; ({
+      ...oper(...args),
+      ...props
+    });
+  }
+  if (typeof oper === 'object') {
+    return Object.keys(oper).reduce((prev, key) =&gt; ({
+      ...prev,
+      [key]: bindData(oper[key], props)
+    }), {});
+  }
+  return oper;
+}
+</code></pre>
+
+<p>Here are some clarifications:</p>
+
+<ol>
+<li>If <code>oper</code> is a function, we decorate the original function by a closure,
+<code>return (...args)</code> is the closure (read more about the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">spread</a> operator.</li>
+</ol>
+
+<p>In general, <code>myFunction(...args);</code> is equelevent to <code>(args) { oper.apply(null, args); }</code>,</p>
+
+<ol>
+<li>When the returned function is invoked, the result of the original function <code>...oper(...args)</code> is then merged with the <code>props</code> object, in other words:</li>
+</ol>
+
+<p><code>...oper(), ...props</code> is equelevent to: <code>Object.assign({}, oper(), props);</code>
+Read more about <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign</a></p>
+
+<ol>
+<li>If <code>oper</code> is an object, we bind each of its key&rsquo;s recursively (assuming each property is a function).</li>
+</ol>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">19 Sep 2014, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/blog/2014/09/19/ember-components/" class="post-title">New Ember Components Suite!</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-emberjs" href="http://asaf.github.io/blog/categories/emberjs">emberjs</a><a class="post-category post-category-bootstrap" href="http://asaf.github.io/blog/categories/bootstrap">bootstrap</a><a class="post-category post-category-javascript" href="http://asaf.github.io/blog/categories/javascript">javascript</a><a class="post-category post-category-coffeescript" href="http://asaf.github.io/blog/categories/coffeescript">coffeescript</a><a class="post-category post-category-UI" href="http://asaf.github.io/blog/categories/ui">UI</a><a class="post-category post-category-ajax" href="http://asaf.github.io/blog/categories/ajax">ajax</a><a class="post-category post-category-components" href="http://asaf.github.io/blog/categories/components">components</a><a class="post-category post-category-ember-addons" href="http://asaf.github.io/blog/categories/ember-addons">ember-addons</a><a class="post-category post-category-forms" href="http://asaf.github.io/blog/categories/forms">forms</a><a class="post-category post-category-ember-forms" href="http://asaf.github.io/blog/categories/ember-forms">ember-forms</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Introducing a new Ember Components suite!</p>
+
+<p>Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.</p>
+
+<p>This project aims to be the successor of our Bootstrap for Ember project as all components on this suite are not bound to any specific CSS framework.</p>
+
+<p>Github repo: <a href="https://github.com/indexiatech/ember-components">https://github.com/indexiatech/ember-components</a></p>
+
+<p>Demo &amp; docs: <a href="http://indexiatech.github.io/ember-components">http://indexiatech.github.io/ember-components</a></p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">02 Aug 2014, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/blog/2014/08/02/ember-forms/" class="post-title">Ember Forms</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-emberjs" href="http://asaf.github.io/blog/categories/emberjs">emberjs</a><a class="post-category post-category-bootstrap" href="http://asaf.github.io/blog/categories/bootstrap">bootstrap</a><a class="post-category post-category-javascript" href="http://asaf.github.io/blog/categories/javascript">javascript</a><a class="post-category post-category-coffeescript" href="http://asaf.github.io/blog/categories/coffeescript">coffeescript</a><a class="post-category post-category-UI" href="http://asaf.github.io/blog/categories/ui">UI</a><a class="post-category post-category-ajax" href="http://asaf.github.io/blog/categories/ajax">ajax</a><a class="post-category post-category-components" href="http://asaf.github.io/blog/categories/components">components</a><a class="post-category post-category-ember-addons" href="http://asaf.github.io/blog/categories/ember-addons">ember-addons</a><a class="post-category post-category-forms" href="http://asaf.github.io/blog/categories/forms">forms</a><a class="post-category post-category-ember-forms" href="http://asaf.github.io/blog/categories/ember-forms">ember-forms</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p><em>Smart, Intuitive forms for Ember.js styled with Bootstrap, Multi layouts and Validation support.</em></p>
+
+<p>As my favorite web framework is <em>emberjs</em>, I lately needed forms support for one of my projects with the following set of features in mind:</p>
+
+<ul>
+<li>Styled for Bootstrap but easy to stil differently.</li>
+<li>Different layouts such <em>inline</em> and <em>horizontal</em></li>
+<li>Validations where validation rules are defined in model/controller and <em>form</em> supports for:
+
+<ul>
+<li>Change color &amp; icons when validation rule fails.</li>
+<li>Show error message per form input.</li>
+<li>Submit button with async support that changes its styles &amp; get disabled during async call.</li>
+</ul></li>
+</ul>
+
+<p>So here is the result: <a href="https://github.com/indexiatech/ember-forms">https://github.com/indexiatech/ember-forms</a></p>
+
+<p>Demo &amp; docs: <a href="http://indexiatech.github.io/ember-forms">http://indexiatech.github.io/ember-forms</a></p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">02 Sep 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/" class="post-title">Bootstrap for Ember - more than 100 stars in 1 week</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-emberjs" href="http://asaf.github.io/blog/categories/emberjs">emberjs</a><a class="post-category post-category-bootstrap" href="http://asaf.github.io/blog/categories/bootstrap">bootstrap</a><a class="post-category post-category-javascript" href="http://asaf.github.io/blog/categories/javascript">javascript</a><a class="post-category post-category-coffee" href="http://asaf.github.io/blog/categories/coffee">coffee</a><a class="post-category post-category-UI" href="http://asaf.github.io/blog/categories/ui">UI</a><a class="post-category post-category-ajax" href="http://asaf.github.io/blog/categories/ajax">ajax</a><a class="post-category post-category-bootstrap-for-ember" href="http://asaf.github.io/blog/categories/bootstrap-for-ember">bootstrap-for-ember</a><a class="post-category post-category-ember-addons" href="http://asaf.github.io/blog/categories/ember-addons">ember-addons</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>This is awesome! <em>Bootstrap for Ember</em> got more than 100 github <strong>stars</strong> in less than a week,</p>
+
+<p>Thanks for the great feedbacks, here&rsquo;s an interesting tweet of the author of Handlebars and Ember.js, <em>Yehuda Katz</em>.</p>
+
+<blockquote class="twitter-tweet"><p>Also, <a href="http://t.co/NtqRMNtsA4">http://t.co/NtqRMNtsA4</a> (Bootstrap for <a href="https://twitter.com/search?q=%23emberjs&amp;src=hash">#emberjs</a> using components) is kind of awesome!</p>&mdash; Yehuda Katz (@wycats) <a href="https://twitter.com/wycats/statuses/373875479096205312">August 31, 2013</a></blockquote>
+
+<p>Visit the project: <a href="https://github.com/ember-addons/bootstrap-for-ember">https://github.com/ember-addons/bootstrap-for-ember</a></p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">29 Aug 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/" class="post-title">Bootstrap for Ember v0.2.0 released</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-emberjs" href="http://asaf.github.io/blog/categories/emberjs">emberjs</a><a class="post-category post-category-bootstrap" href="http://asaf.github.io/blog/categories/bootstrap">bootstrap</a><a class="post-category post-category-javascript" href="http://asaf.github.io/blog/categories/javascript">javascript</a><a class="post-category post-category-coffee" href="http://asaf.github.io/blog/categories/coffee">coffee</a><a class="post-category post-category-UI" href="http://asaf.github.io/blog/categories/ui">UI</a><a class="post-category post-category-ajax" href="http://asaf.github.io/blog/categories/ajax">ajax</a><a class="post-category post-category-bootstrap-for-ember" href="http://asaf.github.io/blog/categories/bootstrap-for-ember">bootstrap-for-ember</a><a class="post-category post-category-ember-addons" href="http://asaf.github.io/blog/categories/ember-addons">ember-addons</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Few days ago I submitted a post about <a href="blog/2013/08/26/bootstrap-for-ember-is-born/">Bootstrap for Ember</a>,
+We released today the 2nd minor version 0.2.0,</p>
+
+<p>So far, version 0.2.0 contains the following components:</p>
+
+<ul>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/alert">Alert</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/label">Label</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/badge">Badge</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/well">Well</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/page-header">Page Header</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/button">Button</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/progressbar">ProgressBar</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/pills">Pills Navigation</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/tabs">Tabs Navigation</a></li>
+</ul>
+
+<p>Project details:</p>
+
+<ul>
+<li><a href="https://github.com/ember-addons/bootstrap-for-ember">Github</a></li>
+<li><a href="https://github.com/ember-addons/bootstrap-for-ember/releases/tag/0.2.0">Release</a></li>
+<li><a href="http://ember-addons.github.io/bootstrap-for-ember">Showcase</a></li>
+</ul>
+
+<p>Have fun!</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">26 Aug 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/blog/2013/08/26/bootstrap-for-ember-is-born/" class="post-title">Bootstrap for Ember is born</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-emberjs" href="http://asaf.github.io/blog/categories/emberjs">emberjs</a><a class="post-category post-category-bootstrap" href="http://asaf.github.io/blog/categories/bootstrap">bootstrap</a><a class="post-category post-category-javascript" href="http://asaf.github.io/blog/categories/javascript">javascript</a><a class="post-category post-category-coffee" href="http://asaf.github.io/blog/categories/coffee">coffee</a><a class="post-category post-category-UI" href="http://asaf.github.io/blog/categories/ui">UI</a><a class="post-category post-category-ajax" href="http://asaf.github.io/blog/categories/ajax">ajax</a><a class="post-category post-category-bootstrap-for-ember" href="http://asaf.github.io/blog/categories/bootstrap-for-ember">bootstrap-for-ember</a><a class="post-category post-category-ember-addons" href="http://asaf.github.io/blog/categories/ember-addons">ember-addons</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of
+making web applications right.</p>
+
+<p>You can just hook both projects together by using Bootstrap as is in Handlebars templates,
+But soon enough, you will find yourself asking questions sucha s:</p>
+
+<ul>
+<li>How do I interact between Bootstrap events and Ember (such as Controllers)?</li>
+<li>How to pass Bootstrap components data from Ember (such as Controllers)</li>
+</ul>
+
+<p>I&rsquo;ve seen few options about the integration between both, but:</p>
+
+<ul>
+<li>They are not easy and fun to use, they make the ease of Bootstrap too complex.</li>
+<li>They are not well documented.</li>
+<li>Development is too slow, I haven&rsquo;t seen anything new lately.</li>
+</ul>
+
+<p>So! I&rsquo;m excited about a project I&rsquo;ve been working lately with some guys to integrate Bootstrap &amp; EmberJs together in a way that
+doesnt make Bootstrap usage more complex than using it as-is but providing great integration with EmberJs components.</p>
+
+<h1 id="links">Links!</h1>
+
+<ul>
+<li>Github Page: <a href="https://github.com/ember-addons/bootstrap-for-ember">https://github.com/ember-addons/bootstrap-for-ember</a></li>
+<li>Showcase: <a href="http://ember-addons.github.io/bootstrap-for-ember/dist/">http://ember-addons.github.io/bootstrap-for-ember/dist/</a></li>
+<li>Twitter: <a href="https://twitter.com/bs_for_ember">https://twitter.com/bs_for_ember</a></li>
+</ul>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">08 Jul 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/blog/2013/07/08/accessing-emberjs-controller-from-different-scopes/" class="post-title">Accessing EmberJS Controller from different scopes</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-emberjs" href="http://asaf.github.io/blog/categories/emberjs">emberjs</a><a class="post-category post-category-javascript" href="http://asaf.github.io/blog/categories/javascript">javascript</a><a class="post-category post-category-mvc" href="http://asaf.github.io/blog/categories/mvc">mvc</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Sometimes you want to use one <em>ember</em> controller from another,
+This simply can be done by &ldquo;asking&rdquo; ember access to the other controller:</p>
+
+<pre><code class="language-javascript">App.PostController = Ember.ArrayController.extend({
+    ...
+})
+
+App.CommentsController = Ember.ArrayController.extend({
+  needs: &quot;post&quot;
+});
+</code></pre>
+
+<p>Then you can simply use the <em>Post</em> controller in <em>Comments</em>&rsquo;s template:</p>
+
+<p>{% raw %}</p>
+
+<pre><code class="language-html">&lt;!-- use comments template --&gt;
+{{ controllers.post }}
+</code></pre>
+
+<p>{% endraw %}</p>
+
+<p>This works pretty nice, especially when you have nested routes (you surely want to display some data of the post when you are in the post&rsquo;s comments context.),</p>
+
+<p>But what if you need to access a controller outside of Ember&rsquo;s scope?</p>
+
+<p>For instance, you may have a websocket listening to a certain top level event and would like to update a certian controller when data is pushed,</p>
+
+<p>You can use the container lookup to retrieve a controller instance:</p>
+
+<pre><code class="language-javascript">// Somewhere out of Ember`s scope
+ss.event.on('incomingComment', function(comment) {
+    commentsController = App.__container__.lookup('controller:Comments')
+    commentsController.pushObject(comment)
+})
+</code></pre>
+
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="http://asaf.github.io/blog/js/all.min.js"></script>
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

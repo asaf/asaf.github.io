@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ajax on Asaf Shakarchi</title>
+    <link>http://asaf.github.io/blog/categories/ajax/</link>
+    <description>Recent content in Ajax on Asaf Shakarchi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 19 Sep 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://asaf.github.io/blog/categories/ajax/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>New Ember Components Suite!</title>
+      <link>http://asaf.github.io/blog/2014/09/19/ember-components/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/blog/2014/09/19/ember-components/</guid>
+      <description>&lt;p&gt;Introducing a new Ember Components suite!&lt;/p&gt;
+
+&lt;p&gt;Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.&lt;/p&gt;
+
+&lt;p&gt;This project aims to be the successor of our Bootstrap for Ember project as all components on this suite are not bound to any specific CSS framework.&lt;/p&gt;
+
+&lt;p&gt;Github repo: &lt;a href=&#34;https://github.com/indexiatech/ember-components&#34;&gt;https://github.com/indexiatech/ember-components&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Demo &amp;amp; docs: &lt;a href=&#34;http://indexiatech.github.io/ember-components&#34;&gt;http://indexiatech.github.io/ember-components&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ember Forms</title>
+      <link>http://asaf.github.io/blog/2014/08/02/ember-forms/</link>
+      <pubDate>Sat, 02 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/blog/2014/08/02/ember-forms/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Smart, Intuitive forms for Ember.js styled with Bootstrap, Multi layouts and Validation support.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;As my favorite web framework is &lt;em&gt;emberjs&lt;/em&gt;, I lately needed forms support for one of my projects with the following set of features in mind:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Styled for Bootstrap but easy to stil differently.&lt;/li&gt;
+&lt;li&gt;Different layouts such &lt;em&gt;inline&lt;/em&gt; and &lt;em&gt;horizontal&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Validations where validation rules are defined in model/controller and &lt;em&gt;form&lt;/em&gt; supports for:
+
+&lt;ul&gt;
+&lt;li&gt;Change color &amp;amp; icons when validation rule fails.&lt;/li&gt;
+&lt;li&gt;Show error message per form input.&lt;/li&gt;
+&lt;li&gt;Submit button with async support that changes its styles &amp;amp; get disabled during async call.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So here is the result: &lt;a href=&#34;https://github.com/indexiatech/ember-forms&#34;&gt;https://github.com/indexiatech/ember-forms&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Demo &amp;amp; docs: &lt;a href=&#34;http://indexiatech.github.io/ember-forms&#34;&gt;http://indexiatech.github.io/ember-forms&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember - more than 100 stars in 1 week</title>
+      <link>http://asaf.github.io/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</link>
+      <pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/blog/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</guid>
+      <description>&lt;p&gt;This is awesome! &lt;em&gt;Bootstrap for Ember&lt;/em&gt; got more than 100 github &lt;strong&gt;stars&lt;/strong&gt; in less than a week,&lt;/p&gt;
+
+&lt;p&gt;Thanks for the great feedbacks, here&amp;rsquo;s an interesting tweet of the author of Handlebars and Ember.js, &lt;em&gt;Yehuda Katz&lt;/em&gt;.&lt;/p&gt;
+
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p&gt;Also, &lt;a href=&#34;http://t.co/NtqRMNtsA4&#34;&gt;http://t.co/NtqRMNtsA4&lt;/a&gt; (Bootstrap for &lt;a href=&#34;https://twitter.com/search?q=%23emberjs&amp;amp;src=hash&#34;&gt;#emberjs&lt;/a&gt; using components) is kind of awesome!&lt;/p&gt;&amp;mdash; Yehuda Katz (@wycats) &lt;a href=&#34;https://twitter.com/wycats/statuses/373875479096205312&#34;&gt;August 31, 2013&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Visit the project: &lt;a href=&#34;https://github.com/ember-addons/bootstrap-for-ember&#34;&gt;https://github.com/ember-addons/bootstrap-for-ember&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember v0.2.0 released</title>
+      <link>http://asaf.github.io/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</link>
+      <pubDate>Thu, 29 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/blog/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</guid>
+      <description>&lt;p&gt;Few days ago I submitted a post about &lt;a href=&#34;blog/2013/08/26/bootstrap-for-ember-is-born/&#34;&gt;Bootstrap for Ember&lt;/a&gt;,
+We released today the 2nd minor version 0.2.0,&lt;/p&gt;
+
+&lt;p&gt;So far, version 0.2.0 contains the following components:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/alert&#34;&gt;Alert&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/label&#34;&gt;Label&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/badge&#34;&gt;Badge&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/well&#34;&gt;Well&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/page-header&#34;&gt;Page Header&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/button&#34;&gt;Button&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/progressbar&#34;&gt;ProgressBar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/pills&#34;&gt;Pills Navigation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/#/show_components/tabs&#34;&gt;Tabs Navigation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Project details:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ember-addons/bootstrap-for-ember&#34;&gt;Github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ember-addons/bootstrap-for-ember/releases/tag/0.2.0&#34;&gt;Release&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember&#34;&gt;Showcase&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Have fun!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember is born</title>
+      <link>http://asaf.github.io/blog/2013/08/26/bootstrap-for-ember-is-born/</link>
+      <pubDate>Mon, 26 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/blog/2013/08/26/bootstrap-for-ember-is-born/</guid>
+      <description>
+
+&lt;p&gt;Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of
+making web applications right.&lt;/p&gt;
+
+&lt;p&gt;You can just hook both projects together by using Bootstrap as is in Handlebars templates,
+But soon enough, you will find yourself asking questions sucha s:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How do I interact between Bootstrap events and Ember (such as Controllers)?&lt;/li&gt;
+&lt;li&gt;How to pass Bootstrap components data from Ember (such as Controllers)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;ve seen few options about the integration between both, but:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;They are not easy and fun to use, they make the ease of Bootstrap too complex.&lt;/li&gt;
+&lt;li&gt;They are not well documented.&lt;/li&gt;
+&lt;li&gt;Development is too slow, I haven&amp;rsquo;t seen anything new lately.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So! I&amp;rsquo;m excited about a project I&amp;rsquo;ve been working lately with some guys to integrate Bootstrap &amp;amp; EmberJs together in a way that
+doesnt make Bootstrap usage more complex than using it as-is but providing great integration with EmberJs components.&lt;/p&gt;
+
+&lt;h1 id=&#34;links&#34;&gt;Links!&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Github Page: &lt;a href=&#34;https://github.com/ember-addons/bootstrap-for-ember&#34;&gt;https://github.com/ember-addons/bootstrap-for-ember&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Showcase: &lt;a href=&#34;http://ember-addons.github.io/bootstrap-for-ember/dist/&#34;&gt;http://ember-addons.github.io/bootstrap-for-ember/dist/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Twitter: &lt;a href=&#34;https://twitter.com/bs_for_ember&#34;&gt;https://twitter.com/bs_for_ember&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

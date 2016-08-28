@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nodejs-model is born &middot; Asaf Shakarchi</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.17-DEV" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="nodejs-model is born &middot; Asaf Shakarchi">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="nodejs-model is born &middot; Asaf Shakarchi">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="http://asaf.github.io/blog/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Asaf Shakarchi" href="http://asaf.github.io/blog/index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://asaf.github.io/blog">Asaf Shakarchi</a></h1>
+            <h2 class="brand-tagline"> &#34;Talk is cheap. Show me the code.&#34; </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://asaf.github.io/blog/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">06 Aug 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://asaf.github.io/blog/2013/08/06/nodejs-model-is-born/" class="post-title">nodejs-model is born</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-nodejs" href="http://asaf.github.io/blog/categories/nodejs">nodejs</a><a class="post-category post-category-models" href="http://asaf.github.io/blog/categories/models">models</a><a class="post-category post-category-nodejs-model" href="http://asaf.github.io/blog/categories/nodejs-model">nodejs-model</a><a class="post-category post-category-validations" href="http://asaf.github.io/blog/categories/validations">validations</a><a class="post-category post-category-schema" href="http://asaf.github.io/blog/categories/schema">schema</a><a class="post-category post-category-couchdb" href="http://asaf.github.io/blog/categories/couchdb">couchdb</a>
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-share">
+                        <div class="post-share-links">
+                            <h4 style="">Share</h4>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="post-description">
+                        <p>I&rsquo;ve been struggling lately to find an appropriate way to handle models correctly,
+In one hand, these noSQL DBs such <em>CouchDB</em> have great flexibility and I didn&rsquo;t want to ruin that with a blowing up ORM framework,
+in the other hand once the application grows a little bit more than a contact list app, then things become messy.</p>
+
+<p>While writing a larger app with Node, I find myself struggling with finding solutions to problems such:
+(there are few more but these are the main)</p>
+
+<ul>
+<li><strong>Validating a document (model) properties (application level) before storing it in the DB.</strong></li>
+<li><strong>A minimal schema where each attribute is defined per model to ensure no allowed attributes leaks into the model.</strong></li>
+<li><strong>Automatically convert a property value when a value is set.</strong></li>
+<li><strong>Filter critical, sensitive attributes when transfering the model on the wire to external clients.</strong></li>
+<li><strong>Updating an existing domain via an accessibility-aware method (you may want users to update their profile but not letting them directly change their password attribute)</strong></li>
+</ul>
+
+<p>So I couldn&rsquo;t really find a good module to achieve all of that without sticking a giant into my lightweight app, so I built one, it&rsquo;s named
+<a href="https://github.com/asaf/nodejs-model">nodejs-model</a>, available here: <a href="https://github.com/asaf/nodejs-model">https://github.com/asaf/nodejs-model</a></p>
+
+<p>For now, read the docs on the github repo for more info, i will post series of posts about <em>nodejs-model</em> in the near future.</p>
+
+                    </div>
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'asafshakarchisblog';
+    var disqus_identifier = 'http:\/\/asaf.github.io\/blog\/2013\/08\/06\/nodejs-model-is-born\/';
+    var disqus_title = 'nodejs-model is born';
+    var disqus_url = 'http:\/\/asaf.github.io\/blog\/2013\/08\/06\/nodejs-model-is-born\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="http://asaf.github.io/blog/js/all.min.js"></script>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
