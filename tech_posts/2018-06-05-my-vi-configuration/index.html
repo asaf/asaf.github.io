@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>My Vim Configuration - Asaf Shakarzy</title>
+  <meta content='My Vim Configuration - Asaf Shakarzy' property='title' />
+  <meta content='My Vim Configuration - Asaf Shakarzy' property='og:title' />
+
+
+<meta property="og:description" content="Vim has thousands of plugins, scripts and addons and you can easily get lost on the net, trying to figure out which one suites you best,
+But it can be simplified easily!
+ First, I suggest to use Vim-Plug for easy plugin management, Vim 8 supports plugin separation (out of the box) quite well but this tool make it even easier,
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim  and here&rsquo;s a starting point of a clean ~/." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://asaf.github.io/tech_posts/2018-06-05-my-vi-configuration/" />
+
+
+<meta property="article:published_time" content="2018-06-05T22:19:36&#43;03:00"/>
+
+<meta property="article:modified_time" content="2018-06-05T22:19:36&#43;03:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="Asaf Shakarzy" />
+</head>
+<body class="global-font">
+  <nav class=" flex  justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Asaf Shakarzy</a>
+  </div>
+  
+  <div class=" flex-grow  pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/posts/' title="bio">bio</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/tech_posts/' title="Tech Blog">Tech Blog</a>
+    
+  </div>
+  
+</nav>
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">My Vim Configuration</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>05 Jun 2018</time> 
+     | 
+    
+    
+    tags: [ <a href='/tags/vi' class="link silver">vi</a>  ]
+    
+  </p>
+  <div class="lh-copy post-content">
+
+<p>Vim has thousands of plugins, scripts and addons and you can easily get lost on the net, trying to figure out which one suites you best,</p>
+
+<p>But it can be simplified easily!</p>
+
+
+<script type="text/javascript" src="https://asciinema.org/a/OLwv3bwginqBjitU7COPe5vmg.js" id="asciicast-OLwv3bwginqBjitU7COPe5vmg" data-rows="20" async></script>
+
+
+<p>First, I suggest to use <a href="https://github.com/junegunn/vim-plug">Vim-Plug</a> for easy plugin management,
+Vim 8 supports plugin separation (out of the box) quite well but this tool make it even easier,</p>
+
+<pre><code class="language-bash">curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+</code></pre>
+
+<p>and here&rsquo;s a starting point of a clean <code>~/.vimrc</code></p>
+
+<pre><code class="language-bash">&quot; Plugins will be downloaded under the specified directory
+call plug#begin('~/.vim/plugged')
+&quot; Declare the list of plugins.
+&quot; List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+</code></pre>
+
+<p>Here are my favorite plugins</p>
+
+<pre><code>&quot; top/bottom status bar
+Plug 'bling/vim-airline'
+&quot; make airline understand git
+Plug 'airblade/vim-gitgutter'
+&quot; for git
+Plug 'tpope/vim-fugitive'
+&quot; dark theme
+Plug 'dracula/vim', { 'as': 'dracula' }
+&quot; support fuzzy search
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+&quot; snippet support
+Plug 'SirVer/ultisnips'
+&quot; json formatted
+Plug 'elzr/vim-json'
+&quot; golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+</code></pre>
+
+<p>let g:airline#extensions#tabline#enabled = 1
+colorscheme dracula</p>
+
+<p>Just run <code>PlugInstall</code> in normal mode and all plugins will be installed silently!</p>
+
+<h1 id="refs">Refs</h1>
+
+<p><a href="https://github.com/junegunn/dotfiles/blob/master/vimrc">https://github.com/junegunn/dotfiles/blob/master/vimrc</a></p>
+</div>
+</main>
+ 
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  <a href="http://asaf.github.io/tech_posts/2016-08-24-gentoo_on_vmware_unable_to_mount_rootfs/">prev post</a>
+  
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  All rights reserved, Asaf Shakarzy 2018
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

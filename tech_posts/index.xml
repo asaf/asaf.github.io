@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
-    <lastBuildDate>Wed, 24 Aug 2016 13:26:30 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 05 Jun 2018 22:19:36 +0300</lastBuildDate>
     
 	<atom:link href="http://asaf.github.io/tech_posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>My Vim Configuration</title>
+      <link>http://asaf.github.io/tech_posts/2018-06-05-my-vi-configuration/</link>
+      <pubDate>Tue, 05 Jun 2018 22:19:36 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tech_posts/2018-06-05-my-vi-configuration/</guid>
+      <description>Vim has thousands of plugins, scripts and addons and you can easily get lost on the net, trying to figure out which one suites you best,
+But it can be simplified easily!
+ First, I suggest to use Vim-Plug for easy plugin management, Vim 8 supports plugin separation (out of the box) quite well but this tool make it even easier,
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim  and here&amp;rsquo;s a starting point of a clean ~/.</description>
+    </item>
     
     <item>
       <title>Gentoo On Vmware Fusion - unable to mount rootfs</title>
