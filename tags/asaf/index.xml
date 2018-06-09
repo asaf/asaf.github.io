@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Asaf on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/asaf/</link>
+    <description>Recent content in Asaf on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Sat, 09 Jun 2018 17:36:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/asaf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Biography</title>
+      <link>http://asaf.github.io/bio/</link>
+      <pubDate>Sat, 09 Jun 2018 17:36:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/bio/</guid>
+      <description>Asaf (Shakarzy) is my name,
+Most of my time I spend on my MacBook Pro computer, I&amp;rsquo;m the (CTO of Indexia Technologies)(https://www.linkedin.com/in/asaf-shakarzy-7065074/) and I lead the tech of CrossID product.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -7,10 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
-    <lastBuildDate>Tue, 05 Jun 2018 22:19:36 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 09 Jun 2018 17:38:00 +0000</lastBuildDate>
     
 	<atom:link href="http://asaf.github.io/tech_posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>My Notebook</title>
+      <link>http://asaf.github.io/tech_posts/my_notebook/</link>
+      <pubDate>Sat, 09 Jun 2018 17:38:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tech_posts/my_notebook/</guid>
+      <description>My current notebook is Macbook Pro 15&amp;rdquo;
+I was a fan of the Thinkpad (T series) for more than 10 years,
+Back in 2016, when Apple came with the Macbook Pro 15&amp;rdquo; retina version I decided to give it a try.
+Since then I stick with Macbook (I already upgraded once to 2017 revision)
+ Here are my pros of Thinkpad and the Macbook Pro.
+Lenovo Pros:
+ It is a modular machine, you can easily swap drive, memory, etc.</description>
+    </item>
     
     <item>
       <title>My Vim Configuration</title>
