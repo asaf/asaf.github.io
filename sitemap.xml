@@ -3,132 +3,132 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2018-06-05-my-vi-configuration/</loc>
+    <loc>http://asaf.github.io/tech_posts/my-vi-configuration/</loc>
     <lastmod>2018-06-05T22:19:36+03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2016-08-24-gentoo_on_vmware_unable_to_mount_rootfs/</loc>
+    <loc>http://asaf.github.io/tech_posts/gentoo_on_vmware_unable_to_mount_rootfs/</loc>
     <lastmod>2016-08-24T13:26:30+03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2016-08-23-export_certificate_and_private_key_from_jks/</loc>
+    <loc>http://asaf.github.io/tech_posts/export_certificate_and_private_key_from_jks/</loc>
     <lastmod>2016-08-23T23:30:26+03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/</loc>
+    <loc>http://asaf.github.io/tech_posts/migrate-octopress-to-hugo/</loc>
     <lastmod>2016-08-23T22:43:26+03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2015-09-14-js-default-function-options-stash-with-es6/</loc>
+    <loc>http://asaf.github.io/tech_posts/js-default-function-options-stash-with-es6/</loc>
     <lastmod>2015-09-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2015-09-13-add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</loc>
+    <loc>http://asaf.github.io/tech_posts/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</loc>
     <lastmod>2015-09-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2015-09-05-react/</loc>
+    <loc>http://asaf.github.io/tech_posts/react_es6_with_browserify/</loc>
     <lastmod>2015-09-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2015-06-23-extending-behavior-of-react-components-by-es6-decorators/</loc>
+    <loc>http://asaf.github.io/tech_posts/extending-behavior-of-react-components-by-es6-decorators/</loc>
     <lastmod>2015-06-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2015-06-19-elegant-way-to-use-react-with-es6-slash-es7-features/</loc>
+    <loc>http://asaf.github.io/tech_posts/elegant-way-to-use-react-with-es6-slash-es7-features/</loc>
     <lastmod>2015-06-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2015-05-01-react/</loc>
+    <loc>http://asaf.github.io/tech_posts/react/</loc>
     <lastmod>2015-05-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2015-02-09-ratpack_hello_world/</loc>
+    <loc>http://asaf.github.io/tech_posts/ratpack_hello_world/</loc>
     <lastmod>2015-02-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2015-02-01-searching_for_new_java_backend/</loc>
+    <loc>http://asaf.github.io/tech_posts/searching_for_new_java_backend/</loc>
     <lastmod>2015-02-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2014-09-19-ember-components/</loc>
+    <loc>http://asaf.github.io/tech_posts/ember-components/</loc>
     <lastmod>2014-09-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2014-08-02-ember-forms/</loc>
+    <loc>http://asaf.github.io/tech_posts/ember-forms/</loc>
     <lastmod>2014-08-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-09-02-bootstrap-for-ember-more-than-100-stars-in-1-week/</loc>
+    <loc>http://asaf.github.io/tech_posts/bootstrap-for-ember-more-than-100-stars-in-1-week/</loc>
     <lastmod>2013-09-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-08-29-bootstrap-for-ember-v0-dot-2-0-released/</loc>
+    <loc>http://asaf.github.io/tech_posts/bootstrap-for-ember-v0-dot-2-0-released/</loc>
     <lastmod>2013-08-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-08-26-bootstrap-for-ember-is-born/</loc>
+    <loc>http://asaf.github.io/tech_posts/bootstrap-for-ember-is-born/</loc>
     <lastmod>2013-08-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-08-06-nodejs-model-is-born/</loc>
+    <loc>http://asaf.github.io/tech_posts/nodejs-model-is-born/</loc>
     <lastmod>2013-08-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-07-10-installing-couchdb-instance-on-amazon-ami-using-build-couchdb/</loc>
+    <loc>http://asaf.github.io/tech_posts/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/</loc>
     <lastmod>2013-07-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-07-10-nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</loc>
+    <loc>http://asaf.github.io/tech_posts/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</loc>
     <lastmod>2013-07-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-07-09-q-promises-with-coffeescript/</loc>
+    <loc>http://asaf.github.io/tech_posts/q-promises-with-coffeescript/</loc>
     <lastmod>2013-07-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-07-08-accessing-emberjs-controller-from-different-scopes/</loc>
+    <loc>http://asaf.github.io/tech_posts/accessing-emberjs-controller-from-different-scopes/</loc>
     <lastmod>2013-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-07-08-blogging-with-octopress-add-about-page/</loc>
+    <loc>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-about-page/</loc>
     <lastmod>2013-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-07-08-blogging-with-octopress-add-comments/</loc>
+    <loc>http://asaf.github.io/tech_posts/blogging-with-octopress-add-comments/</loc>
     <lastmod>2013-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-07-08-blogging-with-octopress-quick-installation/</loc>
+    <loc>http://asaf.github.io/tech_posts/blogging-with-octopress-quick-installation/</loc>
     <lastmod>2013-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://asaf.github.io/tech_posts/2013-07-08-installing-couch-db-on-amazon-ami/</loc>
+    <loc>http://asaf.github.io/tech_posts/installing-couch-db-on-amazon-ami/</loc>
     <lastmod>2013-07-08T00:00:00+00:00</lastmod>
   </url>
   

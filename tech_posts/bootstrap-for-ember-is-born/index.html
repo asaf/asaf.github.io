@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Bootstrap for Ember is born - Asaf Shakarzy</title>
+  <meta content='Bootstrap for Ember is born - Asaf Shakarzy' property='title' />
+  <meta content='Bootstrap for Ember is born - Asaf Shakarzy' property='og:title' />
+
+
+<meta property="og:description" content="Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of making web applications right.
+You can just hook both projects together by using Bootstrap as is in Handlebars templates, But soon enough, you will find yourself asking questions sucha s:
+ How do I interact between Bootstrap events and Ember (such as Controllers)? How to pass Bootstrap components data from Ember (such as Controllers)  I&rsquo;ve seen few options about the integration between both, but:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://asaf.github.io/tech_posts/bootstrap-for-ember-is-born/" />
+
+
+<meta property="article:published_time" content="2013-08-26T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2013-08-26T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="Asaf Shakarzy" />
+</head>
+<body class="global-font">
+  <nav class=" flex  justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Asaf Shakarzy</a>
+  </div>
+  
+  <div class=" flex-grow  pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/posts/' title="bio">bio</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/tech_posts/' title="Tech Blog">Tech Blog</a>
+    
+  </div>
+  
+</nav>
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">Bootstrap for Ember is born</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>26 Aug 2013</time> 
+     | 
+    
+    
+    tags: [ <a href='/tags/emberjs' class="link silver">emberjs</a> <a href='/tags/bootstrap' class="link silver">bootstrap</a> <a href='/tags/javascript' class="link silver">javascript</a> <a href='/tags/coffee' class="link silver">coffee</a> <a href='/tags/ajax' class="link silver">ajax</a> <a href='/tags/bootstrap-for-ember' class="link silver">bootstrap-for-ember</a> <a href='/tags/ember-addons' class="link silver">ember-addons</a>  ]
+    
+  </p>
+  <div class="lh-copy post-content">
+
+<p>Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of
+making web applications right.</p>
+
+<p>You can just hook both projects together by using Bootstrap as is in Handlebars templates,
+But soon enough, you will find yourself asking questions sucha s:</p>
+
+<ul>
+<li>How do I interact between Bootstrap events and Ember (such as Controllers)?</li>
+<li>How to pass Bootstrap components data from Ember (such as Controllers)</li>
+</ul>
+
+<p>I&rsquo;ve seen few options about the integration between both, but:</p>
+
+<ul>
+<li>They are not easy and fun to use, they make the ease of Bootstrap too complex.</li>
+<li>They are not well documented.</li>
+<li>Development is too slow, I haven&rsquo;t seen anything new lately.</li>
+</ul>
+
+<p>So! I&rsquo;m excited about a project I&rsquo;ve been working lately with some guys to integrate Bootstrap &amp; EmberJs together in a way that
+doesnt make Bootstrap usage more complex than using it as-is but providing great integration with EmberJs components.</p>
+
+<h1 id="links">Links!</h1>
+
+<ul>
+<li>Github Page: <a href="https://github.com/ember-addons/bootstrap-for-ember">https://github.com/ember-addons/bootstrap-for-ember</a></li>
+<li>Showcase: <a href="http://ember-addons.github.io/bootstrap-for-ember/dist/">http://ember-addons.github.io/bootstrap-for-ember/dist/</a></li>
+<li>Twitter: <a href="https://twitter.com/bs_for_ember">https://twitter.com/bs_for_ember</a></li>
+</ul>
+</div>
+</main>
+ 
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  <a href="http://asaf.github.io/tech_posts/nodejs-model-is-born/">prev post</a>
+  <a href="http://asaf.github.io/tech_posts/bootstrap-for-ember-v0-dot-2-0-released/">next post</a>
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  All rights reserved, Asaf Shakarzy 2018
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

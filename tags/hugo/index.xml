@@ -14,10 +14,10 @@
     
     <item>
       <title>Migrate Octopress to Hugo</title>
-      <link>http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/</link>
+      <link>http://asaf.github.io/tech_posts/migrate-octopress-to-hugo/</link>
       <pubDate>Tue, 23 Aug 2016 22:43:26 +0300</pubDate>
       
-      <guid>http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/</guid>
+      <guid>http://asaf.github.io/tech_posts/migrate-octopress-to-hugo/</guid>
       <description>My blog was based on Octopress blogging system, based on jekyll, but I was never a ruby person, it also seems like Octopress is not so active lately,
 In the other hand, Hugo feels super slim and simple, thanks to Go and Hugo, it takes only few lines to start a blog,
 You can download a binary package of Hugo, but I have Go installed so it&amp;rsquo;s simply 1 command:</description>

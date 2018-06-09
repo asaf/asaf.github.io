@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Installing CouchDB instance on Amazon AMI using build-couchdb - Asaf Shakarzy</title>
+  <meta content='Installing CouchDB instance on Amazon AMI using build-couchdb - Asaf Shakarzy' property='title' />
+  <meta content='Installing CouchDB instance on Amazon AMI using build-couchdb - Asaf Shakarzy' property='og:title' />
+
+
+<meta property="og:description" content="{% img http://couchdb.apache.org/image/couch.png 160 180 Couch %}
+This post explains how to install CouchDB on Amazon AMI using build-couchdb/
+If you want to install couch from sources without build-couchdb tool, read: Installing CouchDB instance on Amazon AMI is a working link
+build-couchdb does the following things:
+ Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.) Clone the &lsquo;build-couchdb&rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc), These are all the dependencies that CouchDB needs in order to be compiled." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://asaf.github.io/tech_posts/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/" />
+
+
+<meta property="article:published_time" content="2013-07-10T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2013-07-10T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="Asaf Shakarzy" />
+</head>
+<body class="global-font">
+  <nav class=" flex  justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Asaf Shakarzy</a>
+  </div>
+  
+  <div class=" flex-grow  pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/posts/' title="bio">bio</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/tech_posts/' title="Tech Blog">Tech Blog</a>
+    
+  </div>
+  
+</nav>
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">Installing CouchDB instance on Amazon AMI using build-couchdb</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>10 Jul 2013</time> 
+     | 
+    
+    
+    tags: [ <a href='/tags/amazon' class="link silver">amazon</a> <a href='/tags/ec2' class="link silver">ec2</a> <a href='/tags/ami' class="link silver">ami</a> <a href='/tags/couchdb' class="link silver">couchdb</a>  ]
+    
+  </p>
+  <div class="lh-copy post-content">
+
+<p>{% img <a href="http://couchdb.apache.org/image/couch.png">http://couchdb.apache.org/image/couch.png</a> 160 180 Couch %}</p>
+
+<p>This post explains how to install CouchDB on Amazon AMI using <a href="https://github.com/iriscouch/build-couchdb">build-couchdb</a>/</p>
+
+<p>If you want to install couch from sources without build-couchdb tool, read:
+<a href="/blog/2013/07/08/installing-couch-db-on-amazon-ami/">Installing CouchDB instance on Amazon AMI</a> is a working link</p>
+
+<p>build-couchdb does the following things:</p>
+
+<ol>
+<li>Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.)</li>
+<li>Clone the &lsquo;build-couchdb&rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc),
+These are all the dependencies that CouchDB needs in order to be compiled.</li>
+<li>Compiles all dependencies</li>
+<li>Compiles CouchDB linked with the compiled dependencies.</li>
+</ol>
+
+<p>Okay, go grab coffee and lets start!</p>
+
+<h3 id="launch-instance">Launch Instance</h3>
+
+<p>Login into EC2, and launch a new instanc and choose <em>Amazon Linux AMI</em>,
+You can of course choose other Linux flavours (you are not going to use Windows right?),</p>
+
+<p>But I really suggest going with Amazon AMI, it is EBS backed, ships with AWS tools installed and has a
+RHEL style package management using <em>yum</em>.</p>
+
+<p>Once your instance is launched, SSH it, i&rsquo;m sure you can do.</p>
+
+<p>Now lets updated the system to latest:</p>
+
+<pre><code class="language-bash">sudo yum update
+</code></pre>
+
+<h3 id="installation">Installation</h3>
+
+<h4 id="installing-os-dependencies">Installing OS dependencies</h4>
+
+<pre><code class="language-bash">sudo yum install gcc gcc-c++ libtool curl-devel python27 help2man texinfo ruby-rdoc zlib-devel openssl-devel make automake rubygems perl git-core 
+sudo gem install rake --no-ri --no-rdoc
+</code></pre>
+
+<p>If you don&rsquo;t want to get into troubles where build-couch tries to patch autoconf-2.69 because of old python version (&lt; 2.6) then link to python 2.7,
+at least during the time couch is being built.</p>
+
+<pre><code class="language-bash">sudo mv /usr/bin/python /usr/bin/python_org
+sudo ln -s /usr/bin/python2.7 /usr/bin/python
+</code></pre>
+
+<h4 id="clone-build-couchdb">Clone build-couchdb</h4>
+
+<p>git clone git://github.com/iriscouch/build-couchdb
+cd build-couchdb
+git submodule init
+git submodule update</p>
+
+<h4 id="optional-upgrade-spidermonkey">Optional: Upgrade SpiderMonkey</h4>
+
+<p>build-couch uses not an official Mozilla SpiderMonkey version, but considered to be very stable,
+if you would like to replace it with other versions then do the following,
+<em>You can safely skip this, proceed only if you have a good reason to do so</em></p>
+
+<pre><code class="language-bash">sudo yum install mercurial
+cd
+hg clone --verbose http://hg.mozilla.org/releases/mozilla-release  
+cd mozilla-release
+hg checkout FIREFOX_XX_0_RELEASE --clean #replace XX with the tag you wish
+rm -rf ~/build-couchdb/dependencies/spidermonkey/js
+rm -rf ~/build-couchdb/dependencies/spidermonkey/mfbt
+cp -r js mfbt ~/build-couchdb/dependencies/spidermonkey
+</code></pre>
+
+<h4 id="building-couchdb-and-its-dependencies">Building CouchDB and its dependencies</h4>
+
+<p>Now lets build Couch, you can replace <em>1.3.1</em> with any CouchDB release you wish to build,
+Or change the installation location.</p>
+
+<pre><code class="language-bash">sudo rake git=&quot;git://git.apache.org/couchdb.git tags/1.3.1&quot; install=/usr/local/couchdb-1.3.1
+sudo ln -s /usr/local/couchdb-1.3.1 /usr/local/couchdb
+</code></pre>
+
+<p>Now go eat something, drink (another?) coffee, take a shower (you will have time for all of them, I promise.)</p>
+
+<p>You should expect the following output:
+&gt; Plugins done</p>
+
+<p>Now lets see what we&rsquo;ve built:</p>
+
+<pre><code class="language-bash">cd /usr/local/couchdb-1.3.1
+ls bin
+
+&gt; aclocal       autoheader2.13  autom4te2.69    autoreconf2.69  autoupdate2.59  ct_run       erl       genctd       ifnames2.62  pkgdata
+&gt; aclocal-1.11  autoheader2.59  automake        autoscan2.13    autoupdate2.62  curl         erlc      genrb        ifnames2.69  run_erl
+&gt; autoconf2.13  autoheader2.62  automake-1.11   autoscan2.59    autoupdate2.69  curl-config  escript   icu-config   js-config    run_test
+&gt; autoconf2.59  autoheader2.69  autoreconf2.13  autoscan2.62    couch-config    derb         genbrk    icuinfo      libtool      to_erl
+&gt; autoconf2.62  autom4te2.59    autoreconf2.59  autoscan2.69    couchdb         dialyzer     gencfu    ifnames2.13  libtoolize   typer
+&gt; autoconf2.69  autom4te2.62    autoreconf2.62  autoupdate2.13  couchjs         epmd         gencnval  ifnames2.59  makeconv     uconv
+</code></pre>
+
+<p>Lets execute Couch to ensure it can be executed.</p>
+
+<pre><code class="language-bash">sudo ./bin/couchdb
+
+&gt; Apache CouchDB 1.3.1 (LogLevel=info) is starting.
+&gt; Apache CouchDB has started. Time to relax.
+&gt; [info] [&lt;0.32.0&gt;] Apache CouchDB has started on http://127.0.0.1:5984/
+</code></pre>
+
+<p>You can open another terminal to ensure Couch replies properly:</p>
+
+<pre><code class="language-bash">curl http://127.0.0.1:5984
+
+&gt; {&quot;couchdb&quot;:&quot;Welcome&quot;,&quot;uuid&quot;:&quot;9db29433ea76ccfaa81726f6ace742f4&quot;,&quot;version&quot;:&quot;1.3.1&quot;,&quot;vendor&quot;:{&quot;name&quot;:&quot;The Apache Software Foundation&quot;,&quot;version&quot;:&quot;1.3.1&quot;}}
+</code></pre>
+
+<h3 id="configuration">Configuration</h3>
+
+<h4 id="replace-python-link">Replace Python link</h4>
+
+<p>To avoid breaking yum and other things, it is adviced to return the python binary link back to its original version</p>
+
+<pre><code class="language-bash">sudo rm /usr/bin/python
+sudo mv /usr/bin/python_org /usr/bin/python
+</code></pre>
+
+<h4 id="run-couch-on-isolated-user-and-correct-files-ownership">Run Couch on isolated user and correct files ownership</h4>
+
+<pre><code class="language-bash"># add couchdb user
+sudo adduser --system --home /usr/local/couchdb/var/lib/couchdb -M --shell /bin/bash --comment &quot;CouchDB&quot; couchdb
+
+# change file ownership
+sudo chown -R couchdb:couchdb /usr/local/couchdb/etc/couchdb /usr/local/couchdb/var/lib/couchdb /usr/local/couchdb/var/log/couchdb /usr/local/couchdb/var/run/couchdb
+</code></pre>
+
+<h4 id="couch-ini-file">couch ini file</h4>
+
+<p>Lets create couch ini file</p>
+
+<pre><code class="language-bash">cat &lt;&lt; 'EOF' &gt; /usr/local/couchdb/etc/couchdb/local.ini
+[couchdb]
+#read more here: http://guide.couchdb.org/draft/performance.html
+delayed_commits = false
+
+[httpd]
+port = 80
+bind_address = 0.0.0.0
+socket_options = [{recbuf, 262144}, {sndbuf, 262144}, {nodelay, true}]
+WWW-Authenticate = Basic realm=&quot;administrator&quot;
+;WWW-Authenticate = bummer
+
+[couch_httpd_auth]
+require_valid_user = true
+
+[log]
+level = error
+
+[admins]
+EOF
+</code></pre>
+
+<h4 id="password-protection">Password protection</h4>
+
+<pre><code class="language-bash">export PASS=`&lt;/dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c20; echo &quot;&quot;`
+echo &quot;admin = ${ADMIN_PASSWORD}&quot; &gt;&gt; /usr/local/etc/couchdb/local.ini
+</code></pre>
+
+<p>Couch is smart enough to hash the passwords.</p>
+
+<h4 id="logs-rotation">Logs Rotation</h4>
+
+<pre><code class="language-bash">if [ ! -e &quot;/etc/logrotate.d/couchdb&quot; ]
+then
+  # add couch.log to logrotate
+  sudo ln -s /usr/local/couchdb/etc/logrotate.d/couchdb /etc/logrotate.d/
+  # change to daily rotation
+  sudo sed -e s/weekly/daily/g -i /usr/local/couchdb/etc/logrotate.d/couchdb
+  #logrotate -v -f /etc/logrotate.d/couchdb 
+fi
+</code></pre>
+
+<h4 id="run-couchdb-on-startup">Run CouchDB on startup</h4>
+
+<pre><code class="language-bash"># run couchdb on startup
+sudo ln -s /usr/local/couchdb/etc/rc.d/couchdb /etc/init.d/couchdb
+sudo chkconfig --add couchdb
+sudo chkconfig --level 345 couchdb on
+
+sudo service couchdb status
+#Apache CouchDB is not running.
+
+sudo service couchdb start
+#Apache CouchDB is running as process 5047, time to relax.
+
+</code></pre>
+
+<p>Now it&rsquo;s really time to relax, enjoy :-)</p>
+</div>
+</main>
+ 
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  <a href="http://asaf.github.io/tech_posts/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/">prev post</a>
+  <a href="http://asaf.github.io/tech_posts/nodejs-model-is-born/">next post</a>
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  All rights reserved, Asaf Shakarzy 2018
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

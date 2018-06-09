@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>ES6, React &amp; Browserify - Asaf Shakarzy</title>
+  <meta content='ES6, React &amp; Browserify - Asaf Shakarzy' property='title' />
+  <meta content='ES6, React &amp; Browserify - Asaf Shakarzy' property='og:title' />
+
+
+<meta property="og:description" content="ES6, React &amp; Browserify Browserify is a lightweight build tool for JS, you can start &lsquo;require&rsquo; modules with zero configuration, Thanks to Babelify, you can start writing ES6 code (via Babel) write away,
+Here&rsquo;s a proof how simple it is,
+Lets create a package.json file and install minimal dependencies
+npm init npm install --save react npm install --save-dev browserify babelify watchify  Lets give Browserify a hint that it should perform code transformation via babelify by adding this json tag to package." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://asaf.github.io/tech_posts/react_es6_with_browserify/" />
+
+
+<meta property="article:published_time" content="2015-09-05T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2015-09-05T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="Asaf Shakarzy" />
+</head>
+<body class="global-font">
+  <nav class=" flex  justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Asaf Shakarzy</a>
+  </div>
+  
+  <div class=" flex-grow  pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/posts/' title="bio">bio</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/tech_posts/' title="Tech Blog">Tech Blog</a>
+    
+  </div>
+  
+</nav>
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">ES6, React &amp; Browserify</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>05 Sep 2015</time> 
+     | 
+    
+    
+    tags: [ <a href='/tags/react' class="link silver">react</a> <a href='/tags/js' class="link silver">js</a> <a href='/tags/html5' class="link silver">html5</a> <a href='/tags/es6' class="link silver">es6</a> <a href='/tags/browserify' class="link silver">browserify</a>  ]
+    
+  </p>
+  <div class="lh-copy post-content">
+
+<h2 id="es6-react-browserify">ES6, React &amp; Browserify</h2>
+
+<p><a href="http://browserify.org/">Browserify</a> is a <em>lightweight</em> build tool for JS, you can start <em>&lsquo;require&rsquo;</em> modules with zero configuration,
+Thanks to <a href="https://github.com/babel/babelify">Babelify</a>, you can start writing ES6 code (via <a href="babeljs.io">Babel</a>) write away,</p>
+
+<p>Here&rsquo;s a proof how simple it is,</p>
+
+<p>Lets create a <code>package.json</code> file and install minimal dependencies</p>
+
+<pre><code class="language-bash">npm init
+npm install --save react
+npm install --save-dev browserify babelify watchify
+</code></pre>
+
+<p>Lets give Browserify a hint that it should perform code transformation via <code>babelify</code> by adding this json tag to <code>package.json</code></p>
+
+<pre><code class="language-js">&quot;browserify&quot;: {
+  &quot;transform&quot;: [
+    &quot;babelify&quot;
+  ]
+}
+</code></pre>
+
+<p>It can also be nice to just type <code>npm start</code> when developing, so lets add a <code>start</code> script to <code>package.json</code> as well</p>
+
+<p>&ldquo;start&rdquo;: &ldquo;watchify &ndash;extension=js -o bundle.js index.js &amp; python -m SimpleHTTPServer&rdquo;,</p>
+
+<p>Note: Watchify is not mandatory but it&rsquo;s great tool for watching your code changes and auto rebuild when a change gets discovered.</p>
+
+<p>Lets put the simplest index file ever:</p>
+
+<pre><code class="language-html">&lt;html&gt;
+  &lt;body&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;bundle.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>Here&rsquo;s a simple ES6 class with React.</p>
+
+<pre><code class="language-js">import React from 'react';
+
+class Hello extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {count: props.initCount}
+    this.tick = this.tick.bind(this)
+  }
+
+  tick () {
+    this.setState({count: this.state.count + 1});
+  }
+  render(){
+    let { name } = this.props
+    let { count } = this.state
+    return (
+      &lt;button onClick={this.tick}&gt;Hello {name} {count}&lt;/button&gt;
+    );
+  }
+}
+
+React.render(&lt;Hello name=&quot;Stranger&quot; initCount={5}/&gt;, document.body)
+
+</code></pre>
+
+<h2 id="running-the-code">Running the code:</h2>
+
+<pre><code class="language-bash">npm start
+</code></pre>
+
+<p>Open browser <a href="http://localhost:8000">http://localhost:8000</a></p>
+
+<p>To summary:</p>
+
+<p>1) Browserify is lightweight build tool, it handles modularity by understanding <code>require</code>
+2) Labelify is a plugin for Browserify, it takes care of transpilling ES6 code to ES5 via Babel.
+3) Thanks to Babel &amp; React integration, there&rsquo;s no need for any extra plugins to perform JSX transformations.</p>
+</div>
+</main>
+ 
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  <a href="http://asaf.github.io/tech_posts/extending-behavior-of-react-components-by-es6-decorators/">prev post</a>
+  <a href="http://asaf.github.io/tech_posts/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/">next post</a>
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  All rights reserved, Asaf Shakarzy 2018
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

@@ -14,10 +14,10 @@
     
     <item>
       <title>New Ember Components Suite!</title>
-      <link>http://asaf.github.io/tech_posts/2014-09-19-ember-components/</link>
+      <link>http://asaf.github.io/tech_posts/ember-components/</link>
       <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/tech_posts/2014-09-19-ember-components/</guid>
+      <guid>http://asaf.github.io/tech_posts/ember-components/</guid>
       <description>Introducing a new Ember Components suite!
 Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.
 This project aims to be the successor of our Bootstrap for Ember project as all components on this suite are not bound to any specific CSS framework.
@@ -27,10 +27,10 @@ Demo &amp;amp; docs: http://indexiatech.github.io/ember-components</description>
     
     <item>
       <title>Ember Forms</title>
-      <link>http://asaf.github.io/tech_posts/2014-08-02-ember-forms/</link>
+      <link>http://asaf.github.io/tech_posts/ember-forms/</link>
       <pubDate>Sat, 02 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/tech_posts/2014-08-02-ember-forms/</guid>
+      <guid>http://asaf.github.io/tech_posts/ember-forms/</guid>
       <description>Smart, Intuitive forms for Ember.js styled with Bootstrap, Multi layouts and Validation support.
 As my favorite web framework is emberjs, I lately needed forms support for one of my projects with the following set of features in mind:
  Styled for Bootstrap but easy to stil differently. Different layouts such inline and horizontal Validations where validation rules are defined in model/controller and form supports for:  Change color &amp;amp; icons when validation rule fails.</description>
@@ -38,10 +38,10 @@ As my favorite web framework is emberjs, I lately needed forms support for one o
     
     <item>
       <title>Q promises with CoffeeScript</title>
-      <link>http://asaf.github.io/tech_posts/2013-07-09-q-promises-with-coffeescript/</link>
+      <link>http://asaf.github.io/tech_posts/q-promises-with-coffeescript/</link>
       <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/tech_posts/2013-07-09-q-promises-with-coffeescript/</guid>
+      <guid>http://asaf.github.io/tech_posts/q-promises-with-coffeescript/</guid>
       <description>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across &amp;ldquo;https://github.com/kriskowal/q&amp;rdquo;.
 Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner.
 Here&amp;rsquo;s an example:

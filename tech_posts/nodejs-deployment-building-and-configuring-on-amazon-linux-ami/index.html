@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Nodejs Deployment: Building and Configuring on Amazon Linux AMI - Asaf Shakarzy</title>
+  <meta content='Nodejs Deployment: Building and Configuring on Amazon Linux AMI - Asaf Shakarzy' property='title' />
+  <meta content='Nodejs Deployment: Building and Configuring on Amazon Linux AMI - Asaf Shakarzy' property='og:title' />
+
+
+<meta property="og:description" content="Logging in and updating system to latest SSH your shiny new VM,
+Now lets update the system to the latest:
+sudo yum update  Install OS dependencies We&rsquo;r going to build Node.js from sources, some dependencies (such as gcc) are required:
+sudo yum install gcc-c&#43;&#43; make openssl-devel git  Cloning n Building Node.js cd git clone git://github.com/joyent/node.git cd node git checkout v0.10.13 #check for other stable tags by executing &#39;git tag&#39; ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://asaf.github.io/tech_posts/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/" />
+
+
+<meta property="article:published_time" content="2013-07-10T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2013-07-10T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="Asaf Shakarzy" />
+</head>
+<body class="global-font">
+  <nav class=" flex  justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Asaf Shakarzy</a>
+  </div>
+  
+  <div class=" flex-grow  pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/posts/' title="bio">bio</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/tech_posts/' title="Tech Blog">Tech Blog</a>
+    
+  </div>
+  
+</nav>
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">Nodejs Deployment: Building and Configuring on Amazon Linux AMI</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>10 Jul 2013</time> 
+     | 
+    
+    
+    tags: [ <a href='/tags/ec2' class="link silver">ec2</a> <a href='/tags/aws' class="link silver">aws</a> <a href='/tags/nodejs' class="link silver">nodejs</a>  ]
+    
+  </p>
+  <div class="lh-copy post-content">
+
+<h3 id="logging-in-and-updating-system-to-latest">Logging in and updating system to latest</h3>
+
+<p>SSH your shiny new VM,</p>
+
+<p>Now lets update the system to the latest:</p>
+
+<pre><code class="language-bash">sudo yum update
+</code></pre>
+
+<h3 id="install-os-dependencies">Install OS dependencies</h3>
+
+<p>We&rsquo;r going to build Node.js from sources, some dependencies (such as gcc) are required:</p>
+
+<pre><code class="language-bash">sudo yum install gcc-c++ make openssl-devel git
+</code></pre>
+
+<h3 id="cloning-n-building-node-js">Cloning n Building Node.js</h3>
+
+<pre><code class="language-bash">cd
+git clone git://github.com/joyent/node.git
+cd node
+git checkout v0.10.13 #check for other stable tags by executing 'git tag'
+./configure --prefix=/usr/local/node
+make
+sudo make install
+</code></pre>
+
+<p>Go grab a cup of coffee&hellip; :-)
+&hellip;</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<pre><code class="language-bash">sudo useradd _yourappuser_
+passwd _yourappuser_
+sudo su - _yourappuser_
+</code></pre>
+
+<h3 id="put-your-app">Put your app</h3>
+
+<p>Now put your app in ~, for instance:</p>
+
+<pre><code class="language-bash">cd
+pwd
+#/home/_yourappuser_
+git clone _https://myhost.com/myapp myapp_
+</code></pre>
+
+<h3 id="init-d">Init.d</h3>
+
+<p>We would like to have nodejs to start automatically as a service, to do so, lets create an init.d file
+<em>Note: you have to change the properties in the file such as yourappuser, myapp to your app folder and server.js to your node app file.</em></p>
+
+<pre><code class="language-bash">cat &lt;&lt; 'EOF' &gt; /etc/init.d/nodejs
+
+#!/bin/sh
+
+#
+# chkconfig: 35 99 99
+# description: Node.js /home/yourappuser/myapp/app.js
+#
+
+. /etc/rc.d/init.d/functions
+
+USER=&quot;_yourappuser_&quot;
+
+NODE_ENV=&quot;production&quot;
+DAEMON=&quot;/usr/local/node/bin/node&quot;
+ROOT_DIR=&quot;/home/yourappuser/myapp&quot;
+
+SERVER=&quot;$ROOT_DIR/server.js&quot;
+LOG_FILE=&quot;$ROOT_DIR/app.js.log&quot;
+
+LOCK_FILE=&quot;/var/lock/subsys/node-server&quot;
+
+do_start()
+{
+        if [ ! -f &quot;$LOCK_FILE&quot; ] ; then
+                echo -n $&quot;Starting $SERVER: &quot;
+                runuser -l &quot;$USER&quot; -c &quot;NODE_ENV=$NODE_ENV $DAEMON $SERVER &gt;&gt; $LOG_FILE &amp;&quot; &amp;&amp; echo_success || echo_failure
+                RETVAL=$?
+                echo
+                [ $RETVAL -eq 0 ] &amp;&amp; touch $LOCK_FILE
+        else
+                echo &quot;$SERVER is locked.&quot;
+                RETVAL=1
+        fi
+}
+do_stop()
+{
+        echo -n $&quot;Stopping $SERVER: &quot;
+        pid=`ps -aefw | grep &quot;$DAEMON $SERVER&quot; | grep -v &quot; grep &quot; | awk '{print $2}'`
+        kill -9 $pid &gt; /dev/null 2&gt;&amp;1 &amp;&amp; echo_success || echo_failure
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] &amp;&amp; rm -f $LOCK_FILE
+}
+
+case &quot;$1&quot; in
+        start)
+                do_start
+                ;;
+        stop)
+                do_stop
+                ;;
+        restart)
+                do_stop
+                do_start
+                ;;
+        *)
+                echo &quot;Usage: $0 {start|stop|restart}&quot;
+                RETVAL=1
+esac
+
+exit $RETVAL
+
+EOF
+</code></pre>
+
+<p>Add execution permission to the nodejs init script</p>
+
+<pre><code class="language-bash">sudo chmod +x /etc/init.d/nodejs
+</code></pre>
+
+<h3 id="pre-routing-to-port-80">Pre Routing to port 80</h3>
+
+<p>Linux does not allow non super users to listen to ports &lt; 1024, assuming your application listen to port <em>8080</em>,
+You would probably like to pre route any traffic arriving from port <em>80</em> to your node app that listens to port <em>8080</em></p>
+
+<p>You can do this by the pre routing nat capability of <em>Iptables</em></p>
+
+<pre><code class="language-bash">chkconfig iptables on
+service iptables start
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443 #if you want SSL too
+service iptables save
+</code></pre>
+
+<h3 id="configuring-node-http-proxy">Configuring node-http-proxy</h3>
+
+<p>It is common to install http proxies such as <em>nginx</em> on front of nodejs,
+This architecture has many advantages such as raising security level, listening natively to port 80, load balancing, multiple node apps support
+via url rewrite, etc&hellip;</p>
+
+<p>I personally think that the best approach, which is very native to node apps is to use <a href="https://github.com/nodejitsu/node-http-proxy">https://github.com/nodejitsu/node-http-proxy</a>,</p>
+
+<p>Which have several advantages:</p>
+
+<ol>
+<li>Reverse proxies incoming http.ServerRequest streams, WebSockets, HTTPS</li>
+<li>Minimal request overhead and latency</li>
+<li>Battled-hardened through production usage</li>
+<li>Very native for nodejs apps</li>
+</ol>
+
+<p>TODO: Will post more details in the future but you can simply visit <a href="node-http-proxy">&ldquo;https://github.com/nodejitsu/node-http-proxy&rdquo;</a> site.</p>
+
+<p><a href="https://github.com/pkrumins/nodejs-proxy">https://github.com/pkrumins/nodejs-proxy</a></p>
+</div>
+</main>
+ 
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  <a href="http://asaf.github.io/tech_posts/q-promises-with-coffeescript/">prev post</a>
+  <a href="http://asaf.github.io/tech_posts/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/">next post</a>
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  All rights reserved, Asaf Shakarzy 2018
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

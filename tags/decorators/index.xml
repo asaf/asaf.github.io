@@ -14,10 +14,10 @@
     
     <item>
       <title>Extending behavior of React Components by ES6 Decorators &amp; Higher Order Components</title>
-      <link>http://asaf.github.io/tech_posts/2015-06-23-extending-behavior-of-react-components-by-es6-decorators/</link>
+      <link>http://asaf.github.io/tech_posts/extending-behavior-of-react-components-by-es6-decorators/</link>
       <pubDate>Tue, 23 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/tech_posts/2015-06-23-extending-behavior-of-react-components-by-es6-decorators/</guid>
+      <guid>http://asaf.github.io/tech_posts/extending-behavior-of-react-components-by-es6-decorators/</guid>
       <description>About Mixins &amp;amp; Higher Order Components Sometimes it makes sense to extends a behavior of a component, while mixins are still alive, they&amp;rsquo;r not recommended anylonger, use Higher Order Components instead.
 So instead of doing this:
 function StoreMixin(...stores) { var Mixin = { getInitialState() { return this.getStateFromStores(this.props); }, ... } } var UserProfilePage = React.createClass({ mixins: [StoreMixin(UserStore)], propTypes: { userId: PropTypes.number.isRequired }, ... })  You can do that:</description>

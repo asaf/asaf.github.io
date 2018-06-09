@@ -14,10 +14,10 @@
     
     <item>
       <title>My Vim Configuration</title>
-      <link>http://asaf.github.io/tech_posts/2018-06-05-my-vi-configuration/</link>
+      <link>http://asaf.github.io/tech_posts/my-vi-configuration/</link>
       <pubDate>Tue, 05 Jun 2018 22:19:36 +0300</pubDate>
       
-      <guid>http://asaf.github.io/tech_posts/2018-06-05-my-vi-configuration/</guid>
+      <guid>http://asaf.github.io/tech_posts/my-vi-configuration/</guid>
       <description>Vim has thousands of plugins, scripts and addons and you can easily get lost on the net, trying to figure out which one suites you best,
 But it can be simplified easily!
  First, I suggest to use Vim-Plug for easy plugin management, Vim 8 supports plugin separation (out of the box) quite well but this tool make it even easier,

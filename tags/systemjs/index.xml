@@ -14,10 +14,10 @@
     
     <item>
       <title>Elegant way to use React with ES6/ES7 features.</title>
-      <link>http://asaf.github.io/tech_posts/2015-06-19-elegant-way-to-use-react-with-es6-slash-es7-features/</link>
+      <link>http://asaf.github.io/tech_posts/elegant-way-to-use-react-with-es6-slash-es7-features/</link>
       <pubDate>Fri, 19 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/tech_posts/2015-06-19-elegant-way-to-use-react-with-es6-slash-es7-features/</guid>
+      <guid>http://asaf.github.io/tech_posts/elegant-way-to-use-react-with-es6-slash-es7-features/</guid>
       <description>React, JSX, ES6. So you want React, JSX the markup and write ES6/7 code style, but setting a working environment may be pain in the ass,
 More to say, Facebook announced that its JSTransformer and react-tools going to be deprecated,
 It seems like it&amp;rsquo;s starting to get confusing how to set a full working environment with JSX transformation and ES6/ES7 support.
