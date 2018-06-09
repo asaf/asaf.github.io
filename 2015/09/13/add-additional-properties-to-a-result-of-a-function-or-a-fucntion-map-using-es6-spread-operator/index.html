@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Add additional properties to a result of a function or a fucntion map using ES6 spread operator. - Asaf Shakarzy</title>
+  <meta content='Add additional properties to a result of a function or a fucntion map using ES6 spread operator. - Asaf Shakarzy' property='title' />
+  <meta content='Add additional properties to a result of a function or a fucntion map using ES6 spread operator. - Asaf Shakarzy' property='og:title' />
+
+
+<meta property="og:description" content="Sometimes it makes sense to add additional properties to a result of a function,
+Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,
+Using ES6, we could easily achieve this by:
+bindData(oper, props) { if (typeof oper === &#39;function&#39;) { return (...args) =&gt; ({ ...oper(...args), ...props }); } if (typeof oper === &#39;object&#39;) { return Object.keys(oper).reduce((prev, key) =&gt; ({ ...prev, [key]: bindData(oper[key], props) }), {}); } return oper; }  Here are some clarifications:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/" />
+
+
+<meta property="article:published_time" content="2015-09-13T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2015-09-13T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="Asaf Shakarzy" />
+</head>
+<body class="global-font">
+  <nav class=" flex  justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Asaf Shakarzy</a>
+  </div>
+  
+  <div class=" flex-grow  pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/posts/' title="bio">bio</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/tech_posts/' title="Tech Blog">Tech Blog</a>
+    
+  </div>
+  
+</nav>
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">Add additional properties to a result of a function or a fucntion map using ES6 spread operator.</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>13 Sep 2015</time> 
+     | 
+    
+    
+    tags: [ <a href='/tags/js' class="link silver">js</a> <a href='/tags/javascript' class="link silver">javascript</a> <a href='/tags/es6' class="link silver">es6</a> <a href='/tags/spread' class="link silver">spread</a>  ]
+    
+  </p>
+  <div class="lh-copy post-content"><p>Sometimes it makes sense to add additional properties to a result of a function,</p>
+
+<p>Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,</p>
+
+<p>Using ES6, we could easily achieve this by:</p>
+
+<pre><code class="language-js">bindData(oper, props) {
+  if (typeof oper === 'function') {
+    return (...args) =&gt; ({
+      ...oper(...args),
+      ...props
+    });
+  }
+  if (typeof oper === 'object') {
+    return Object.keys(oper).reduce((prev, key) =&gt; ({
+      ...prev,
+      [key]: bindData(oper[key], props)
+    }), {});
+  }
+  return oper;
+}
+</code></pre>
+
+<p>Here are some clarifications:</p>
+
+<ol>
+<li>If <code>oper</code> is a function, we decorate the original function by a closure,
+<code>return (...args)</code> is the closure (read more about the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">spread</a> operator.</li>
+</ol>
+
+<p>In general, <code>myFunction(...args);</code> is equelevent to <code>(args) { oper.apply(null, args); }</code>,</p>
+
+<ol>
+<li>When the returned function is invoked, the result of the original function <code>...oper(...args)</code> is then merged with the <code>props</code> object, in other words:</li>
+</ol>
+
+<p><code>...oper(), ...props</code> is equelevent to: <code>Object.assign({}, oper(), props);</code>
+Read more about <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign</a></p>
+
+<ol>
+<li>If <code>oper</code> is an object, we bind each of its key&rsquo;s recursively (assuming each property is a function).</li>
+</ol>
+</div>
+</main>
+ 
+
+
+
+
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  <a href="http://asaf.github.io/2015/09/05/react/">prev post</a>
+  <a href="http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/">next post</a>
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  All rights reserved, Asaf Shakarzy 2018
+</footer>
+  
+
+
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

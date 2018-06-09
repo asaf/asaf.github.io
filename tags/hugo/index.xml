@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/hugo/</link>
+    <description>Recent content in Hugo on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Tue, 23 Aug 2016 22:43:26 +0300</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Migrate Octopress to Hugo</title>
+      <link>http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/</link>
+      <pubDate>Tue, 23 Aug 2016 22:43:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/</guid>
+      <description>My blog was based on Octopress blogging system, based on jekyll, but I was never a ruby person, it also seems like Octopress is not so active lately,
+In the other hand, Hugo feels super slim and simple, thanks to Go and Hugo, it takes only few lines to start a blog,
+You can download a binary package of Hugo, but I have Go installed so it&amp;rsquo;s simply 1 command:</description>
+    </item>
+    
+  </channel>
+</rss>

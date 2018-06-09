@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/</link>
+    <description>Recent content in Tags on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Fri, 19 Sep 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ajax</title>
+      <link>http://asaf.github.io/tags/ajax/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/ajax/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Amazon</title>
+      <link>http://asaf.github.io/tags/amazon/</link>
+      <pubDate>Wed, 10 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/amazon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ami</title>
+      <link>http://asaf.github.io/tags/ami/</link>
+      <pubDate>Wed, 10 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/ami/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Annotations</title>
+      <link>http://asaf.github.io/tags/annotations/</link>
+      <pubDate>Tue, 23 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/annotations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Async</title>
+      <link>http://asaf.github.io/tags/async/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/async/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Aws</title>
+      <link>http://asaf.github.io/tags/aws/</link>
+      <pubDate>Wed, 10 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Blog</title>
+      <link>http://asaf.github.io/tags/blog/</link>
+      <pubDate>Tue, 23 Aug 2016 22:43:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Blogging</title>
+      <link>http://asaf.github.io/tags/blogging/</link>
+      <pubDate>Tue, 23 Aug 2016 22:43:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/blogging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bootstrap</title>
+      <link>http://asaf.github.io/tags/bootstrap/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/bootstrap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember</title>
+      <link>http://asaf.github.io/tags/bootstrap-for-ember/</link>
+      <pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/bootstrap-for-ember/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Browserify</title>
+      <link>http://asaf.github.io/tags/browserify/</link>
+      <pubDate>Sat, 05 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/browserify/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coffee</title>
+      <link>http://asaf.github.io/tags/coffee/</link>
+      <pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/coffee/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coffeescript</title>
+      <link>http://asaf.github.io/tags/coffeescript/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/coffeescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Components</title>
+      <link>http://asaf.github.io/tags/components/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/components/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Couchdb</title>
+      <link>http://asaf.github.io/tags/couchdb/</link>
+      <pubDate>Tue, 06 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/couchdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Decorators</title>
+      <link>http://asaf.github.io/tags/decorators/</link>
+      <pubDate>Tue, 23 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/decorators/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Destructuring</title>
+      <link>http://asaf.github.io/tags/destructuring/</link>
+      <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/destructuring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ec2</title>
+      <link>http://asaf.github.io/tags/ec2/</link>
+      <pubDate>Wed, 10 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/ec2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ember Addons</title>
+      <link>http://asaf.github.io/tags/ember-addons/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/ember-addons/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ember Forms</title>
+      <link>http://asaf.github.io/tags/ember-forms/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/ember-forms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Emberjs</title>
+      <link>http://asaf.github.io/tags/emberjs/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/emberjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Es6</title>
+      <link>http://asaf.github.io/tags/es6/</link>
+      <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/es6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Facebook</title>
+      <link>http://asaf.github.io/tags/facebook/</link>
+      <pubDate>Tue, 23 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/facebook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Forms</title>
+      <link>http://asaf.github.io/tags/forms/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/forms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gentoo</title>
+      <link>http://asaf.github.io/tags/gentoo/</link>
+      <pubDate>Wed, 24 Aug 2016 13:26:30 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/gentoo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Higher Order Components</title>
+      <link>http://asaf.github.io/tags/higher-order-components/</link>
+      <pubDate>Tue, 23 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/higher-order-components/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Html5</title>
+      <link>http://asaf.github.io/tags/html5/</link>
+      <pubDate>Sat, 05 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/html5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Http</title>
+      <link>http://asaf.github.io/tags/http/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>http://asaf.github.io/tags/hugo/</link>
+      <pubDate>Tue, 23 Aug 2016 22:43:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>http://asaf.github.io/tags/java/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java8</title>
+      <link>http://asaf.github.io/tags/java8/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/java8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Javascript</title>
+      <link>http://asaf.github.io/tags/javascript/</link>
+      <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jks</title>
+      <link>http://asaf.github.io/tags/jks/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/jks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Js</title>
+      <link>http://asaf.github.io/tags/js/</link>
+      <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jspm</title>
+      <link>http://asaf.github.io/tags/jspm/</link>
+      <pubDate>Fri, 19 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/jspm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Keystore</title>
+      <link>http://asaf.github.io/tags/keystore/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/keystore/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Keytool</title>
+      <link>http://asaf.github.io/tags/keytool/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/keytool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://asaf.github.io/tags/linux/</link>
+      <pubDate>Wed, 24 Aug 2016 13:26:30 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Models</title>
+      <link>http://asaf.github.io/tags/models/</link>
+      <pubDate>Tue, 06 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/models/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mvc</title>
+      <link>http://asaf.github.io/tags/mvc/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/mvc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nodejs</title>
+      <link>http://asaf.github.io/tags/nodejs/</link>
+      <pubDate>Tue, 06 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/nodejs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nodejs Model</title>
+      <link>http://asaf.github.io/tags/nodejs-model/</link>
+      <pubDate>Tue, 06 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/nodejs-model/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Octopress</title>
+      <link>http://asaf.github.io/tags/octopress/</link>
+      <pubDate>Tue, 23 Aug 2016 22:43:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/octopress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Openssl</title>
+      <link>http://asaf.github.io/tags/openssl/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/openssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pkcs12</title>
+      <link>http://asaf.github.io/tags/pkcs12/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tags/pkcs12/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Promises</title>
+      <link>http://asaf.github.io/tags/promises/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/promises/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Q</title>
+      <link>http://asaf.github.io/tags/q/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/q/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ratpack</title>
+      <link>http://asaf.github.io/tags/ratpack/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/ratpack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>React</title>
+      <link>http://asaf.github.io/tags/react/</link>
+      <pubDate>Sat, 05 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/react/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rx</title>
+      <link>http://asaf.github.io/tags/rx/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/rx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Schema</title>
+      <link>http://asaf.github.io/tags/schema/</link>
+      <pubDate>Tue, 06 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/schema/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spread</title>
+      <link>http://asaf.github.io/tags/spread/</link>
+      <pubDate>Sun, 13 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/spread/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Streams</title>
+      <link>http://asaf.github.io/tags/streams/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/streams/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Systemjs</title>
+      <link>http://asaf.github.io/tags/systemjs/</link>
+      <pubDate>Fri, 19 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/systemjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tips</title>
+      <link>http://asaf.github.io/tags/tips/</link>
+      <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/tips/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Validations</title>
+      <link>http://asaf.github.io/tags/validations/</link>
+      <pubDate>Tue, 06 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/validations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>http://asaf.github.io/tags/web/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Sockets</title>
+      <link>http://asaf.github.io/tags/web-sockets/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/tags/web-sockets/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

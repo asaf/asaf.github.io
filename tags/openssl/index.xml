@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Openssl on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/openssl/</link>
+    <description>Recent content in Openssl on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Tue, 23 Aug 2016 23:30:26 +0300</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/openssl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Export Certificate and Private key from JKS</title>
+      <link>http://asaf.github.io/tech_posts/2016-08-23-export_certificate_and_private_key_from_jks/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tech_posts/2016-08-23-export_certificate_and_private_key_from_jks/</guid>
+      <description>I had to migrate web application written in Java to NodesJS,
+Java web containers store certificates inside JKS Keystore where NodeJS requires certificate and private key in PEM format.
+Exporting certificate directly from JKS is easy by using keytool, but exporting private key is not allowed, To export the private key using Java, we need to interact with the keystore by writing some custom code using the Keystore java API,</description>
+    </item>
+    
+  </channel>
+</rss>

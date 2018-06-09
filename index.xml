@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Asaf Shakarzy</title>
+    <link>http://asaf.github.io/</link>
+    <description>Recent content on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Wed, 24 Aug 2016 13:26:30 +0300</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gentoo On Vmware Fusion - unable to mount rootfs</title>
+      <link>http://asaf.github.io/tech_posts/2016-08-24-gentoo_on_vmware_unable_to_mount_rootfs/</link>
+      <pubDate>Wed, 24 Aug 2016 13:26:30 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tech_posts/2016-08-24-gentoo_on_vmware_unable_to_mount_rootfs/</guid>
+      <description>I&amp;rsquo;ve been trying to install Gentoo linux as a guest on OSX using Vmware Fusion, After configuring the kernel, booting the system resulted:
+Using the Gentoo minimal bootable disc, we can identify what SCSI storage controller we have:
+lspci |grep -i scsi 00:10.0 SCSI storage controller: LSI Logic / Symbios Logic 53c1030 PCI-X Fusion-MPT Dual Ultra320 SCSI (rev 01)  The Ultra 320 controller requires Fusion-MPT support in the kernel, that is located under:</description>
+    </item>
+    
+    <item>
+      <title>Export Certificate and Private key from JKS</title>
+      <link>http://asaf.github.io/tech_posts/2016-08-23-export_certificate_and_private_key_from_jks/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tech_posts/2016-08-23-export_certificate_and_private_key_from_jks/</guid>
+      <description>I had to migrate web application written in Java to NodesJS,
+Java web containers store certificates inside JKS Keystore where NodeJS requires certificate and private key in PEM format.
+Exporting certificate directly from JKS is easy by using keytool, but exporting private key is not allowed, To export the private key using Java, we need to interact with the keystore by writing some custom code using the Keystore java API,</description>
+    </item>
+    
+    <item>
+      <title>Migrate Octopress to Hugo</title>
+      <link>http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/</link>
+      <pubDate>Tue, 23 Aug 2016 22:43:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/</guid>
+      <description>My blog was based on Octopress blogging system, based on jekyll, but I was never a ruby person, it also seems like Octopress is not so active lately,
+In the other hand, Hugo feels super slim and simple, thanks to Go and Hugo, it takes only few lines to start a blog,
+You can download a binary package of Hugo, but I have Go installed so it&amp;rsquo;s simply 1 command:</description>
+    </item>
+    
+    <item>
+      <title>Default function options stash with ES6 destructuring assignment.</title>
+      <link>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</link>
+      <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</guid>
+      <description>ES6 opens up a clean approach to define function options stash thanks to the destructuring assignment syntax,
+Assuming we want options but let the user overrides it, we can declare our function that way:
+function hello(param1, {debug = true, whatever = false} = {}) { }
+The advantages are, clearly there is no code in the body function to achieve default options &amp;amp; user overrides.</description>
+    </item>
+    
+    <item>
+      <title>Add additional properties to a result of a function or a fucntion map using ES6 spread operator.</title>
+      <link>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</link>
+      <pubDate>Sun, 13 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</guid>
+      <description>Sometimes it makes sense to add additional properties to a result of a function,
+Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,
+Using ES6, we could easily achieve this by:
+bindData(oper, props) { if (typeof oper === &#39;function&#39;) { return (...args) =&amp;gt; ({ ...oper(...args), ...props }); } if (typeof oper === &#39;object&#39;) { return Object.keys(oper).reduce((prev, key) =&amp;gt; ({ ...prev, [key]: bindData(oper[key], props) }), {}); } return oper; }  Here are some clarifications:</description>
+    </item>
+    
+    <item>
+      <title>ES6, React &amp; Browserify</title>
+      <link>http://asaf.github.io/2015/09/05/react/</link>
+      <pubDate>Sat, 05 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/05/react/</guid>
+      <description>ES6, React &amp;amp; Browserify Browserify is a lightweight build tool for JS, you can start &amp;lsquo;require&amp;rsquo; modules with zero configuration, Thanks to Babelify, you can start writing ES6 code (via Babel) write away,
+Here&amp;rsquo;s a proof how simple it is,
+Lets create a package.json file and install minimal dependencies
+npm init npm install --save react npm install --save-dev browserify babelify watchify  Lets give Browserify a hint that it should perform code transformation via babelify by adding this json tag to package.</description>
+    </item>
+    
+    <item>
+      <title>Extending behavior of React Components by ES6 Decorators &amp; Higher Order Components</title>
+      <link>http://asaf.github.io/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/</link>
+      <pubDate>Tue, 23 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/</guid>
+      <description>About Mixins &amp;amp; Higher Order Components Sometimes it makes sense to extends a behavior of a component, while mixins are still alive, they&amp;rsquo;r not recommended anylonger, use Higher Order Components instead.
+So instead of doing this:
+function StoreMixin(...stores) { var Mixin = { getInitialState() { return this.getStateFromStores(this.props); }, ... } } var UserProfilePage = React.createClass({ mixins: [StoreMixin(UserStore)], propTypes: { userId: PropTypes.number.isRequired }, ... })  You can do that:</description>
+    </item>
+    
+    <item>
+      <title>Elegant way to use React with ES6/ES7 features.</title>
+      <link>http://asaf.github.io/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/</link>
+      <pubDate>Fri, 19 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/</guid>
+      <description>React, JSX, ES6. So you want React, JSX the markup and write ES6/7 code style, but setting a working environment may be pain in the ass,
+More to say, Facebook announced that its JSTransformer and react-tools going to be deprecated,
+It seems like it&amp;rsquo;s starting to get confusing how to set a full working environment with JSX transformation and ES6/ES7 support.
+While React 0.13.0-beta-1 announced great support for ES6, it still unclear how to build a full working environment that supports ES6 either,</description>
+    </item>
+    
+    <item>
+      <title>Facebook React - simplified work flow.</title>
+      <link>http://asaf.github.io/2015/05/01/react/</link>
+      <pubDate>Fri, 01 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/05/01/react/</guid>
+      <description>React is a really game changer in the world of web development, As most web frameworks (such Angular, Ember, etc) supports two way bindings that really simplifies development life, when applications start to get bigger things start to get clashed as multiple views may be bound to multiple models and getting unexpected behaviors is not something imaginary,
+React solve these problems by exposing a new flow that is based on unidirectional binding, combined with the usage of virtual DOM, DOM reconciliation should result a better performance than two way bindings based frameworks, Well, if Facebook uses it, then it scales :)</description>
+    </item>
+    
+    <item>
+      <title>Hello world using Ratpack.</title>
+      <link>http://asaf.github.io/2015/02/09/ratpack_hello_world/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/02/09/ratpack_hello_world/</guid>
+      <description>About Ratpack Ratpack is a set of Java libraries that facilitate fast, efficient, evolvable and well tested HTTP applications built on Netty event driven networking engine,
+After crawling into its source code, I find it simple and easy to use and it feels right, why? because:
+ It&amp;rsquo;s super simple, its core has very limited number of dependencies Has out of the box extensions such as Guice, Jackson, etc, but nothing dictates you using them thanks to Guice modular architecture.</description>
+    </item>
+    
+    <item>
+      <title>Choosing Java Backend framework in 2015.</title>
+      <link>http://asaf.github.io/2015/02/01/searching_for_new_java_backend/</link>
+      <pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/02/01/searching_for_new_java_backend/</guid>
+      <description>So it&amp;rsquo;s year 2015 and I&amp;rsquo;m taking a role in a new cloud service, helping to choose the right backend technology,
+This is the summary of our requirements:
+ Can quickly come up with some POC. HTTP driven. Native support for Async. Modular. Avoid frameworks that dictates specific code structure.  Here are few options we tried but decided to pivot and seek for alternatives,
+Akka Akka seems very promising, it feels lightweight, highly concurrent and distributed, Akka is based on actors pattern, an old pattern invented by Carl Hewitt and friends, promoted lately by Erlang,</description>
+    </item>
+    
+    <item>
+      <title>New Ember Components Suite!</title>
+      <link>http://asaf.github.io/2014/09/19/ember-components/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2014/09/19/ember-components/</guid>
+      <description>Introducing a new Ember Components suite!
+Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.
+This project aims to be the successor of our Bootstrap for Ember project as all components on this suite are not bound to any specific CSS framework.
+Github repo: https://github.com/indexiatech/ember-components
+Demo &amp;amp; docs: http://indexiatech.github.io/ember-components</description>
+    </item>
+    
+    <item>
+      <title>Ember Forms</title>
+      <link>http://asaf.github.io/2014/08/02/ember-forms/</link>
+      <pubDate>Sat, 02 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2014/08/02/ember-forms/</guid>
+      <description>Smart, Intuitive forms for Ember.js styled with Bootstrap, Multi layouts and Validation support.
+As my favorite web framework is emberjs, I lately needed forms support for one of my projects with the following set of features in mind:
+ Styled for Bootstrap but easy to stil differently. Different layouts such inline and horizontal Validations where validation rules are defined in model/controller and form supports for:  Change color &amp;amp; icons when validation rule fails.</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember - more than 100 stars in 1 week</title>
+      <link>http://asaf.github.io/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</link>
+      <pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</guid>
+      <description>This is awesome! Bootstrap for Ember got more than 100 github stars in less than a week,
+Thanks for the great feedbacks, here&amp;rsquo;s an interesting tweet of the author of Handlebars and Ember.js, Yehuda Katz.
+Also, http://t.co/NtqRMNtsA4 (Bootstrap for #emberjs using components) is kind of awesome!
+&amp;mdash; Yehuda Katz (@wycats) August 31, 2013 Visit the project: https://github.com/ember-addons/bootstrap-for-ember</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember v0.2.0 released</title>
+      <link>http://asaf.github.io/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</link>
+      <pubDate>Thu, 29 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</guid>
+      <description>Few days ago I submitted a post about Bootstrap for Ember, We released today the 2nd minor version 0.2.0,
+So far, version 0.2.0 contains the following components:
+ Alert Label Badge Well Page Header Button ProgressBar Pills Navigation Tabs Navigation  Project details:
+ Github Release Showcase  Have fun!</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember is born</title>
+      <link>http://asaf.github.io/2013/08/26/bootstrap-for-ember-is-born/</link>
+      <pubDate>Mon, 26 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/08/26/bootstrap-for-ember-is-born/</guid>
+      <description>Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of making web applications right.
+You can just hook both projects together by using Bootstrap as is in Handlebars templates, But soon enough, you will find yourself asking questions sucha s:
+ How do I interact between Bootstrap events and Ember (such as Controllers)? How to pass Bootstrap components data from Ember (such as Controllers)  I&amp;rsquo;ve seen few options about the integration between both, but:</description>
+    </item>
+    
+    <item>
+      <title>nodejs-model is born</title>
+      <link>http://asaf.github.io/2013/08/06/nodejs-model-is-born/</link>
+      <pubDate>Tue, 06 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/08/06/nodejs-model-is-born/</guid>
+      <description>I&amp;rsquo;ve been struggling lately to find an appropriate way to handle models correctly, In one hand, these noSQL DBs such CouchDB have great flexibility and I didn&amp;rsquo;t want to ruin that with a blowing up ORM framework, in the other hand once the application grows a little bit more than a contact list app, then things become messy.
+While writing a larger app with Node, I find myself struggling with finding solutions to problems such: (there are few more but these are the main)</description>
+    </item>
+    
+    <item>
+      <title>Installing CouchDB instance on Amazon AMI using build-couchdb</title>
+      <link>http://asaf.github.io/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/</link>
+      <pubDate>Wed, 10 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/</guid>
+      <description>{% img http://couchdb.apache.org/image/couch.png 160 180 Couch %}
+This post explains how to install CouchDB on Amazon AMI using build-couchdb/
+If you want to install couch from sources without build-couchdb tool, read: Installing CouchDB instance on Amazon AMI is a working link
+build-couchdb does the following things:
+ Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.) Clone the &amp;lsquo;build-couchdb&amp;rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc), These are all the dependencies that CouchDB needs in order to be compiled.</description>
+    </item>
+    
+    <item>
+      <title>Nodejs Deployment: Building and Configuring on Amazon Linux AMI</title>
+      <link>http://asaf.github.io/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</link>
+      <pubDate>Wed, 10 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</guid>
+      <description>Logging in and updating system to latest SSH your shiny new VM,
+Now lets update the system to the latest:
+sudo yum update  Install OS dependencies We&amp;rsquo;r going to build Node.js from sources, some dependencies (such as gcc) are required:
+sudo yum install gcc-c++ make openssl-devel git  Cloning n Building Node.js cd git clone git://github.com/joyent/node.git cd node git checkout v0.10.13 #check for other stable tags by executing &#39;git tag&#39; .</description>
+    </item>
+    
+    <item>
+      <title>Q promises with CoffeeScript</title>
+      <link>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</guid>
+      <description>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across &amp;ldquo;https://github.com/kriskowal/q&amp;rdquo;.
+Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner.
+Here&amp;rsquo;s an example:
+Defining promises with CoffeeScript:
+q = require &#39;q&#39; exports.hello = () -&amp;gt; d = q.defer() d.resolve &#39;hello&#39; d.promise exports.world = () -&amp;gt; d = q.defer() d.resolve &#39;world&#39; d.promise exports.</description>
+    </item>
+    
+    <item>
+      <title>Accessing EmberJS Controller from different scopes</title>
+      <link>http://asaf.github.io/2013/07/08/accessing-emberjs-controller-from-different-scopes/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/08/accessing-emberjs-controller-from-different-scopes/</guid>
+      <description>Sometimes you want to use one ember controller from another, This simply can be done by &amp;ldquo;asking&amp;rdquo; ember access to the other controller:
+App.PostController = Ember.ArrayController.extend({ ... }) App.CommentsController = Ember.ArrayController.extend({ needs: &amp;quot;post&amp;quot; });  Then you can simply use the Post controller in Comments&amp;rsquo;s template:
+{% raw %}
+&amp;lt;!-- use comments template --&amp;gt; {{ controllers.post }}  {% endraw %}
+This works pretty nice, especially when you have nested routes (you surely want to display some data of the post when you are in the post&amp;rsquo;s comments context.</description>
+    </item>
+    
+    <item>
+      <title>Blogging with Octopress: Add About Page</title>
+      <link>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-about-page/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-about-page/</guid>
+      <description>Adding About Me page, probably one of the first thing to do, right?
+Note: If you just want to say few words about yourself on the aside panel, skip to About Me on the aside panel
+Adding About Page Create the page:
+rake new_page[&amp;quot;about&amp;quot;]  rake creates a new page located in source/about/index.markdown
+I edited mine to look like:
+--- layout: page title: &amp;quot;About Me&amp;quot; comments: true sharing: true footer: true ---  Note that I removed the date line because it doesn&amp;rsquo;t make sense in this page.</description>
+    </item>
+    
+    <item>
+      <title>Blogging with Octopress: Add Comments</title>
+      <link>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-comments/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-comments/</guid>
+      <description>If you want your blog to support comments, follow this:
+Octopress has a native 3rd party plugin for Disqus that will host all your blog&amp;rsquo;s comments.
+Visit http://www.disqus.com web site and sign in, Then https://disqus.com/admin/signup/.
+Here&amp;rsquo;s example how I file the signup form my blog which is hosted in GitHub pages.
+Site Url: asaf.github.io Site Name: Asaf Shakarchi&#39;s Blog Site Shortname: asafshakarchisblog  Remember the site short name, you need it soon!</description>
+    </item>
+    
+    <item>
+      <title>Blogging with Octopress: Quick Installation</title>
+      <link>http://asaf.github.io/2013/07/08/blogging-with-octopress-quick-installation/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/08/blogging-with-octopress-quick-installation/</guid>
+      <description>I really wanted to revive my blog (which was hosted in Blogger), but I wanted to have more control over it, It just feels very natural for guys like me who uses vi more than GUI =)
+Since Octopress docs are too long and frustrating (oh common, i just wanted a blog), I decided to dedicate few posts for it, I hope I&amp;rsquo;ll have the time to record (blog, post, whatever) all the cool things i&amp;rsquo;m gonna add to my blog in the future.</description>
+    </item>
+    
+    <item>
+      <title>Installing CouchDB instance on Amazon AMI</title>
+      <link>http://asaf.github.io/2013/07/08/installing-couch-db-on-amazon-ami/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/08/installing-couch-db-on-amazon-ami/</guid>
+      <description>{% img http://couchdb.apache.org/image/couch.png 160 180 Couch %}
+One of our platform is based on CouchDB, we host everything on Amazon EC2 and while Amazon lacks with CouchDB support, I have decided to build our own CouchDB server.
+So here&amp;rsquo;s a guide, how to install CouchDB on Amazon AMI (Amazon Linux):
+Launch Instance Login into EC2, and launch a new instanc and choose Amazon Linux AMI, You can of course choose other Linux flavours (you are not going to use Windows right?</description>
+    </item>
+    
+  </channel>
+</rss>

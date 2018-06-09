@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Coffee on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/coffee/</link>
+    <description>Recent content in Coffee on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Mon, 02 Sep 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/coffee/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bootstrap for Ember - more than 100 stars in 1 week</title>
+      <link>http://asaf.github.io/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</link>
+      <pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</guid>
+      <description>This is awesome! Bootstrap for Ember got more than 100 github stars in less than a week,
+Thanks for the great feedbacks, here&amp;rsquo;s an interesting tweet of the author of Handlebars and Ember.js, Yehuda Katz.
+Also, http://t.co/NtqRMNtsA4 (Bootstrap for #emberjs using components) is kind of awesome!
+&amp;mdash; Yehuda Katz (@wycats) August 31, 2013 Visit the project: https://github.com/ember-addons/bootstrap-for-ember</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember v0.2.0 released</title>
+      <link>http://asaf.github.io/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</link>
+      <pubDate>Thu, 29 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</guid>
+      <description>Few days ago I submitted a post about Bootstrap for Ember, We released today the 2nd minor version 0.2.0,
+So far, version 0.2.0 contains the following components:
+ Alert Label Badge Well Page Header Button ProgressBar Pills Navigation Tabs Navigation  Project details:
+ Github Release Showcase  Have fun!</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap for Ember is born</title>
+      <link>http://asaf.github.io/2013/08/26/bootstrap-for-ember-is-born/</link>
+      <pubDate>Mon, 26 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/08/26/bootstrap-for-ember-is-born/</guid>
+      <description>Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of making web applications right.
+You can just hook both projects together by using Bootstrap as is in Handlebars templates, But soon enough, you will find yourself asking questions sucha s:
+ How do I interact between Bootstrap events and Ember (such as Controllers)? How to pass Bootstrap components data from Ember (such as Controllers)  I&amp;rsquo;ve seen few options about the integration between both, but:</description>
+    </item>
+    
+  </channel>
+</rss>

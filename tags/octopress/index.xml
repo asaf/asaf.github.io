@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Octopress on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/octopress/</link>
+    <description>Recent content in Octopress on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Tue, 23 Aug 2016 22:43:26 +0300</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/octopress/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Migrate Octopress to Hugo</title>
+      <link>http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/</link>
+      <pubDate>Tue, 23 Aug 2016 22:43:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/</guid>
+      <description>My blog was based on Octopress blogging system, based on jekyll, but I was never a ruby person, it also seems like Octopress is not so active lately,
+In the other hand, Hugo feels super slim and simple, thanks to Go and Hugo, it takes only few lines to start a blog,
+You can download a binary package of Hugo, but I have Go installed so it&amp;rsquo;s simply 1 command:</description>
+    </item>
+    
+    <item>
+      <title>Blogging with Octopress: Add About Page</title>
+      <link>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-about-page/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-about-page/</guid>
+      <description>Adding About Me page, probably one of the first thing to do, right?
+Note: If you just want to say few words about yourself on the aside panel, skip to About Me on the aside panel
+Adding About Page Create the page:
+rake new_page[&amp;quot;about&amp;quot;]  rake creates a new page located in source/about/index.markdown
+I edited mine to look like:
+--- layout: page title: &amp;quot;About Me&amp;quot; comments: true sharing: true footer: true ---  Note that I removed the date line because it doesn&amp;rsquo;t make sense in this page.</description>
+    </item>
+    
+    <item>
+      <title>Blogging with Octopress: Add Comments</title>
+      <link>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-comments/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-comments/</guid>
+      <description>If you want your blog to support comments, follow this:
+Octopress has a native 3rd party plugin for Disqus that will host all your blog&amp;rsquo;s comments.
+Visit http://www.disqus.com web site and sign in, Then https://disqus.com/admin/signup/.
+Here&amp;rsquo;s example how I file the signup form my blog which is hosted in GitHub pages.
+Site Url: asaf.github.io Site Name: Asaf Shakarchi&#39;s Blog Site Shortname: asafshakarchisblog  Remember the site short name, you need it soon!</description>
+    </item>
+    
+    <item>
+      <title>Blogging with Octopress: Quick Installation</title>
+      <link>http://asaf.github.io/2013/07/08/blogging-with-octopress-quick-installation/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/08/blogging-with-octopress-quick-installation/</guid>
+      <description>I really wanted to revive my blog (which was hosted in Blogger), but I wanted to have more control over it, It just feels very natural for guys like me who uses vi more than GUI =)
+Since Octopress docs are too long and frustrating (oh common, i just wanted a blog), I decided to dedicate few posts for it, I hope I&amp;rsquo;ll have the time to record (blog, post, whatever) all the cool things i&amp;rsquo;m gonna add to my blog in the future.</description>
+    </item>
+    
+  </channel>
+</rss>

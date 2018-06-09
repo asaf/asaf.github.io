@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spread on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/spread/</link>
+    <description>Recent content in Spread on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Sun, 13 Sep 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/spread/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Add additional properties to a result of a function or a fucntion map using ES6 spread operator.</title>
+      <link>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</link>
+      <pubDate>Sun, 13 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</guid>
+      <description>Sometimes it makes sense to add additional properties to a result of a function,
+Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,
+Using ES6, we could easily achieve this by:
+bindData(oper, props) { if (typeof oper === &#39;function&#39;) { return (...args) =&amp;gt; ({ ...oper(...args), ...props }); } if (typeof oper === &#39;object&#39;) { return Object.keys(oper).reduce((prev, key) =&amp;gt; ({ ...prev, [key]: bindData(oper[key], props) }), {}); } return oper; }  Here are some clarifications:</description>
+    </item>
+    
+  </channel>
+</rss>

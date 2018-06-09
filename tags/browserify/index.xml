@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Browserify on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/browserify/</link>
+    <description>Recent content in Browserify on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Sat, 05 Sep 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/browserify/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ES6, React &amp; Browserify</title>
+      <link>http://asaf.github.io/2015/09/05/react/</link>
+      <pubDate>Sat, 05 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/05/react/</guid>
+      <description>ES6, React &amp;amp; Browserify Browserify is a lightweight build tool for JS, you can start &amp;lsquo;require&amp;rsquo; modules with zero configuration, Thanks to Babelify, you can start writing ES6 code (via Babel) write away,
+Here&amp;rsquo;s a proof how simple it is,
+Lets create a package.json file and install minimal dependencies
+npm init npm install --save react npm install --save-dev browserify babelify watchify  Lets give Browserify a hint that it should perform code transformation via babelify by adding this json tag to package.</description>
+    </item>
+    
+  </channel>
+</rss>

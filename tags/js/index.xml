@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Js on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/js/</link>
+    <description>Recent content in Js on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Mon, 14 Sep 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/js/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Default function options stash with ES6 destructuring assignment.</title>
+      <link>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</link>
+      <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</guid>
+      <description>ES6 opens up a clean approach to define function options stash thanks to the destructuring assignment syntax,
+Assuming we want options but let the user overrides it, we can declare our function that way:
+function hello(param1, {debug = true, whatever = false} = {}) { }
+The advantages are, clearly there is no code in the body function to achieve default options &amp;amp; user overrides.</description>
+    </item>
+    
+    <item>
+      <title>Add additional properties to a result of a function or a fucntion map using ES6 spread operator.</title>
+      <link>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</link>
+      <pubDate>Sun, 13 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</guid>
+      <description>Sometimes it makes sense to add additional properties to a result of a function,
+Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,
+Using ES6, we could easily achieve this by:
+bindData(oper, props) { if (typeof oper === &#39;function&#39;) { return (...args) =&amp;gt; ({ ...oper(...args), ...props }); } if (typeof oper === &#39;object&#39;) { return Object.keys(oper).reduce((prev, key) =&amp;gt; ({ ...prev, [key]: bindData(oper[key], props) }), {}); } return oper; }  Here are some clarifications:</description>
+    </item>
+    
+    <item>
+      <title>ES6, React &amp; Browserify</title>
+      <link>http://asaf.github.io/2015/09/05/react/</link>
+      <pubDate>Sat, 05 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/05/react/</guid>
+      <description>ES6, React &amp;amp; Browserify Browserify is a lightweight build tool for JS, you can start &amp;lsquo;require&amp;rsquo; modules with zero configuration, Thanks to Babelify, you can start writing ES6 code (via Babel) write away,
+Here&amp;rsquo;s a proof how simple it is,
+Lets create a package.json file and install minimal dependencies
+npm init npm install --save react npm install --save-dev browserify babelify watchify  Lets give Browserify a hint that it should perform code transformation via babelify by adding this json tag to package.</description>
+    </item>
+    
+    <item>
+      <title>Extending behavior of React Components by ES6 Decorators &amp; Higher Order Components</title>
+      <link>http://asaf.github.io/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/</link>
+      <pubDate>Tue, 23 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/</guid>
+      <description>About Mixins &amp;amp; Higher Order Components Sometimes it makes sense to extends a behavior of a component, while mixins are still alive, they&amp;rsquo;r not recommended anylonger, use Higher Order Components instead.
+So instead of doing this:
+function StoreMixin(...stores) { var Mixin = { getInitialState() { return this.getStateFromStores(this.props); }, ... } } var UserProfilePage = React.createClass({ mixins: [StoreMixin(UserStore)], propTypes: { userId: PropTypes.number.isRequired }, ... })  You can do that:</description>
+    </item>
+    
+    <item>
+      <title>Elegant way to use React with ES6/ES7 features.</title>
+      <link>http://asaf.github.io/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/</link>
+      <pubDate>Fri, 19 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/</guid>
+      <description>React, JSX, ES6. So you want React, JSX the markup and write ES6/7 code style, but setting a working environment may be pain in the ass,
+More to say, Facebook announced that its JSTransformer and react-tools going to be deprecated,
+It seems like it&amp;rsquo;s starting to get confusing how to set a full working environment with JSX transformation and ES6/ES7 support.
+While React 0.13.0-beta-1 announced great support for ES6, it still unclear how to build a full working environment that supports ES6 either,</description>
+    </item>
+    
+    <item>
+      <title>Facebook React - simplified work flow.</title>
+      <link>http://asaf.github.io/2015/05/01/react/</link>
+      <pubDate>Fri, 01 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/05/01/react/</guid>
+      <description>React is a really game changer in the world of web development, As most web frameworks (such Angular, Ember, etc) supports two way bindings that really simplifies development life, when applications start to get bigger things start to get clashed as multiple views may be bound to multiple models and getting unexpected behaviors is not something imaginary,
+React solve these problems by exposing a new flow that is based on unidirectional binding, combined with the usage of virtual DOM, DOM reconciliation should result a better performance than two way bindings based frameworks, Well, if Facebook uses it, then it scales :)</description>
+    </item>
+    
+  </channel>
+</rss>

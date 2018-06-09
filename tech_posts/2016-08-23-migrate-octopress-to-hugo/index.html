@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Migrate Octopress to Hugo - Asaf Shakarzy</title>
+  <meta content='Migrate Octopress to Hugo - Asaf Shakarzy' property='title' />
+  <meta content='Migrate Octopress to Hugo - Asaf Shakarzy' property='og:title' />
+
+
+<meta property="og:description" content="My blog was based on Octopress blogging system, based on jekyll, but I was never a ruby person, it also seems like Octopress is not so active lately,
+In the other hand, Hugo feels super slim and simple, thanks to Go and Hugo, it takes only few lines to start a blog,
+You can download a binary package of Hugo, but I have Go installed so it&rsquo;s simply 1 command:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/" />
+
+
+<meta property="article:published_time" content="2016-08-23T22:43:26&#43;03:00"/>
+
+<meta property="article:modified_time" content="2016-08-23T22:43:26&#43;03:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="Asaf Shakarzy" />
+</head>
+<body class="global-font">
+  <nav class=" flex  justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Asaf Shakarzy</a>
+  </div>
+  
+  <div class=" flex-grow  pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/posts/' title="bio">bio</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/tech_posts/' title="Tech Blog">Tech Blog</a>
+    
+  </div>
+  
+</nav>
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">Migrate Octopress to Hugo</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>23 Aug 2016</time> 
+     | 
+    
+    
+    tags: [ <a href='/tags/blogging' class="link silver">blogging</a> <a href='/tags/blog' class="link silver">blog</a> <a href='/tags/hugo' class="link silver">hugo</a> <a href='/tags/octopress' class="link silver">octopress</a>  ]
+    
+  </p>
+  <div class="lh-copy post-content">
+
+<p>My blog was based on <a href="https://github.com/imathis/octopress">Octopress</a> blogging system, based on <a href="https://github.com/jekyll/jekyll">jekyll</a>,
+but I was never a ruby person, it also seems like Octopress is not so active lately,</p>
+
+<p>In the other hand, Hugo feels super slim and simple, thanks to <em>Go</em> and <em>Hugo</em>, it takes only few lines to start a blog,</p>
+
+<p>You can download a binary package of Hugo, but I have Go installed so it&rsquo;s simply 1 command:</p>
+
+<pre><code class="language-bash">go get -u -v github.com/spf13/hugo
+</code></pre>
+
+<p>Creating a new blog is simply one command:</p>
+
+<pre><code class="language-bash">hugo new site myblog
+</code></pre>
+
+<p>This command creates the <code>myblog</code> folder with some initial data that serves as a baseline for our blog.</p>
+
+<p>Adding a new post is simple as:</p>
+
+<pre><code class="language-bash">hugo new post/welcome.md
+</code></pre>
+
+<p>This generates the <code>content/post/welcome.md</code> file, a post is just a simple file, no magic!</p>
+
+<p>A theme defines how the blog look like visually, there are many <a href="themes.gohugo.io">themes</a>, choose the one you like, in this post, I use the <a href="http://themes.gohugo.io/purehugo/">purehugo</a> theme because it&rsquo;s clean and simple.</p>
+
+<pre><code class="language-bash">cd themes
+git clone https://github.com/dplesca/purehugo.git
+</code></pre>
+
+<p>Lets star a local server to see our shining new blog:</p>
+
+<pre><code class="language-bash">hugo server --theme=hugo_theme_robust --buildDrafts
+</code></pre>
+
+<p>Hit in browser: <a href="http://localhost:1313">http://localhost:1313</a></p>
+
+<p>You should see the <em>welcome</em> blog entry we just added.</p>
+
+<h2 id="migrate-from-octopress">Migrate from Octopress</h2>
+
+<p>Hugo has a built in support to <a href="https://gohugo.io/commands/hugo_import_jekyll/">migrate from jekyll</a></p>
+
+<pre><code class="language-bash">cd my_octopress_blog
+ls
+config.yaml ... source/ ...
+hugo import jekyll source/ hugo-import/
+Congratulations! 26 post(s) imported!
+...
+</code></pre>
+
+<p>Make sure to have <em>config.yaml</em> and the <em>source</em> folder in current directory, running the import command should import all files</p>
+
+<p>Simply move the <em>posts</em> folder into your new blog <em>content</em> folder by:</p>
+
+<pre><code class="language-bash">mv hugo-import/content/post/* &lt;location_of_new_hugo_blog&gt;/content/post`
+</code></pre>
+
+<p>Happy blogging!</p>
+</div>
+</main>
+ 
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  <a href="http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/">prev post</a>
+  <a href="http://asaf.github.io/tech_posts/2016-08-23-export_certificate_and_private_key_from_jks/">next post</a>
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  All rights reserved, Asaf Shakarzy 2018
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ec2 on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/ec2/</link>
+    <description>Recent content in Ec2 on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Wed, 10 Jul 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/ec2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Installing CouchDB instance on Amazon AMI using build-couchdb</title>
+      <link>http://asaf.github.io/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/</link>
+      <pubDate>Wed, 10 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/</guid>
+      <description>{% img http://couchdb.apache.org/image/couch.png 160 180 Couch %}
+This post explains how to install CouchDB on Amazon AMI using build-couchdb/
+If you want to install couch from sources without build-couchdb tool, read: Installing CouchDB instance on Amazon AMI is a working link
+build-couchdb does the following things:
+ Install general dependencies via yum (such as gcc, ruby, automake, rubygems, etc.) Clone the &amp;lsquo;build-couchdb&amp;rsquo; project, initalize and update its sub modules (will clone CouchDB itself, curl, gnulib, etc), These are all the dependencies that CouchDB needs in order to be compiled.</description>
+    </item>
+    
+    <item>
+      <title>Nodejs Deployment: Building and Configuring on Amazon Linux AMI</title>
+      <link>http://asaf.github.io/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</link>
+      <pubDate>Wed, 10 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</guid>
+      <description>Logging in and updating system to latest SSH your shiny new VM,
+Now lets update the system to the latest:
+sudo yum update  Install OS dependencies We&amp;rsquo;r going to build Node.js from sources, some dependencies (such as gcc) are required:
+sudo yum install gcc-c++ make openssl-devel git  Cloning n Building Node.js cd git clone git://github.com/joyent/node.git cd node git checkout v0.10.13 #check for other stable tags by executing &#39;git tag&#39; .</description>
+    </item>
+    
+    <item>
+      <title>Installing CouchDB instance on Amazon AMI</title>
+      <link>http://asaf.github.io/2013/07/08/installing-couch-db-on-amazon-ami/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/08/installing-couch-db-on-amazon-ami/</guid>
+      <description>{% img http://couchdb.apache.org/image/couch.png 160 180 Couch %}
+One of our platform is based on CouchDB, we host everything on Amazon EC2 and while Amazon lacks with CouchDB support, I have decided to build our own CouchDB server.
+So here&amp;rsquo;s a guide, how to install CouchDB on Amazon AMI (Amazon Linux):
+Launch Instance Login into EC2, and launch a new instanc and choose Amazon Linux AMI, You can of course choose other Linux flavours (you are not going to use Windows right?</description>
+    </item>
+    
+  </channel>
+</rss>

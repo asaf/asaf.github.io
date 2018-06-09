@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mvc on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/mvc/</link>
+    <description>Recent content in Mvc on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Mon, 08 Jul 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/mvc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Accessing EmberJS Controller from different scopes</title>
+      <link>http://asaf.github.io/2013/07/08/accessing-emberjs-controller-from-different-scopes/</link>
+      <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/08/accessing-emberjs-controller-from-different-scopes/</guid>
+      <description>Sometimes you want to use one ember controller from another, This simply can be done by &amp;ldquo;asking&amp;rdquo; ember access to the other controller:
+App.PostController = Ember.ArrayController.extend({ ... }) App.CommentsController = Ember.ArrayController.extend({ needs: &amp;quot;post&amp;quot; });  Then you can simply use the Post controller in Comments&amp;rsquo;s template:
+{% raw %}
+&amp;lt;!-- use comments template --&amp;gt; {{ controllers.post }}  {% endraw %}
+This works pretty nice, especially when you have nested routes (you surely want to display some data of the post when you are in the post&amp;rsquo;s comments context.</description>
+    </item>
+    
+  </channel>
+</rss>

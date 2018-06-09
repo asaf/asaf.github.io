@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Coffeescript on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/coffeescript/</link>
+    <description>Recent content in Coffeescript on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Fri, 19 Sep 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/coffeescript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>New Ember Components Suite!</title>
+      <link>http://asaf.github.io/2014/09/19/ember-components/</link>
+      <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2014/09/19/ember-components/</guid>
+      <description>Introducing a new Ember Components suite!
+Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.
+This project aims to be the successor of our Bootstrap for Ember project as all components on this suite are not bound to any specific CSS framework.
+Github repo: https://github.com/indexiatech/ember-components
+Demo &amp;amp; docs: http://indexiatech.github.io/ember-components</description>
+    </item>
+    
+    <item>
+      <title>Ember Forms</title>
+      <link>http://asaf.github.io/2014/08/02/ember-forms/</link>
+      <pubDate>Sat, 02 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2014/08/02/ember-forms/</guid>
+      <description>Smart, Intuitive forms for Ember.js styled with Bootstrap, Multi layouts and Validation support.
+As my favorite web framework is emberjs, I lately needed forms support for one of my projects with the following set of features in mind:
+ Styled for Bootstrap but easy to stil differently. Different layouts such inline and horizontal Validations where validation rules are defined in model/controller and form supports for:  Change color &amp;amp; icons when validation rule fails.</description>
+    </item>
+    
+    <item>
+      <title>Q promises with CoffeeScript</title>
+      <link>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</guid>
+      <description>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across &amp;ldquo;https://github.com/kriskowal/q&amp;rdquo;.
+Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner.
+Here&amp;rsquo;s an example:
+Defining promises with CoffeeScript:
+q = require &#39;q&#39; exports.hello = () -&amp;gt; d = q.defer() d.resolve &#39;hello&#39; d.promise exports.world = () -&amp;gt; d = q.defer() d.resolve &#39;world&#39; d.promise exports.</description>
+    </item>
+    
+  </channel>
+</rss>

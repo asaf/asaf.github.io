@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tips on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/tips/</link>
+    <description>Recent content in Tips on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Mon, 14 Sep 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Default function options stash with ES6 destructuring assignment.</title>
+      <link>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</link>
+      <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</guid>
+      <description>ES6 opens up a clean approach to define function options stash thanks to the destructuring assignment syntax,
+Assuming we want options but let the user overrides it, we can declare our function that way:
+function hello(param1, {debug = true, whatever = false} = {}) { }
+The advantages are, clearly there is no code in the body function to achieve default options &amp;amp; user overrides.</description>
+    </item>
+    
+  </channel>
+</rss>

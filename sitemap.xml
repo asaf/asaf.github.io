@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://asaf.github.io/tech_posts/2016-08-24-gentoo_on_vmware_unable_to_mount_rootfs/</loc>
+    <lastmod>2016-08-24T13:26:30+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tech_posts/2016-08-23-export_certificate_and_private_key_from_jks/</loc>
+    <lastmod>2016-08-23T23:30:26+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/</loc>
+    <lastmod>2016-08-23T22:43:26+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</loc>
+    <lastmod>2015-09-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</loc>
+    <lastmod>2015-09-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2015/09/05/react/</loc>
+    <lastmod>2015-09-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2015/06/23/extending-behavior-of-react-components-by-es6-decorators/</loc>
+    <lastmod>2015-06-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2015/06/19/elegant-way-to-use-react-with-es6-slash-es7-features/</loc>
+    <lastmod>2015-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2015/05/01/react/</loc>
+    <lastmod>2015-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2015/02/09/ratpack_hello_world/</loc>
+    <lastmod>2015-02-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2015/02/01/searching_for_new_java_backend/</loc>
+    <lastmod>2015-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2014/09/19/ember-components/</loc>
+    <lastmod>2014-09-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2014/08/02/ember-forms/</loc>
+    <lastmod>2014-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</loc>
+    <lastmod>2013-09-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</loc>
+    <lastmod>2013-08-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/08/26/bootstrap-for-ember-is-born/</loc>
+    <lastmod>2013-08-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/08/06/nodejs-model-is-born/</loc>
+    <lastmod>2013-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/07/10/installing-couchdb-instance-on-amazon-ami-using-build-couchdb/</loc>
+    <lastmod>2013-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</loc>
+    <lastmod>2013-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/07/08/accessing-emberjs-controller-from-different-scopes/</loc>
+    <lastmod>2013-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-about-page/</loc>
+    <lastmod>2013-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-comments/</loc>
+    <lastmod>2013-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/07/08/blogging-with-octopress-quick-installation/</loc>
+    <lastmod>2013-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/2013/07/08/installing-couch-db-on-amazon-ami/</loc>
+    <lastmod>2013-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/ajax/</loc>
+    <lastmod>2014-09-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/amazon/</loc>
+    <lastmod>2013-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/ami/</loc>
+    <lastmod>2013-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/annotations/</loc>
+    <lastmod>2015-06-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/</loc>
+    <lastmod>2016-08-24T13:26:30+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/async/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/aws/</loc>
+    <lastmod>2013-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/blog/</loc>
+    <lastmod>2016-08-23T22:43:26+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/blogging/</loc>
+    <lastmod>2016-08-23T22:43:26+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/bootstrap/</loc>
+    <lastmod>2014-09-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/bootstrap-for-ember/</loc>
+    <lastmod>2013-09-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/browserify/</loc>
+    <lastmod>2015-09-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/coffee/</loc>
+    <lastmod>2013-09-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/coffeescript/</loc>
+    <lastmod>2014-09-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/components/</loc>
+    <lastmod>2014-09-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/couchdb/</loc>
+    <lastmod>2013-08-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/decorators/</loc>
+    <lastmod>2015-06-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/destructuring/</loc>
+    <lastmod>2015-09-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/ec2/</loc>
+    <lastmod>2013-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/ember-addons/</loc>
+    <lastmod>2014-09-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/ember-forms/</loc>
+    <lastmod>2014-09-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/emberjs/</loc>
+    <lastmod>2014-09-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/es6/</loc>
+    <lastmod>2015-09-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/facebook/</loc>
+    <lastmod>2015-06-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/forms/</loc>
+    <lastmod>2014-09-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/gentoo/</loc>
+    <lastmod>2016-08-24T13:26:30+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/higher-order-components/</loc>
+    <lastmod>2015-06-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/html5/</loc>
+    <lastmod>2015-09-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/http/</loc>
+    <lastmod>2015-02-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/hugo/</loc>
+    <lastmod>2016-08-23T22:43:26+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/java/</loc>
+    <lastmod>2016-08-23T23:30:26+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/java8/</loc>
+    <lastmod>2015-02-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/javascript/</loc>
+    <lastmod>2015-09-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/jks/</loc>
+    <lastmod>2016-08-23T23:30:26+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/js/</loc>
+    <lastmod>2015-09-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/jspm/</loc>
+    <lastmod>2015-06-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/keystore/</loc>
+    <lastmod>2016-08-23T23:30:26+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/keytool/</loc>
+    <lastmod>2016-08-23T23:30:26+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/linux/</loc>
+    <lastmod>2016-08-24T13:26:30+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/models/</loc>
+    <lastmod>2013-08-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/mvc/</loc>
+    <lastmod>2013-07-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/nodejs/</loc>
+    <lastmod>2013-08-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/nodejs-model/</loc>
+    <lastmod>2013-08-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/octopress/</loc>
+    <lastmod>2016-08-23T22:43:26+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/openssl/</loc>
+    <lastmod>2016-08-23T23:30:26+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/pkcs12/</loc>
+    <lastmod>2016-08-23T23:30:26+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/promises/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/q/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/ratpack/</loc>
+    <lastmod>2015-02-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/react/</loc>
+    <lastmod>2015-09-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/rx/</loc>
+    <lastmod>2015-02-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/schema/</loc>
+    <lastmod>2013-08-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/spread/</loc>
+    <lastmod>2015-09-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/streams/</loc>
+    <lastmod>2015-02-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/systemjs/</loc>
+    <lastmod>2015-06-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/</loc>
+    <lastmod>2014-09-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tech_posts/</loc>
+    <lastmod>2016-08-24T13:26:30+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/tips/</loc>
+    <lastmod>2015-09-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/validations/</loc>
+    <lastmod>2013-08-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/web/</loc>
+    <lastmod>2015-02-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://asaf.github.io/tags/web-sockets/</loc>
+    <lastmod>2015-02-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

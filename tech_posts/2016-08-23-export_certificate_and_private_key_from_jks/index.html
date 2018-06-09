@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Export Certificate and Private key from JKS - Asaf Shakarzy</title>
+  <meta content='Export Certificate and Private key from JKS - Asaf Shakarzy' property='title' />
+  <meta content='Export Certificate and Private key from JKS - Asaf Shakarzy' property='og:title' />
+
+
+<meta property="og:description" content="I had to migrate web application written in Java to NodesJS,
+Java web containers store certificates inside JKS Keystore where NodeJS requires certificate and private key in PEM format.
+Exporting certificate directly from JKS is easy by using keytool, but exporting private key is not allowed, To export the private key using Java, we need to interact with the keystore by writing some custom code using the Keystore java API," />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://asaf.github.io/tech_posts/2016-08-23-export_certificate_and_private_key_from_jks/" />
+
+
+<meta property="article:published_time" content="2016-08-23T23:30:26&#43;03:00"/>
+
+<meta property="article:modified_time" content="2016-08-23T23:30:26&#43;03:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="Asaf Shakarzy" />
+</head>
+<body class="global-font">
+  <nav class=" flex  justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">Asaf Shakarzy</a>
+  </div>
+  
+  <div class=" flex-grow  pv1">
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/posts/' title="bio">bio</a>
+    
+      <a class="link dim dark-gray f6 dib mr2 mr3-l ttu tracked" href='/tech_posts/' title="Tech Blog">Tech Blog</a>
+    
+  </div>
+  
+</nav>
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">Export Certificate and Private key from JKS</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>23 Aug 2016</time> 
+     | 
+    
+    
+    tags: [ <a href='/tags/java' class="link silver">java</a> <a href='/tags/keytool' class="link silver">keytool</a> <a href='/tags/openssl' class="link silver">openssl</a> <a href='/tags/keystore' class="link silver">keystore</a> <a href='/tags/pkcs12' class="link silver">pkcs12</a> <a href='/tags/jks' class="link silver">jks</a>  ]
+    
+  </p>
+  <div class="lh-copy post-content"><p>I had to migrate web application written in Java to NodesJS,</p>
+
+<p>Java web containers store certificates inside JKS Keystore where NodeJS requires certificate and private key in <a href="https://nodejs.org/api/https.html">PEM format</a>.</p>
+
+<p>Exporting certificate directly from JKS is easy by using <em>keytool</em>, but exporting private key is not allowed,
+To export the private key using Java, we need to interact with the keystore by writing some custom code using the Keystore java API,</p>
+
+<p>the other alternative is simply convert the JKS into a <a href="https://en.wikipedia.org/wiki/PKCS_12">PKCS12</a> and export the certificate &amp; key using <em>openssl</em></p>
+
+<p>Convert JKS to PKCS12 format:</p>
+
+<pre><code>keytool -importkeystore -srckeystore mykeystore.jks -destkeystore mykeystore.p12 -deststoretype PKCS12
+</code></pre>
+
+<p>Note: The <em>-importkeystore</em> parameter is only supported with the keytool that ships with Java ver 1.6+</p>
+
+<p>you can view the content of the pkcs12 keystore by:</p>
+
+<pre><code>openssl pkcs12 -in mykeystore.p12
+</code></pre>
+
+<p>(Specifically look for the <em>friendlyName</em> that corresponds to the <em>alias</em> property of in <em>JKS</em>)</p>
+
+<p>Export the certificate:</p>
+
+<pre><code>openssl pkcs12 -in mykeystore.p12 -nokeys -out cert.pem
+</code></pre>
+
+<p>Export the private key (unencrypted)</p>
+
+<pre><code>openssl pkcs12 -in mykeystore.p12  -nodes -nocerts -out key.pem
+</code></pre>
+
+<p>the <em>-nodes</em> means &ldquo;No DES&rdquo;, that is &ldquo;do not encrypt the private key that will be exported to key.pem&rdquo;</p>
+
+<p>Make sure you keep the private key safe (recommended: <em>chmod 600 key.pem</em>)</p>
+</div>
+</main>
+ 
+
+
+
+
+
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  <a href="http://asaf.github.io/tech_posts/2016-08-23-migrate-octopress-to-hugo/">prev post</a>
+  <a href="http://asaf.github.io/tech_posts/2016-08-24-gentoo_on_vmware_unable_to_mount_rootfs/">next post</a>
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  All rights reserved, Asaf Shakarzy 2018
+</footer>
+  
+
+
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

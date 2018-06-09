@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gentoo on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/gentoo/</link>
+    <description>Recent content in Gentoo on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Wed, 24 Aug 2016 13:26:30 +0300</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/gentoo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gentoo On Vmware Fusion - unable to mount rootfs</title>
+      <link>http://asaf.github.io/tech_posts/2016-08-24-gentoo_on_vmware_unable_to_mount_rootfs/</link>
+      <pubDate>Wed, 24 Aug 2016 13:26:30 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tech_posts/2016-08-24-gentoo_on_vmware_unable_to_mount_rootfs/</guid>
+      <description>I&amp;rsquo;ve been trying to install Gentoo linux as a guest on OSX using Vmware Fusion, After configuring the kernel, booting the system resulted:
+Using the Gentoo minimal bootable disc, we can identify what SCSI storage controller we have:
+lspci |grep -i scsi 00:10.0 SCSI storage controller: LSI Logic / Symbios Logic 53c1030 PCI-X Fusion-MPT Dual Ultra320 SCSI (rev 01)  The Ultra 320 controller requires Fusion-MPT support in the kernel, that is located under:</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nodejs on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/nodejs/</link>
+    <description>Recent content in Nodejs on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Tue, 06 Aug 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>nodejs-model is born</title>
+      <link>http://asaf.github.io/2013/08/06/nodejs-model-is-born/</link>
+      <pubDate>Tue, 06 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/08/06/nodejs-model-is-born/</guid>
+      <description>I&amp;rsquo;ve been struggling lately to find an appropriate way to handle models correctly, In one hand, these noSQL DBs such CouchDB have great flexibility and I didn&amp;rsquo;t want to ruin that with a blowing up ORM framework, in the other hand once the application grows a little bit more than a contact list app, then things become messy.
+While writing a larger app with Node, I find myself struggling with finding solutions to problems such: (there are few more but these are the main)</description>
+    </item>
+    
+    <item>
+      <title>Nodejs Deployment: Building and Configuring on Amazon Linux AMI</title>
+      <link>http://asaf.github.io/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</link>
+      <pubDate>Wed, 10 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</guid>
+      <description>Logging in and updating system to latest SSH your shiny new VM,
+Now lets update the system to the latest:
+sudo yum update  Install OS dependencies We&amp;rsquo;r going to build Node.js from sources, some dependencies (such as gcc) are required:
+sudo yum install gcc-c++ make openssl-devel git  Cloning n Building Node.js cd git clone git://github.com/joyent/node.git cd node git checkout v0.10.13 #check for other stable tags by executing &#39;git tag&#39; .</description>
+    </item>
+    
+    <item>
+      <title>Q promises with CoffeeScript</title>
+      <link>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</guid>
+      <description>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across &amp;ldquo;https://github.com/kriskowal/q&amp;rdquo;.
+Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner.
+Here&amp;rsquo;s an example:
+Defining promises with CoffeeScript:
+q = require &#39;q&#39; exports.hello = () -&amp;gt; d = q.defer() d.resolve &#39;hello&#39; d.promise exports.world = () -&amp;gt; d = q.defer() d.resolve &#39;world&#39; d.promise exports.</description>
+    </item>
+    
+  </channel>
+</rss>

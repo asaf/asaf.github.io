@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on Asaf Shakarzy</title>
+    <link>http://asaf.github.io/tags/java/</link>
+    <description>Recent content in Java on Asaf Shakarzy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved, Asaf Shakarzy 2018</copyright>
+    <lastBuildDate>Tue, 23 Aug 2016 23:30:26 +0300</lastBuildDate>
+    
+	<atom:link href="http://asaf.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Export Certificate and Private key from JKS</title>
+      <link>http://asaf.github.io/tech_posts/2016-08-23-export_certificate_and_private_key_from_jks/</link>
+      <pubDate>Tue, 23 Aug 2016 23:30:26 +0300</pubDate>
+      
+      <guid>http://asaf.github.io/tech_posts/2016-08-23-export_certificate_and_private_key_from_jks/</guid>
+      <description>I had to migrate web application written in Java to NodesJS,
+Java web containers store certificates inside JKS Keystore where NodeJS requires certificate and private key in PEM format.
+Exporting certificate directly from JKS is easy by using keytool, but exporting private key is not allowed, To export the private key using Java, we need to interact with the keystore by writing some custom code using the Keystore java API,</description>
+    </item>
+    
+    <item>
+      <title>Hello world using Ratpack.</title>
+      <link>http://asaf.github.io/2015/02/09/ratpack_hello_world/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/02/09/ratpack_hello_world/</guid>
+      <description>About Ratpack Ratpack is a set of Java libraries that facilitate fast, efficient, evolvable and well tested HTTP applications built on Netty event driven networking engine,
+After crawling into its source code, I find it simple and easy to use and it feels right, why? because:
+ It&amp;rsquo;s super simple, its core has very limited number of dependencies Has out of the box extensions such as Guice, Jackson, etc, but nothing dictates you using them thanks to Guice modular architecture.</description>
+    </item>
+    
+    <item>
+      <title>Choosing Java Backend framework in 2015.</title>
+      <link>http://asaf.github.io/2015/02/01/searching_for_new_java_backend/</link>
+      <pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://asaf.github.io/2015/02/01/searching_for_new_java_backend/</guid>
+      <description>So it&amp;rsquo;s year 2015 and I&amp;rsquo;m taking a role in a new cloud service, helping to choose the right backend technology,
+This is the summary of our requirements:
+ Can quickly come up with some POC. HTTP driven. Native support for Async. Modular. Avoid frameworks that dictates specific code structure.  Here are few options we tried but decided to pivot and seek for alternatives,
+Akka Akka seems very promising, it feels lightweight, highly concurrent and distributed, Akka is based on actors pattern, an old pattern invented by Carl Hewitt and friends, promoted lately by Erlang,</description>
+    </item>
+    
+  </channel>
+</rss>
