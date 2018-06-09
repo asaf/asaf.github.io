@@ -25,10 +25,10 @@ You can download a binary package of Hugo, but I have Go installed so it&amp;rsq
     
     <item>
       <title>Blogging with Octopress: Add Comments</title>
-      <link>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-comments/</link>
+      <link>http://asaf.github.io/tech_posts/2013-07-08-blogging-with-octopress-add-comments/</link>
       <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2013/07/08/blogging-with-octopress-add-comments/</guid>
+      <guid>http://asaf.github.io/tech_posts/2013-07-08-blogging-with-octopress-add-comments/</guid>
       <description>If you want your blog to support comments, follow this:
 Octopress has a native 3rd party plugin for Disqus that will host all your blog&amp;rsquo;s comments.
 Visit http://www.disqus.com web site and sign in, Then https://disqus.com/admin/signup/.
@@ -38,10 +38,10 @@ Site Url: asaf.github.io Site Name: Asaf Shakarchi&#39;s Blog Site Shortname: as
     
     <item>
       <title>Blogging with Octopress: Quick Installation</title>
-      <link>http://asaf.github.io/2013/07/08/blogging-with-octopress-quick-installation/</link>
+      <link>http://asaf.github.io/tech_posts/2013-07-08-blogging-with-octopress-quick-installation/</link>
       <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2013/07/08/blogging-with-octopress-quick-installation/</guid>
+      <guid>http://asaf.github.io/tech_posts/2013-07-08-blogging-with-octopress-quick-installation/</guid>
       <description>I really wanted to revive my blog (which was hosted in Blogger), but I wanted to have more control over it, It just feels very natural for guys like me who uses vi more than GUI =)
 Since Octopress docs are too long and frustrating (oh common, i just wanted a blog), I decided to dedicate few posts for it, I hope I&amp;rsquo;ll have the time to record (blog, post, whatever) all the cool things i&amp;rsquo;m gonna add to my blog in the future.</description>
     </item>

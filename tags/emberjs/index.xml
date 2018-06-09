@@ -14,10 +14,10 @@
     
     <item>
       <title>New Ember Components Suite!</title>
-      <link>http://asaf.github.io/2014/09/19/ember-components/</link>
+      <link>http://asaf.github.io/tech_posts/2014-09-19-ember-components/</link>
       <pubDate>Fri, 19 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2014/09/19/ember-components/</guid>
+      <guid>http://asaf.github.io/tech_posts/2014-09-19-ember-components/</guid>
       <description>Introducing a new Ember Components suite!
 Ember Components is a set of rich web components written for Ember.js that let you create an astonishing UI for ambitious web applications.
 This project aims to be the successor of our Bootstrap for Ember project as all components on this suite are not bound to any specific CSS framework.
@@ -27,10 +27,10 @@ Demo &amp;amp; docs: http://indexiatech.github.io/ember-components</description>
     
     <item>
       <title>Ember Forms</title>
-      <link>http://asaf.github.io/2014/08/02/ember-forms/</link>
+      <link>http://asaf.github.io/tech_posts/2014-08-02-ember-forms/</link>
       <pubDate>Sat, 02 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2014/08/02/ember-forms/</guid>
+      <guid>http://asaf.github.io/tech_posts/2014-08-02-ember-forms/</guid>
       <description>Smart, Intuitive forms for Ember.js styled with Bootstrap, Multi layouts and Validation support.
 As my favorite web framework is emberjs, I lately needed forms support for one of my projects with the following set of features in mind:
  Styled for Bootstrap but easy to stil differently. Different layouts such inline and horizontal Validations where validation rules are defined in model/controller and form supports for:  Change color &amp;amp; icons when validation rule fails.</description>
@@ -38,10 +38,10 @@ As my favorite web framework is emberjs, I lately needed forms support for one o
     
     <item>
       <title>Bootstrap for Ember - more than 100 stars in 1 week</title>
-      <link>http://asaf.github.io/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</link>
+      <link>http://asaf.github.io/tech_posts/2013-09-02-bootstrap-for-ember-more-than-100-stars-in-1-week/</link>
       <pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2013/09/02/bootstrap-for-ember-more-than-100-stars-in-1-week/</guid>
+      <guid>http://asaf.github.io/tech_posts/2013-09-02-bootstrap-for-ember-more-than-100-stars-in-1-week/</guid>
       <description>This is awesome! Bootstrap for Ember got more than 100 github stars in less than a week,
 Thanks for the great feedbacks, here&amp;rsquo;s an interesting tweet of the author of Handlebars and Ember.js, Yehuda Katz.
 Also, http://t.co/NtqRMNtsA4 (Bootstrap for #emberjs using components) is kind of awesome!
@@ -50,10 +50,10 @@ Also, http://t.co/NtqRMNtsA4 (Bootstrap for #emberjs using components) is kind o
     
     <item>
       <title>Bootstrap for Ember v0.2.0 released</title>
-      <link>http://asaf.github.io/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</link>
+      <link>http://asaf.github.io/tech_posts/2013-08-29-bootstrap-for-ember-v0-dot-2-0-released/</link>
       <pubDate>Thu, 29 Aug 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2013/08/29/bootstrap-for-ember-v0-dot-2-0-released/</guid>
+      <guid>http://asaf.github.io/tech_posts/2013-08-29-bootstrap-for-ember-v0-dot-2-0-released/</guid>
       <description>Few days ago I submitted a post about Bootstrap for Ember, We released today the 2nd minor version 0.2.0,
 So far, version 0.2.0 contains the following components:
  Alert Label Badge Well Page Header Button ProgressBar Pills Navigation Tabs Navigation  Project details:
@@ -62,10 +62,10 @@ So far, version 0.2.0 contains the following components:
     
     <item>
       <title>Bootstrap for Ember is born</title>
-      <link>http://asaf.github.io/2013/08/26/bootstrap-for-ember-is-born/</link>
+      <link>http://asaf.github.io/tech_posts/2013-08-26-bootstrap-for-ember-is-born/</link>
       <pubDate>Mon, 26 Aug 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2013/08/26/bootstrap-for-ember-is-born/</guid>
+      <guid>http://asaf.github.io/tech_posts/2013-08-26-bootstrap-for-ember-is-born/</guid>
       <description>Bootstrap is an amazing set of pure CSS3 / HTML 5 components, while EmberJs amazes in its beauty of making web applications right.
 You can just hook both projects together by using Bootstrap as is in Handlebars templates, But soon enough, you will find yourself asking questions sucha s:
  How do I interact between Bootstrap events and Ember (such as Controllers)? How to pass Bootstrap components data from Ember (such as Controllers)  I&amp;rsquo;ve seen few options about the integration between both, but:</description>
@@ -73,10 +73,10 @@ You can just hook both projects together by using Bootstrap as is in Handlebars 
     
     <item>
       <title>Accessing EmberJS Controller from different scopes</title>
-      <link>http://asaf.github.io/2013/07/08/accessing-emberjs-controller-from-different-scopes/</link>
+      <link>http://asaf.github.io/tech_posts/2013-07-08-accessing-emberjs-controller-from-different-scopes/</link>
       <pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2013/07/08/accessing-emberjs-controller-from-different-scopes/</guid>
+      <guid>http://asaf.github.io/tech_posts/2013-07-08-accessing-emberjs-controller-from-different-scopes/</guid>
       <description>Sometimes you want to use one ember controller from another, This simply can be done by &amp;ldquo;asking&amp;rdquo; ember access to the other controller:
 App.PostController = Ember.ArrayController.extend({ ... }) App.CommentsController = Ember.ArrayController.extend({ needs: &amp;quot;post&amp;quot; });  Then you can simply use the Post controller in Comments&amp;rsquo;s template:
 {% raw %}

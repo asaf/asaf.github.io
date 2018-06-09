@@ -14,10 +14,10 @@
     
     <item>
       <title>Hello world using Ratpack.</title>
-      <link>http://asaf.github.io/2015/02/09/ratpack_hello_world/</link>
+      <link>http://asaf.github.io/tech_posts/2015-02-09-ratpack_hello_world/</link>
       <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2015/02/09/ratpack_hello_world/</guid>
+      <guid>http://asaf.github.io/tech_posts/2015-02-09-ratpack_hello_world/</guid>
       <description>About Ratpack Ratpack is a set of Java libraries that facilitate fast, efficient, evolvable and well tested HTTP applications built on Netty event driven networking engine,
 After crawling into its source code, I find it simple and easy to use and it feels right, why? because:
  It&amp;rsquo;s super simple, its core has very limited number of dependencies Has out of the box extensions such as Guice, Jackson, etc, but nothing dictates you using them thanks to Guice modular architecture.</description>

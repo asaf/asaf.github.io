@@ -14,10 +14,10 @@
     
     <item>
       <title>Nodejs Deployment: Building and Configuring on Amazon Linux AMI</title>
-      <link>http://asaf.github.io/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</link>
+      <link>http://asaf.github.io/tech_posts/2013-07-10-nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</link>
       <pubDate>Wed, 10 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2013/07/10/nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</guid>
+      <guid>http://asaf.github.io/tech_posts/2013-07-10-nodejs-deployment-building-and-configuring-on-amazon-linux-ami/</guid>
       <description>Logging in and updating system to latest SSH your shiny new VM,
 Now lets update the system to the latest:
 sudo yum update  Install OS dependencies We&amp;rsquo;r going to build Node.js from sources, some dependencies (such as gcc) are required:

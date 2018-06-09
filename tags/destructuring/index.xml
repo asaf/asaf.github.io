@@ -14,10 +14,10 @@
     
     <item>
       <title>Default function options stash with ES6 destructuring assignment.</title>
-      <link>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</link>
+      <link>http://asaf.github.io/tech_posts/2015-09-14-js-default-function-options-stash-with-es6/</link>
       <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2015/09/14/js-default-function-options-stash-with-es6/</guid>
+      <guid>http://asaf.github.io/tech_posts/2015-09-14-js-default-function-options-stash-with-es6/</guid>
       <description>ES6 opens up a clean approach to define function options stash thanks to the destructuring assignment syntax,
 Assuming we want options but let the user overrides it, we can declare our function that way:
 function hello(param1, {debug = true, whatever = false} = {}) { }

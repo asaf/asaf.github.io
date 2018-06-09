@@ -14,10 +14,10 @@
     
     <item>
       <title>Add additional properties to a result of a function or a fucntion map using ES6 spread operator.</title>
-      <link>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</link>
+      <link>http://asaf.github.io/tech_posts/2015-09-13-add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</link>
       <pubDate>Sun, 13 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2015/09/13/add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</guid>
+      <guid>http://asaf.github.io/tech_posts/2015-09-13-add-additional-properties-to-a-result-of-a-function-or-a-fucntion-map-using-es6-spread-operator/</guid>
       <description>Sometimes it makes sense to add additional properties to a result of a function,
 Examples could be enhancing an operation result with some meta data, extending with a timestamp, run time, etc,
 Using ES6, we could easily achieve this by:

@@ -14,10 +14,10 @@
     
     <item>
       <title>ES6, React &amp; Browserify</title>
-      <link>http://asaf.github.io/2015/09/05/react/</link>
+      <link>http://asaf.github.io/tech_posts/2015-09-05-react/</link>
       <pubDate>Sat, 05 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2015/09/05/react/</guid>
+      <guid>http://asaf.github.io/tech_posts/2015-09-05-react/</guid>
       <description>ES6, React &amp;amp; Browserify Browserify is a lightweight build tool for JS, you can start &amp;lsquo;require&amp;rsquo; modules with zero configuration, Thanks to Babelify, you can start writing ES6 code (via Babel) write away,
 Here&amp;rsquo;s a proof how simple it is,
 Lets create a package.json file and install minimal dependencies

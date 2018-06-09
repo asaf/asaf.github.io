@@ -14,10 +14,10 @@
     
     <item>
       <title>Q promises with CoffeeScript</title>
-      <link>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</link>
+      <link>http://asaf.github.io/tech_posts/2013-07-09-q-promises-with-coffeescript/</link>
       <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://asaf.github.io/2013/07/09/q-promises-with-coffeescript/</guid>
+      <guid>http://asaf.github.io/tech_posts/2013-07-09-q-promises-with-coffeescript/</guid>
       <description>If you are using NodeJS (or for some other reasons you need to do many async invocations), then you probably came across &amp;ldquo;https://github.com/kriskowal/q&amp;rdquo;.
 Using Q with CoffeeScript is great as code blocks are much more organized and looks cleaner.
 Here&amp;rsquo;s an example:
